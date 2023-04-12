@@ -72,6 +72,29 @@ public class CollaboratedBy {
         return artists;
     }
 
+    public static List<Song> getSongsByArtistID(String artistID, Connection conn) throws SQLException {
+
+        List<Song> songs = new ArrayList<>();
+
+        String sql = "SELECT s.* FROM collaboratedBy cb JOIN Songs s ON cb.songID = s.songID WHERE cb.artistID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, artistID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // String songID, String title, String duration, String releaseDate, float
+            // royaltyPaid, float royaltyRate
+            Song song = new Song(rs.getString("songID"), rs.getString("title"), rs.getString("duration"),
+                    rs.getString("releaseDate"), rs.getFloat("royaltyPaid"), rs.getFloat("royaltyRate"));
+            songs.add(song);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return songs;
+    }
+
     public static CollaboratedBy readCollaboration(String artistID, String songID, Connection connection)
             throws SQLException {
         PreparedStatement statement = null;

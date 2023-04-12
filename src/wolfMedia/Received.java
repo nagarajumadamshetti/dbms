@@ -1,5 +1,9 @@
 package wolfMedia;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Received {
     private String paymentID;
     private String artistID;
@@ -44,6 +48,26 @@ public class Received {
             }
         }
         return isInserted;
+    }
+
+    public static List<ArtistPayments> getArtistPayments(String artistID, Connection conn) throws SQLException {
+
+        List<ArtistPayments> artistPayments = new ArrayList<>();
+
+        String sql = "SELECT aP.* FROM received r JOIN ArtistPayments aP ON ap.paymentID = r.paymentID WHERE r.artistID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, artistID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            ArtistPayments artistPayment = new ArtistPayments(rs.getString("paymentID"), rs.getInt("paymentAmount"));
+            artistPayments.add(artistPayment);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return artistPayments;
     }
 
     public static Received readReceived(String paymentID, Connection connection) throws SQLException {

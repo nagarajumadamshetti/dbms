@@ -77,6 +77,7 @@ public class WolfMediaTesting {
                     System.out.println("4. Podcast episode");
                     System.out.println("5. Album");
                     System.out.println("6. Record label");
+                    System.out.println("7. Podcast");
                     System.out.print("Choice: ");
                     int subChoice1 = input.nextInt();
                     // handle sub choice here
