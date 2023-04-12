@@ -76,12 +76,8 @@ public class InformationProcessing {
         AlbumInformationProcessing.processAlbum();
     }
     
-    private static void processRecordLabel() {
+    private static void processRecordLabel()throws SQLException {
         // code for processing record label information
-        System.out.println("Enter record label information:");
-        System.out.print("Label name: ");
-        String labelName = input.nextLine();
-        // additional fields as required
-        // add code to update or delete record label information
+        RecordLabelInformationProcessing.processRecordLabel();
     }
 }
