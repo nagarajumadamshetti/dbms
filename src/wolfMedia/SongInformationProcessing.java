@@ -268,6 +268,9 @@ public class SongInformationProcessing {
     }
     public static int songViewed(String songID, String date, Connection conn) throws SQLException{
         SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn );
+        if(sV== null){
+            return 0;
+        }
         return sV.getCount();
     }
 

@@ -99,7 +99,7 @@ public class ArtistInformationProcessing {
 
     public static int createArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
         System.out.println(
-                "Enter Atrist Primary Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
+                "Enter Artist Primary Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
         String genreID = input.nextLine();
         int isCreated = 0;
         if (!genreID.isEmpty()) {
