@@ -1,0 +1,14 @@
+wolfMedia/.vscode/settings.json
+wolfMedia/bin
+wolfMedia/lib/mariadb-java-client-3.1.1.jar
+wolfMedia/src/wolfMedia/*.java
+
+(in DBMS directory)
+
+cd CSC_540_DBMS_D/wolfMedia
+
+javac -cp .:lib/mariadb-java-client-3.1.1.jar -d bin src/wolfMedia/*.java (This compiles all the .java files in wolfMedia/src/wolfMedia and stores the created .class files in wolfMedia/bin.
+
+cd bin
+
+java -cp .:../lib/mariadb-java-client-3.1.1.jar wolfMedia.Testing (Runs Testing.java)
