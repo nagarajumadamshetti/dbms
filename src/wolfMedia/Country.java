@@ -3,19 +3,19 @@ package wolfMedia;
 import java.sql.*;
 
 public class Country {
-    private int countryID;
+    private String countryID;
     private String name;
 
-    public Country(int countryID, String name) {
+    public Country(String countryID, String name) {
         this.countryID = countryID;
         this.name = name;
     }
 
-    public int getCountryID() {
+    public String getCountryID() {
         return countryID;
     }
 
-    public void setCountryID(int countryID) {
+    public void setCountryID(String countryID) {
         this.countryID = countryID;
     }
 
@@ -31,9 +31,9 @@ public class Country {
         PreparedStatement statement = null;
         int isInserted = 0;
         try {
-            String query = "INSERT INTO country (countryID, name) VALUES (?, ?)";
+            String query = "INSERT INTO countries (countryID, name) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
-            statement.setInt(1, country.getCountryID());
+            statement.setString(1, country.getCountryID());
             statement.setString(2, country.getName());
             isInserted = statement.executeUpdate();
             System.out.println("Country created.");
@@ -44,17 +44,17 @@ public class Country {
         return isInserted;
     }
 
-    public static Country readCountry(int countryID, Connection connection) throws SQLException {
+    public static Country readCountry(String countryID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Country country = null;
         try {
-            String query = "SELECT * FROM country WHERE countryID = ?";
+            String query = "SELECT * FROM countries WHERE countryID = ?";
             statement = connection.prepareStatement(query);
-            statement.setInt(1, countryID);
+            statement.setString(1, countryID);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                country = new Country(resultSet.getInt("countryID"),
+                country = new Country(resultSet.getString("countryID"),
                         resultSet.getString("name"));
             }
         } catch (SQLException e) {
@@ -75,10 +75,10 @@ public class Country {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE country SET name = ? WHERE countryID = ?";
+            String query = "UPDATE countries SET name = ? WHERE countryID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, country.getName());
-            statement.setInt(2, country.getCountryID());
+            statement.setString(2, country.getCountryID());
             isUpdated = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,13 +91,13 @@ public class Country {
         return isUpdated;
     }
 
-    public static int deleteCountry(int countryID, Connection connection) throws SQLException {
+    public static int deleteCountry(String countryID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM country WHERE countryID = ?";
+            String query = "DELETE FROM countries WHERE countryID = ?";
             statement = connection.prepareStatement(query);
-            statement.setInt(1, countryID);
+            statement.setString(1, countryID);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

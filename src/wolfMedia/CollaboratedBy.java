@@ -1,5 +1,8 @@
 package wolfMedia;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CollaboratedBy {
 
@@ -47,8 +50,30 @@ public class CollaboratedBy {
             }
         }
     }
-    
-    public static CollaboratedBy readCollaboration(String artistID, String songID, Connection connection) throws SQLException {
+
+    public static List<Artist> getArtists(String songID, Connection conn) throws SQLException {
+
+        List<Artist> artists = new ArrayList<>();
+
+        String sql = "SELECT a.* FROM collaboratedBy cb JOIN Artists a ON cb.artistID = a.artistID WHERE cb.songID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, songID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Artist artist = new Artist(rs.getString("artistID"), rs.getString("name"), rs.getString("status"),
+                    rs.getString("type"));
+            artists.add(artist);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return artists;
+    }
+
+    public static CollaboratedBy readCollaboration(String artistID, String songID, Connection connection)
+            throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         CollaboratedBy collaboration = null;
@@ -93,8 +118,8 @@ public class CollaboratedBy {
                 statement.close();
             }
         }
-    }    
-    
+    }
+
     public static int deleteCollaboration(String artistID, String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
@@ -114,5 +139,5 @@ public class CollaboratedBy {
             }
         }
     }
-    
+
 }

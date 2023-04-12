@@ -2,10 +2,10 @@ package wolfMedia;
 import java.sql.*;
 
 public class Artist {
-    private String artistID;
-    private String name;
-    private String status;
-    private String type;
+    public String artistID;
+    public String name;
+    public String status;
+    public String type;
 
     public Artist(String artistID, String name, String status, String type) {
         this.artistID = artistID;

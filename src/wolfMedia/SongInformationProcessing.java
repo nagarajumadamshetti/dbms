@@ -21,7 +21,7 @@ public class SongInformationProcessing {
 
         switch (subChoice2) {
             case 1:
-                createSong();
+                createSong("song");
                 break;
             case 2:
                 updateSong();
@@ -41,7 +41,7 @@ public class SongInformationProcessing {
     /**
      * Create Song
      */
-    private static void createSong() throws SQLException {
+    public static void createSong(String from) throws SQLException {
         System.out.println("Enter song information:");
         System.out.print("Song ID: ");
         String songID = input.nextLine();
@@ -69,11 +69,14 @@ public class SongInformationProcessing {
 
             createGeneredIn(songID,conn);
 
-            createBelongsTo(songID,conn);
+            if(true){// from =="song"
+            createBelongsTo(songID,conn);}
 
-            createSungBy(songID,conn);
+            if(true){// from =="song"
+            createSungBy(songID,conn);}
 
-            createCollaborators(songID, conn);
+            if(true){ // from =="song"
+            createCollaborators(songID, conn);}
 
             viewSong(songID, conn);
         }
@@ -179,6 +182,9 @@ public class SongInformationProcessing {
         System.out.println("Collaborated Artist IDs by space: ");
         String[] collaboratedArtistIDs = input.nextLine().split(" ");
         int isCreated = 0;
+        if(collaboratedArtistIDs.length==0){
+            return isCreated;
+        }
         for (int i = 0; i < collaboratedArtistIDs.length; i++) {
             CollaboratedBy cB = new CollaboratedBy(collaboratedArtistIDs[i], songID);
             isCreated = CollaboratedBy.createCollaboration(cB, conn);
@@ -198,6 +204,10 @@ public class SongInformationProcessing {
         String date = currentDate.format(formatter);
 
         SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn);
+        
+        SungBy sB= SungBy.readSungBySongID(songID, conn);
+        ArtistInformationProcessing.increaseArtistMonthlyListeners(sB.getArtistID(), conn);
+
         if (sV == null) {
             sV = new SongsViewed(songID, date, 1);
             SongsViewed.createSongsViewed(sV, conn);
@@ -210,13 +220,14 @@ public class SongInformationProcessing {
         }
     }
 
-    private static void updateSong() throws SQLException {
+    public static void updateSong() throws SQLException {
         // add code to prompt for song ID and new song information, then update song in
         // data store
         // Update an existing Song record in the database
         System.out.println("Enter song ID to update:");
         String updateID = input.nextLine();
         Connection conn = Connections.open();
+        
         Song sToUpdate = Song.readSong(updateID, conn);
         if (sToUpdate == null) {
             System.out.println("Song with ID " + updateID + " does not exist");
@@ -255,11 +266,53 @@ public class SongInformationProcessing {
         }
         Connections.close(conn);
     }
+    public static int songViewed(String songID, String date, Connection conn) throws SQLException{
+        SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn );
+        return sV.getCount();
+    }
+
+    public static String songReleasedIn(String songID, Connection conn) throws SQLException{
+        ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn );
+        Country c = Country.readCountry(rI.getCountryID(), conn);
+        return c.getName();
+    }
+
+    public static String songSungIn(String songID, Connection conn) throws SQLException{
+        SungIn sI = SungIn.readSungIn(songID, conn );
+        Language l = Language.readLanguage(sI.getLanguageID(), conn);
+        return l.getName();
+    }
+
+    public static String songGeneredIn(String songID, Connection conn) throws SQLException{
+        GeneredIn gI = GeneredIn.readGeneredIn(songID, conn );
+        Genre g = Genre.readGenre(gI.getGenreID(), conn);
+        return g.getName();
+    }
+    
+    public static String songArtist(String songID, Connection conn) throws SQLException{
+        SungBy sB= SungBy.readSungBySongID(songID, conn);
+        Artist a= Artist.readArtist(sB.getArtistID(), conn);
+        return a.getName();
+    }
+
+    public static List<Album> songBelongsToAlbums(String songID, Connection conn) throws SQLException{
+        List<Album> albums = BelongsTo.getAlbums(songID, conn);
+        return albums;
+    }
+
+    public static List<Artist> songCollaborators(String songID, Connection conn) throws SQLException{
+        List<Artist> artists = CollaboratedBy.getArtists(songID, conn);
+        return artists;
+    }
 
     private static void readSong() throws SQLException {
         // add code to prompt for song ID and display song information from data store
         System.out.println("Enter song ID to read:");
         String readID = input.nextLine();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
+        String date = currentDate.format(formatter);
+
         Connection conn = Connections.open();
         Song s = Song.readSong(readID, conn);
         if (s == null) {
@@ -271,6 +324,37 @@ public class SongInformationProcessing {
             System.out.println("Release Date: " + s.releaseDate);
             System.out.println("Royalty Paid: " + s.royaltyPaid);
             System.out.println("Royalty Rate: " + s.royaltyRate);
+
+            System.out.println("Song sung By: "+ songArtist(readID,conn));
+
+            System.out.println("Song Viewed: "+ songViewed(readID, date, conn));
+
+            System.out.println("Song Released In: " + songReleasedIn(readID,conn));
+
+            System.out.println("Song Sung In: " + songSungIn(readID,conn));
+
+            System.out.println("Song Genered In: " + songGeneredIn(readID,conn));
+
+            System.out.println("Song Collaborators: ");
+
+            List<Artist> artists= songCollaborators(readID,conn);
+            if (artists.isEmpty()) {
+                System.out.println("  (none)");
+            } else {
+                for (Artist artist : artists) {
+                    System.out.println("  " + artist.getArtistID() + " - " + artist.getName());
+                }
+            }
+
+            System.out.println("Song Belongs to albums: ");
+            List<Album> albums = songBelongsToAlbums(readID,conn);
+            if (albums.isEmpty()) {
+                System.out.println("  (none)");
+            } else {
+                for (Album album : albums) {
+                    System.out.println("  " + album.getAlbumID() + " - " + album.getName());
+                }
+            }
         }
         Connections.close(conn);
     }

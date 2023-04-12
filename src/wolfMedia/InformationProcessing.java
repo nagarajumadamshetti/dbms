@@ -62,15 +62,9 @@ public class InformationProcessing {
         // add code to update or delete podcast episode information
     }
     
-    private static void processAlbum() {
-        // code for processing album information
-        System.out.println("Enter album information:");
-        System.out.print("Album name: ");
-        String albumName = input.nextLine();
-        System.out.print("Artist name: ");
-        String artistName = input.nextLine();
-        // additional fields as required
-        // add code to update or delete album information
+    private static void processAlbum() throws SQLException {
+        // code for processing song information
+        AlbumInformationProcessing.processAlbum();
     }
     
     private static void processRecordLabel() {
