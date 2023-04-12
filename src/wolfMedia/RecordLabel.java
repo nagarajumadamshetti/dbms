@@ -30,7 +30,7 @@ public class RecordLabel {
         int isInserted = 0;
         
         try {
-            String query = "INSERT INTO record_labels (recordLabelID, name) VALUES (?, ?)";
+            String query = "INSERT INTO recordLabel (recordLabelID, name) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, recordLabel.getRecordLabelID());
             statement.setString(2, recordLabel.getName());
@@ -55,7 +55,7 @@ public class RecordLabel {
         ResultSet resultSet = null;
         RecordLabel recordLabel = null;
         try {
-            String query = "SELECT * FROM record_labels WHERE recordLabelID = ?";
+            String query = "SELECT * FROM recordLabel WHERE recordLabelID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, recordLabelID);
             resultSet = statement.executeQuery();
@@ -84,7 +84,7 @@ public class RecordLabel {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE record_labels SET name = ? WHERE recordLabelID = ?";
+            String query = "UPDATE recordLabel SET name = ? WHERE recordLabelID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, recordLabel.getName());
             statement.setString(2, recordLabel.getRecordLabelID());
@@ -107,7 +107,7 @@ public class RecordLabel {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM record_labels WHERE recordLabelID = ?";
+            String query = "DELETE FROM recordLabel WHERE recordLabelID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, recordLabelID);
             isDeleted = statement.executeUpdate();

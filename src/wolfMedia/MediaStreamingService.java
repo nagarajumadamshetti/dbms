@@ -40,7 +40,7 @@ public class MediaStreamingService {
         PreparedStatement statement = null;
         int isInserted = 0;
         try {
-            String query = "INSERT INTO media_streaming_service (ID, name, email) VALUES (?, ?, ?)";
+            String query = "INSERT INTO mediaStreamingService (ID, name, email) VALUES (?, ?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, mediaStreamingService.getID());
             statement.setString(2, mediaStreamingService.getName());
@@ -59,7 +59,7 @@ public class MediaStreamingService {
         ResultSet resultSet = null;
         MediaStreamingService mediaStreamingService = null;
         try {
-            String query = "SELECT * FROM media_streaming_service WHERE ID = ?";
+            String query = "SELECT * FROM mediaStreamingService WHERE ID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, ID);
             resultSet = statement.executeQuery();
@@ -86,7 +86,7 @@ public class MediaStreamingService {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE media_streaming_service SET name = ?, email = ? WHERE ID = ?";
+            String query = "UPDATE mediaStreamingService SET name = ?, email = ? WHERE ID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, mediaStreamingService.getName());
             statement.setString(2, mediaStreamingService.getEmail());
@@ -107,7 +107,7 @@ public class MediaStreamingService {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM media_streaming_service WHERE ID = ?";
+            String query = "DELETE FROM mediaStreamingService WHERE ID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, ID);
             isDeleted = statement.executeUpdate();

@@ -31,7 +31,7 @@ public class ManagedBy {
         int isInserted = 0;
         
         try {
-            String query = "INSERT INTO managed_by (paymentID, ID) VALUES (?, ?)";
+            String query = "INSERT INTO managedBy (paymentID, ID) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, managedBy.getPaymentID());
             statement.setString(2, managedBy.getID());
@@ -49,7 +49,7 @@ public class ManagedBy {
         ResultSet resultSet = null;
         ManagedBy managedBy = null;
         try {
-            String query = "SELECT * FROM managed_by WHERE paymentID = ?";
+            String query = "SELECT * FROM managedBy WHERE paymentID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, paymentID);
             resultSet = statement.executeQuery();
@@ -75,7 +75,7 @@ public class ManagedBy {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE managed_by SET ID = ? WHERE paymentID = ?";
+            String query = "UPDATE managedBy SET ID = ? WHERE paymentID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, managedBy.getID());
             statement.setString(2, managedBy.getPaymentID());
@@ -95,7 +95,7 @@ public class ManagedBy {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM managed_by WHERE paymentID = ?";
+            String query = "DELETE FROM managedBy WHERE paymentID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, paymentID);
             isDeleted = statement.executeUpdate();
