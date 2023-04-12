@@ -1,8 +1,8 @@
 package wolfMedia;
 import java.sql.*;
 public class RecordLabel {
-    private String recordLabelID;
-    private String name;
+    public String recordLabelID;
+    public String name;
 
     public RecordLabel(String recordLabelID, String name) {
         this.recordLabelID = recordLabelID;

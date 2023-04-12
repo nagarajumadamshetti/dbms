@@ -46,7 +46,8 @@ public class ContractedWith {
         return isInserted;
     }
 
-    public static List<RecordLabel> getRecordLabelContractsByArtistID(String artistID, Connection conn) throws SQLException {
+    public static List<RecordLabel> getRecordLabelContractsByArtistID(String artistID, Connection conn)
+            throws SQLException {
 
         List<RecordLabel> recordLabels = new ArrayList<>();
 
@@ -65,6 +66,27 @@ public class ContractedWith {
         pstmt.close();
 
         return recordLabels;
+    }
+
+    public static List<Artist> getArtistsByRecordLabelID(String recordLabelID, Connection conn) throws SQLException {
+
+        List<Artist> artists = new ArrayList<>();
+
+        String sql = "SELECT a.* FROM contractedWith cW JOIN artists a ON cW.artistID = a.artistID WHERE cW.recordLabelID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, recordLabelID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Artist artist = new Artist(rs.getString("artistID"), rs.getString("name"), rs.getString("status"),
+                    rs.getString("type"));
+            artists.add(artist);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return artists;
     }
 
     public static ContractedWith readContractedWith(String artistID, Connection connection) throws SQLException {
