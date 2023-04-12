@@ -60,7 +60,7 @@ public class BelongsTo {
         }
     }
     
-    public BelongsTo readBelongsTo(String songID, String albumID, Connection connection) throws SQLException {
+    public static BelongsTo readBelongsTo(String songID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         BelongsTo belongsTo = null;

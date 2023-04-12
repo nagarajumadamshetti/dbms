@@ -44,7 +44,7 @@ public class BasedIn {
         return isInserted;
     }
 
-    public BasedIn readBasedIn(String artistID, Connection connection) throws SQLException {
+    public static BasedIn readBasedIn(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         BasedIn basedIn = null;

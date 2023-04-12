@@ -47,7 +47,7 @@ public class PaymentMade {
         }
     }
     
-    public PaymentMade readPaymentMade(String userID, String paymentID, Connection connection) throws SQLException {
+    public static PaymentMade readPaymentMade(String userID, String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PaymentMade paymentMade = null;

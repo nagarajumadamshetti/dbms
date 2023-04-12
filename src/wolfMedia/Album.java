@@ -66,7 +66,7 @@ public class Album {
         }
     }
 
-    public Album readAlbum(String albumID, Connection connection) throws SQLException {
+    public static Album readAlbum(String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Album album = null;

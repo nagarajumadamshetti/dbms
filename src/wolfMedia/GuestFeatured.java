@@ -48,7 +48,7 @@ public class GuestFeatured {
         }
     }
     
-    public GuestFeatured readGuestFeatured(String guestID, String podcastEpisodeID, Connection connection) throws SQLException {
+    public static GuestFeatured readGuestFeatured(String guestID, String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         GuestFeatured guestFeatured = null;

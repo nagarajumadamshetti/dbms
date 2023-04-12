@@ -73,7 +73,7 @@ public class Artist {
         return isInserted;
     }
 
-    public Artist readArtist(String artistID, Connection connection) throws SQLException {
+    public static Artist readArtist(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Artist artist = null;

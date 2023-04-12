@@ -54,7 +54,7 @@ public class MediaStreamingService {
         return isInserted;
     }
 
-    public MediaStreamingService readMediaStreamingService(String ID, Connection connection) throws SQLException {
+    public static MediaStreamingService readMediaStreamingService(String ID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         MediaStreamingService mediaStreamingService = null;

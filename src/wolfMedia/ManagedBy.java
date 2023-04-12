@@ -44,7 +44,7 @@ public class ManagedBy {
         return isInserted;
     }
 
-    public ManagedBy readManagedBy(String paymentID, Connection connection) throws SQLException {
+    public static ManagedBy readManagedBy(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ManagedBy managedBy = null;

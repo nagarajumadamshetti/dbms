@@ -47,7 +47,7 @@ public class PartOf {
         }
     }
     
-    public PartOf readPartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {
+    public static PartOf readPartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PartOf partOf = null;

@@ -91,7 +91,7 @@ public class SubscribeArtist {
         }
     }
     
-    public boolean hasSubscription(String userID, String artistID, Connection connection) throws SQLException {
+    public static boolean hasSubscription(String userID, String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean hasSubscription = false;

@@ -50,7 +50,7 @@ public class RecordLabel {
         return isInserted;
     }
 
-    public RecordLabel readRecordLabel(String recordLabelID, Connection connection) throws SQLException {
+    public static RecordLabel readRecordLabel(String recordLabelID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         RecordLabel recordLabel = null;

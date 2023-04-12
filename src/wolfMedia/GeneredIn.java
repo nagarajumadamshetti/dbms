@@ -44,7 +44,7 @@ public class GeneredIn {
         return isInserted;
     }
 
-    public GeneredIn readGeneredIn(String songID, Connection connection) throws SQLException {
+    public static GeneredIn readGeneredIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         GeneredIn generedIn = null;

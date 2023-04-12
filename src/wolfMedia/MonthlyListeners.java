@@ -55,7 +55,7 @@ public class MonthlyListeners {
         return isInserted;
     }
     
-    public MonthlyListeners readMonthlyListeners(String artistID, Date date, Connection connection) throws SQLException {
+    public static MonthlyListeners readMonthlyListeners(String artistID, Date date, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         MonthlyListeners monthlyListeners = null;

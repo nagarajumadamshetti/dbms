@@ -48,7 +48,7 @@ public class OwnedBy {
         }
     }
     
-    public OwnedBy readOwnedBy(String podcastID, String podcastHostID, Connection connection) throws SQLException {
+    public static OwnedBy readOwnedBy(String podcastID, String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         OwnedBy ownedBy = null;

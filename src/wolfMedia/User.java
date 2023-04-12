@@ -115,7 +115,7 @@ public class User {
         }
     }
     
-    public User readUser(String userID, Connection connection) throws SQLException {
+    public static User readUser(String userID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         User user = null;

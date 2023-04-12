@@ -43,7 +43,7 @@ public class ArtistPayments {
         return isInserted;
     }
 
-    public ArtistPayments readPayment(String paymentID, Connection connection) throws SQLException {
+    public static ArtistPayments readPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ArtistPayments payment = null;

@@ -49,7 +49,7 @@ public class SponsoredBy {
         }
     }
     
-    public List<String> readSponsorsByPodcast(String podcastID, Connection connection) throws SQLException {
+    public static List<String> readSponsorsByPodcast(String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<String> sponsorIDs = new ArrayList<>();
@@ -74,7 +74,7 @@ public class SponsoredBy {
         return sponsorIDs;
     }
     
-    public List<String> readPodcastsBySponsor(String sponsorID, Connection connection) throws SQLException {
+    public static List<String> readPodcastsBySponsor(String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<String> podcastIDs = new ArrayList<>();

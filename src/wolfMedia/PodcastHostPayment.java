@@ -59,7 +59,7 @@ public class PodcastHostPayment {
         }
     }
     
-    public PodcastHostPayment readPodcastHostPayment(String paymentID, Connection connection) throws SQLException {
+    public static PodcastHostPayment readPodcastHostPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PodcastHostPayment podcastHostPayment = null;
