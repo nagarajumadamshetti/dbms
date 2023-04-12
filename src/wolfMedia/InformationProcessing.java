@@ -49,24 +49,16 @@ public class InformationProcessing {
         // PodCastInformationProcessing.processPodCast();
     }
     
-    private static void processPodcastHost() {
+    private static void processPodcastHost()throws SQLException {
         // code for processing podcast host information
-        System.out.println("Enter podcast host information:");
-        System.out.print("Host name: ");
-        String hostName = input.nextLine();
+        PodcastHostInformationProcessing.processPodcastHost();
         // additional fields as required
         // add code to update or delete podcast host information
     }
     
-    private static void processPodcastEpisode() {
+    private static void processPodcastEpisode() throws SQLException{
         // code for processing podcast episode information
-        System.out.println("Enter podcast episode information:");
-        System.out.print("Episode title: ");
-        String episodeTitle = input.nextLine();
-        System.out.print("Podcast name: ");
-        String podcastName = input.nextLine();
-        System.out.print("Host name: ");
-        String hostName = input.nextLine();
+        // PodcastEpisodeInformationProcessing.process
         // additional fields as required
         // add code to update or delete podcast episode information
     }
