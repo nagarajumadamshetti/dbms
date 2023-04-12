@@ -1,5 +1,7 @@
 package wolfMedia;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Has {
 
@@ -46,6 +48,28 @@ public class Has {
                 statement.close();
             }
         }
+    }
+
+    public static List<Album> getAlbumsByArtistID(String artistID, Connection conn) throws SQLException {
+
+        List<Album> albums = new ArrayList<>();
+
+        String sql = "SELECT a.* FROM has ha JOIN Albums a ON ha.albumID = a.albumID WHERE ha.artistID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, artistID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // String albumID, String name, String edition, int releaseYea
+            Album album = new Album(rs.getString("albumID"), rs.getString("name"), rs.getString("edition"),
+                    rs.getInt("releaseYear"));
+            albums.add(album);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return albums;
     }
     
     public static Has readHas(String artistID, String albumID, Connection connection) throws SQLException {

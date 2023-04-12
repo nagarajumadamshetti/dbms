@@ -1,5 +1,8 @@
 package wolfMedia;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContractedWith {
     private String artistID;
@@ -43,6 +46,27 @@ public class ContractedWith {
         return isInserted;
     }
 
+    public static List<RecordLabel> getRecordLabelContractsByArtistID(String artistID, Connection conn) throws SQLException {
+
+        List<RecordLabel> recordLabels = new ArrayList<>();
+
+        String sql = "SELECT rl.* FROM contractedWith cW JOIN recordLabel rl ON cW.recordLabelID = rl.recordLabelID WHERE cW.artistID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, artistID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // String recordLabelID, String name
+            RecordLabel recordLabel = new RecordLabel(rs.getString("recordLabelID"), rs.getString("name"));
+            recordLabels.add(recordLabel);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return recordLabels;
+    }
+
     public static ContractedWith readContractedWith(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -58,7 +82,7 @@ public class ContractedWith {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null ;
+            return null;
         } finally {
             if (resultSet != null) {
                 resultSet.close();

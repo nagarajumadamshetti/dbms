@@ -25,6 +25,9 @@ public class InformationProcessing {
             case 6:
                 processRecordLabel();
                 break;
+            case 7:
+                processPodCast();
+                break;
             default:
                 System.out.println("Invalid choice.");
         }
@@ -38,6 +41,12 @@ public class InformationProcessing {
     private static void processArtist() throws SQLException {
         // code for processing artist information
         ArtistInformationProcessing.processArtist();
+    }
+    
+        
+    private static void processPodCast() throws SQLException {
+        // code for processing artist information
+        // PodCastInformationProcessing.processPodCast();
     }
     
     private static void processPodcastHost() {

@@ -1,5 +1,8 @@
 package wolfMedia;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SungBy {
     private String artistID;
@@ -38,17 +41,39 @@ public class SungBy {
             System.out.println("SungBy created.");
         } catch (SQLException ex) {
             System.out.println("Error creating SungBy: " + ex.getMessage());
-    			if (statement != null) {
-    				statement.close();
-    			}
+            if (statement != null) {
+                statement.close();
+            }
             return 0;
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
         }
-        finally {
-			if (statement != null) {
-				statement.close();
-			}
-		}
         return isInserted;
+    }
+
+    public static List<Song> getSongsByArtistID(String artistID, Connection conn) throws SQLException {
+
+        List<Song> songs = new ArrayList<>();
+
+        String sql = "SELECT s.* FROM sungBy sb JOIN Songs s ON sb.songID = s.songID WHERE sb.artistID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, artistID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // String songID, String title, String duration, String releaseDate, float
+            // royaltyPaid, float royaltyRate
+            Song song = new Song(rs.getString("songID"), rs.getString("title"), rs.getString("duration"),
+                    rs.getString("releaseDate"), rs.getFloat("royaltyPaid"), rs.getFloat("royaltyRate"));
+            songs.add(song);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return songs;
     }
 
     public static SungBy readSungBySongID(String songID, Connection connection) throws SQLException {
@@ -67,8 +92,8 @@ public class SungBy {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return null;
         } finally {
             if (resultSet != null) {
@@ -98,8 +123,8 @@ public class SungBy {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return null;
         } finally {
             if (resultSet != null) {
@@ -124,8 +149,8 @@ public class SungBy {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return 0;
         } finally {
             if (statement != null) {
@@ -147,8 +172,8 @@ public class SungBy {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return 0;
         } finally {
             if (statement != null) {

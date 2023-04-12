@@ -92,9 +92,22 @@ public class ArtistInformationProcessing {
             createArtistPrimaryGeneredIn(artistID, conn);
 
             increaseArtistMonthlyListeners(artistID, conn);
+
+            addArtistRecordLabelcontracts(artistID, conn);
         }
 
         Connections.close(conn);
+    }
+
+    public static int addArtistRecordLabelcontracts(String artistID, Connection conn) throws SQLException {
+        System.out.println("Enter  Record Label ID\n");
+        String recordLabelID = input.nextLine();
+        int isCreated = 0;
+        if (!recordLabelID.isEmpty()) {
+            ContractedWith cW = new ContractedWith(artistID, recordLabelID);
+            isCreated = ContractedWith.createContractedWith(cW, conn);
+        }
+        return isCreated;
     }
 
     public static int createArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
@@ -253,9 +266,88 @@ public class ArtistInformationProcessing {
         Connections.close(conn);
     }
 
+    public static List<ArtistPayments> getArtistPayments(String artistID, Connection conn) throws SQLException {
+        List<ArtistPayments> artistPayments = Received.getArtistPayments(artistID, conn);
+        if (artistPayments.isEmpty()) {
+            System.out.println("  (none)");
+        } else {
+            for (ArtistPayments artistPayment : artistPayments) {
+                System.out.println("  " + artistPayment.getPaymentID() + " - " + artistPayment.getPaymentAmount());
+            }
+        }
+        return artistPayments;
+    }
+
+    public static String artistBasedIn(String artistID, Connection conn) throws SQLException {
+        BasedIn rI = BasedIn.readBasedIn(artistID, conn);
+        Country c = Country.readCountry(rI.getCountryID(), conn);
+        return c.getName();
+    }
+
+    public static int artistMonthlyViewed(String artistID, String date, Connection conn) throws SQLException {
+        MonthlyListeners mL = MonthlyListeners.readMonthlyListeners(artistID, date, conn);
+        if (mL == null) {
+            return 0;
+        }
+        return mL.getCount();
+    }
+
+    public static List<Song> getArtistSongs(String artistID, Connection conn) throws SQLException {
+        List<Song> artistSongs = SungBy.getSongsByArtistID(artistID, conn);
+        if (artistSongs.isEmpty()) {
+            System.out.println("  (none)");
+        } else {
+            for (Song artistSong : artistSongs) {
+                System.out.println("  " + artistSong.getSongID() + " - " + artistSong.getTitle());
+            }
+        }
+        return artistSongs;
+    }
+
+    public static List<Song> getArtistCollaboratedSongs(String artistID, Connection conn) throws SQLException {
+        List<Song> collabSongs = CollaboratedBy.getSongsByArtistID(artistID, conn);
+        if (collabSongs.isEmpty()) {
+            System.out.println("  (none)");
+        } else {
+            for (Song artistSong : collabSongs) {
+                System.out.println("  " + artistSong.getSongID() + " - " + artistSong.getTitle());
+            }
+        }
+        return collabSongs;
+    }
+
+    public static List<Album> getArtistAlbums(String artistID, Connection conn) throws SQLException {
+        List<Album> albums = Has.getAlbumsByArtistID(artistID, conn);
+        if (albums.isEmpty()) {
+            System.out.println("  (none)");
+        } else {
+            for (Album album : albums) {
+                System.out.println("  " + album.getAlbumID() + " - " + album.getName());
+            }
+        }
+        return albums;
+    }
+
+    public static List<RecordLabel> getArtistRecordLabelContracts(String artistID, Connection conn)
+            throws SQLException {
+        List<RecordLabel> recordLabels = ContractedWith.getRecordLabelContractsByArtistID(artistID, conn);
+        if (recordLabels.isEmpty()) {
+            System.out.println("  (none)");
+        } else {
+            for (RecordLabel recordLabel : recordLabels) {
+                System.out.println("  " + recordLabel.getRecordLabelID() + " - " + recordLabel.getName());
+            }
+        }
+        return recordLabels;
+    }
+
     private static void readArtist() throws SQLException {
         // add code to prompt for artist ID and display artist information from data
         // store
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
+        String date = currentDate.format(formatter);
+
         System.out.println("Enter artist ID to read:");
         String readID = input.nextLine();
         Connection conn = Connections.open();
@@ -267,6 +359,31 @@ public class ArtistInformationProcessing {
             System.out.println("Name: " + a.name);
             System.out.println("Status: " + a.status);
             System.out.println("Type: " + a.type);
+
+            System.out.println("Payments Received: ");
+
+            getArtistPayments(readID, conn);
+
+            System.out.println("Artist is based in: " + artistBasedIn(readID, conn));
+
+            System.out.println("Artist Monthy Views: " + artistMonthlyViewed(readID, date, conn));
+
+            System.out.println("Artist Songs: ");
+
+            getArtistSongs(readID, conn);
+
+            System.out.println("Artist collaborations: ");
+
+            getArtistCollaboratedSongs(readID, conn);
+
+            System.out.println("Artist Albums: ");
+
+            getArtistAlbums(readID, conn);
+
+            System.out.println("Artist Contracted Record Labels: ");
+
+            getArtistRecordLabelContracts(readID, conn);
+
         }
         Connections.close(conn);
     }
