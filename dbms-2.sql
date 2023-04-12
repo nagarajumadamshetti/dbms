@@ -1972,3 +1972,4 @@ VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8);
       INNER JOIN partOf ON podcastEpisodes.podcastEpisodeID = partOf.podcastEpisodeID 
       INNER JOIN podcasts ON partOf.podcastID = podcasts.podcastID 
       WHERE podcasts.podcastName = 'Podcast-26';
+      
