@@ -65,7 +65,7 @@ public class PodcastHostInformationProcessing {
             System.out.println("PodcastHost not created");
         }
         else{
-            System.out.println("Want to add artist to any existing albums? Enter yes/no");
+            System.out.println("Want to link podcastHost to any existing podcasts? Enter yes/no");
             String response = input.nextLine();
             if (response.equals("yes")) {
                 createHostedPodcasts(PodcastHostID, conn);
