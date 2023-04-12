@@ -92,7 +92,7 @@ public class PodcastHost {
         }
     }
     
-    public PodcastHost readPodcastHost(String podcastHostID, Connection connection) throws SQLException {
+    public static PodcastHost readPodcastHost(String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PodcastHost podcastHost = null;

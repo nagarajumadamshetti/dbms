@@ -48,7 +48,7 @@ public class CollaboratedBy {
         }
     }
     
-    public CollaboratedBy readCollaboration(String artistID, String songID, Connection connection) throws SQLException {
+    public static CollaboratedBy readCollaboration(String artistID, String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         CollaboratedBy collaboration = null;

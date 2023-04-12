@@ -47,7 +47,7 @@ public class UserPayment {
         }
     }
     
-    public UserPayment readUserPayment(String paymentID, Connection connection) throws SQLException {
+    public static UserPayment readUserPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         UserPayment userPayment = null;

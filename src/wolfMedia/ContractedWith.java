@@ -43,7 +43,7 @@ public class ContractedWith {
         return isInserted;
     }
 
-    public ContractedWith readContractedWith(String artistID, Connection connection) throws SQLException {
+    public static ContractedWith readContractedWith(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ContractedWith contractedWith = null;

@@ -47,7 +47,7 @@ public class PodcastGeneredIn {
         }
     }
     
-    public PodcastGeneredIn readPodcastGeneredIn(String podcastID, String genreID, Connection connection) throws SQLException {
+    public static PodcastGeneredIn readPodcastGeneredIn(String podcastID, String genreID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PodcastGeneredIn podcastGeneredIn = null;

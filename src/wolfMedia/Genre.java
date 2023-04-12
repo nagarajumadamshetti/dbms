@@ -44,7 +44,7 @@ public class Genre {
         return isInserted;
     }
 
-    public Genre readGenre(String genreID, Connection connection) throws SQLException {
+    public static Genre readGenre(String genreID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Genre genre = null;

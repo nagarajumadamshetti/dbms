@@ -51,7 +51,7 @@ public class RecordLabelPayment {
         return isInserted;
     }
 
-    public RecordLabelPayment readPayment(String paymentID, Connection connection) throws SQLException {
+    public static RecordLabelPayment readPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         RecordLabelPayment payment = null;

@@ -52,7 +52,7 @@ public class SungIn {
 		return isInserted;
 	}
 
-	public SungIn readSungIn(String songID, Connection connection) throws SQLException {
+	public static SungIn readSungIn(String songID, Connection connection) throws SQLException {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		SungIn sungIn = null;

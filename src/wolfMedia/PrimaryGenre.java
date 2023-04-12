@@ -42,7 +42,7 @@ public class PrimaryGenre {
         return isInserted;
     }
 
-    public PrimaryGenre readPrimaryGenre(String artistID, Connection connection) throws SQLException {
+    public static PrimaryGenre readPrimaryGenre(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PrimaryGenre primaryGenre = null;

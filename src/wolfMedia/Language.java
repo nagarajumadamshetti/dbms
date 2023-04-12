@@ -45,7 +45,7 @@ public class Language {
         return isInserted;
     }
 
-    public Language readLanguage(String languageID, Connection connection) throws SQLException {
+    public static Language readLanguage(String languageID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Language language = null;

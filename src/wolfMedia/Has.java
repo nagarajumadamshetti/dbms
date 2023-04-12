@@ -48,7 +48,7 @@ public class Has {
         }
     }
     
-    public Has readHas(String artistID, String albumID, Connection connection) throws SQLException {
+    public static Has readHas(String artistID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Has has = null;

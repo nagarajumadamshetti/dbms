@@ -48,7 +48,7 @@ public class OriginCountry {
         }
     }
     
-    public OriginCountry readOriginCountry(String podcastID, Connection connection) throws SQLException {
+    public static OriginCountry readOriginCountry(String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         OriginCountry originCountry = null;

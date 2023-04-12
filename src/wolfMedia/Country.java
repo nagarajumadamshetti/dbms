@@ -44,7 +44,7 @@ public class Country {
         return isInserted;
     }
 
-    public Country readCountry(int countryID, Connection connection) throws SQLException {
+    public static Country readCountry(int countryID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Country country = null;

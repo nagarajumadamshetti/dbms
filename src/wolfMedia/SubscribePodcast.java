@@ -47,7 +47,7 @@ public class SubscribePodcast {
         }
     }
     
-    public SubscribePodcast readSubscribePodcast(String userID, String podcastID, Connection connection) throws SQLException {
+    public static SubscribePodcast readSubscribePodcast(String userID, String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         SubscribePodcast subscribePodcast = null;

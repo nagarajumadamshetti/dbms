@@ -46,7 +46,7 @@ public class Received {
         return isInserted;
     }
 
-    public Received readReceived(String paymentID, Connection connection) throws SQLException {
+    public static Received readReceived(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Received received = null;

@@ -43,7 +43,7 @@ public class Guest {
         return isInserted;
     }
 
-    public Guest readGuest(String guestID, Connection connection) throws SQLException {
+    public static Guest readGuest(String guestID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Guest guest = null;

@@ -50,7 +50,7 @@ public class ReleasedIn {
         return isInserted;
     }
 
-    public ReleasedIn readReleasedIn(String songID, Connection connection) throws SQLException {
+    public static ReleasedIn readReleasedIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         ReleasedIn releasedIn = null;

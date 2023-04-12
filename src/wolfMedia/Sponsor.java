@@ -50,7 +50,7 @@ public class Sponsor {
         return isInserted;
     }
 
-    public Sponsor readSponsor(String sponsorID, Connection connection) throws SQLException {
+    public static Sponsor readSponsor(String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Sponsor sponsor = null;
