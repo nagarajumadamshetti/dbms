@@ -51,6 +51,36 @@ public class SungBy {
         return isInserted;
     }
 
+    public static SungBy readSungBySongID(String songID, Connection connection) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        SungBy sungBy = null;
+        try {
+            String query = "SELECT * FROM SungBy WHERE songID = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, songID);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                sungBy = new SungBy(resultSet.getString("artistID"),
+                        resultSet.getString("songID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (statement != null) {
+				statement.close();
+			}
+            return null;
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return sungBy;
+    }
+
     public static SungBy readSungBy(String artistID, String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;

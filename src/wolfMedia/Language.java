@@ -32,7 +32,7 @@ public class Language {
         int isInserted = 0;
         
         try {
-            String query = "INSERT INTO language (languageID, name) VALUES (?, ?)";
+            String query = "INSERT INTO languages (languageID, name) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, language.getLanguageID());
             statement.setString(2, language.getName());
@@ -50,7 +50,7 @@ public class Language {
         ResultSet resultSet = null;
         Language language = null;
         try {
-            String query = "SELECT * FROM language WHERE languageID = ?";
+            String query = "SELECT * FROM languages WHERE languageID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, languageID);
             resultSet = statement.executeQuery();
@@ -77,7 +77,7 @@ public class Language {
         int isUpdated = 0;
         
         try {
-            String query = "UPDATE language SET name = ? WHERE languageID = ?";
+            String query = "UPDATE languages SET name = ? WHERE languageID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, language.getName());
             statement.setString(2, language.getLanguageID());
@@ -97,7 +97,7 @@ public class Language {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM language WHERE languageID = ?";
+            String query = "DELETE FROM languages WHERE languageID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, languageID);
             isDeleted = statement.executeUpdate();

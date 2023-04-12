@@ -1,13 +1,12 @@
 package wolfMedia;
 import java.sql.*;
-import java.util.Date;
 
 public class MonthlyListeners {
     private String artistID;
-    private Date date;
+    private String date;
     private int count;
     
-    public MonthlyListeners(String artistID, Date date, int count) {
+    public MonthlyListeners(String artistID, String date, int count) {
         this.artistID = artistID;
         this.date = date;
         this.count = count;
@@ -21,11 +20,11 @@ public class MonthlyListeners {
         this.artistID = artistID;
     }
     
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
     
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
     
@@ -44,7 +43,7 @@ public class MonthlyListeners {
             String query = "INSERT INTO monthlyListeners (artistID, date, count) VALUES (?, ?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, monthlyListeners.getArtistID());
-            statement.setDate(2, new java.sql.Date(monthlyListeners.getDate().getTime()));
+            statement.setString(2, monthlyListeners.getDate());
             statement.setInt(3, monthlyListeners.getCount());
             isInserted = statement.executeUpdate();
             System.out.println("Monthly listeners created.");
@@ -55,7 +54,7 @@ public class MonthlyListeners {
         return isInserted;
     }
     
-    public static MonthlyListeners readMonthlyListeners(String artistID, Date date, Connection connection) throws SQLException {
+    public static MonthlyListeners readMonthlyListeners(String artistID, String date, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         MonthlyListeners monthlyListeners = null;
@@ -63,11 +62,11 @@ public class MonthlyListeners {
             String query = "SELECT * FROM monthlyListeners WHERE artistID = ? AND date = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, artistID);
-            statement.setDate(2, new java.sql.Date(date.getTime()));
+            statement.setString(2, date);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 monthlyListeners = new MonthlyListeners(resultSet.getString("artistID"),
-                        resultSet.getDate("date"),
+                        resultSet.getString("date"),
                         resultSet.getInt("count"));
             }
         } catch (SQLException e) {
@@ -92,7 +91,7 @@ public class MonthlyListeners {
             statement = connection.prepareStatement(query);
             statement.setInt(1, monthlyListeners.getCount());
             statement.setString(2, monthlyListeners.getArtistID());
-            statement.setDate(3, new java.sql.Date(monthlyListeners.getDate().getTime()));
+            statement.setString(3, monthlyListeners.getDate());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,14 +104,14 @@ public class MonthlyListeners {
         return isUpdated;
     }
     
-    public static int deleteMonthlyListeners(String artistID, Date date, Connection connection) throws SQLException {
+    public static int deleteMonthlyListeners(String artistID, String date, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
             String query = "DELETE FROM monthlyListeners WHERE artistID = ? AND date = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, artistID);
-            statement.setDate(2, new java.sql.Date(date.getTime()));
+            statement.setString(2, date);
             statement.executeUpdate();
         } catch (SQLException e) {
         	  e.printStackTrace();

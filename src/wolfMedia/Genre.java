@@ -31,7 +31,7 @@ public class Genre {
         PreparedStatement statement = null;
         int isInserted = 0;
         try {
-            String query = "INSERT INTO genre (genreID, name) VALUES (?, ?)";
+            String query = "INSERT INTO genres (genreID, name) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, genre.getGenreID());
             statement.setString(2, genre.getName());
@@ -49,7 +49,7 @@ public class Genre {
         ResultSet resultSet = null;
         Genre genre = null;
         try {
-            String query = "SELECT * FROM genre WHERE genreID = ?";
+            String query = "SELECT * FROM genres WHERE genreID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, genreID);
             resultSet = statement.executeQuery();
@@ -75,7 +75,7 @@ public class Genre {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE genre SET name = ? WHERE genreID = ?";
+            String query = "UPDATE genres SET name = ? WHERE genreID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, genre.getName());
             statement.setString(2, genre.getGenreID());
@@ -95,7 +95,7 @@ public class Genre {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM genre WHERE genreID = ?";
+            String query = "DELETE FROM genres WHERE genreID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, genreID);
             isDeleted = statement.executeUpdate();
