@@ -52,46 +52,68 @@ public class MaintainPayments {
 
     public static void makeUserPayments(String userID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO userPayments (paymentID, paymentAmount) "+
-        "select ? as paymentID, u.monthlySubscriptionFee as paymentAmount "+
-        "FROM users u "+
-        "WHERE u.userID = ? ";
+        String sql = "INSERT INTO userPayments (paymentID, paymentAmount) " +
+                "select ? as paymentID, u.monthlySubscriptionFee as paymentAmount " +
+                "FROM users u " +
+                "WHERE u.userID = ? ";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, userID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        // //System.out.println(rowsAffected + " row(s) affected");
     }
 
     public static void makePaymentsMade(String userID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO paymentsMade (paymentID, userID) "+
-        "SELECT ? as paymentID, u.userID as userID "+
-        "FROM users u "+
-        "WHERE u.userID = ?";
+        String sql = "INSERT INTO paymentsMade (paymentID, userID) " +
+                "SELECT ? as paymentID, u.userID as userID " +
+                "FROM users u " +
+                "WHERE u.userID = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, userID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        // //System.out.println(rowsAffected + " row(s) affected");
     }
-
 
     private static void makePaymentsToPodcastHost() throws SQLException {
         // code for updating play count for songs
@@ -117,52 +139,77 @@ public class MaintainPayments {
         Connections.close(conn);
 
     }
-    public static void makePodcastHostPayments(String podcastEpisodeID, String masterPaymentID, Connection conn) throws SQLException {
+
+    public static void makePodcastHostPayments(String podcastEpisodeID, String masterPaymentID, Connection conn)
+            throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO podcastHostPayments (paymentID, flatFee, bonus) "+
-        "select ? as paymentID, 10 as flatFee,( p.rating * ps.advertisementCount) as bonus "+
-        "FROM podcasts p "+
-        "JOIN partOf po ON po.podcastID=p.podcastID "+
-        "JOIN podcastEpisodes ps ON ps.podcastEpisodeID = po.podcastEpisodeID "+
-        "WHERE ps.podcastEpisodeID = ? ";
+        String sql = "INSERT INTO podcastHostPayments (paymentID, flatFee, bonus) " +
+                "select ? as paymentID, 10 as flatFee,( p.rating * ps.advertisementCount) as bonus " +
+                "FROM podcasts p " +
+                "JOIN partOf po ON po.podcastID=p.podcastID " +
+                "JOIN podcastEpisodes ps ON ps.podcastEpisodeID = po.podcastEpisodeID " +
+                "WHERE ps.podcastEpisodeID = ? ";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, podcastEpisodeID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
-    public static void createPodcastPayments(String podcastEpisodeID, String masterPaymentID, Connection conn) throws SQLException {
+    public static void createPodcastPayments(String podcastEpisodeID, String masterPaymentID, Connection conn)
+            throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO podcastPayments (paymentID, podcastHostID) "+
-        "SELECT ? as paymentID, ph.podcastHostID as podcastHostID "+
-        "FROM podcasts p "+
-        "JOIN ownedBy o ON o.podcastID = p.podcastID "+
-        "JOIN  podcastHosts ph ON ph.podcastHostID = o.podcastHostID "+
-        "JOIN partOf po ON po.podcastID=p.podcastID "+
-        "JOIN podcastEpisodes ps ON ps.podcastEpisodeID = po.podcastEpisodeID "+
-        "WHERE ps.podcastEpisodeID = ? ";
+        String sql = "INSERT INTO podcastPayments (paymentID, podcastHostID) " +
+                "SELECT ? as paymentID, ph.podcastHostID as podcastHostID " +
+                "FROM podcasts p " +
+                "JOIN ownedBy o ON o.podcastID = p.podcastID " +
+                "JOIN  podcastHosts ph ON ph.podcastHostID = o.podcastHostID " +
+                "JOIN partOf po ON po.podcastID=p.podcastID " +
+                "JOIN podcastEpisodes ps ON ps.podcastEpisodeID = po.podcastEpisodeID " +
+                "WHERE ps.podcastEpisodeID = ? ";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, podcastEpisodeID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     private static void makeRoyaltyPaymentsForSong() throws SQLException {
@@ -192,29 +239,42 @@ public class MaintainPayments {
         Connections.close(conn);
     }
 
-    public static void makeMainArtistPayment(String songID, String masterPaymentID, Connection conn) throws SQLException {
+    public static void makeMainArtistPayment(String songID, String masterPaymentID, Connection conn)
+            throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO received (paymentID, artistID) "+
-        "SELECT ? as paymentID, sb.artistID "+
-        "FROM songs s "+
-        "JOIN sungBy sb ON s.songID = sb.songID "+
-        "WHERE s.songID = ? ";
+        String sql = "INSERT INTO received (paymentID, artistID) " +
+                "SELECT ? as paymentID, sb.artistID " +
+                "FROM songs s " +
+                "JOIN sungBy sb ON s.songID = sb.songID " +
+                "WHERE s.songID = ? ";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, songID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
-    public static void makeCollaboratorPayments(String songID, String masterPaymentID, Connection conn) throws SQLException {
+    public static void makeCollaboratorPayments(String songID, String masterPaymentID, Connection conn)
+            throws SQLException {
         // Prepare SQL statement
         String sql = "INSERT INTO received (paymentID, artistID) SELECT ? as paymentID, c.artistID FROM songs s JOIN collaboratedBy c ON c.songID = s.songID WHERE s.songID = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -222,13 +282,24 @@ public class MaintainPayments {
         pstmt.setString(2, songID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     public static void makeArtistPayment(String songID, String masterPaymentID, Connection conn) throws SQLException {
@@ -239,13 +310,24 @@ public class MaintainPayments {
         pstmt.setString(2, songID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     public static void createPaymentsReceivedRecord(String songID, String masterPaymentID, Connection conn)
@@ -264,13 +346,24 @@ public class MaintainPayments {
         pstmt.setString(2, songID);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     public static void makeRecordLabelPayment(String songID, String masterPaymentID, String formattedDate,
@@ -287,13 +380,24 @@ public class MaintainPayments {
         pstmt.setString(3, formattedDate);
 
         // Execute SQL statement and get number of rows affected
-        int rowsAffected = pstmt.executeUpdate();
+        ResultSet resultSet = pstmt.executeQuery();
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",  ");
+                String columnValue = resultSet.getString(i);
+                System.out.print(columnValue + " " + rsmd.getColumnName(i));
+            }
+            System.out.println("");
+        }
 
         // Close resources
         pstmt.close();
 
         // Print number of rows affected
-        System.out.println(rowsAffected + " row(s) affected");
+        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     public static String makeMasterPayment(String formattedDate, Connection conn) throws SQLException {
