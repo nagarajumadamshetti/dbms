@@ -42,10 +42,35 @@ public class PodcastHostInformationProcessing {
             case 4:
                 readPodcastHost();
                 break;
+            case 5:
+                assignPodcastHostToPodcast();
+                break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
                 break;
         }
+    }
+
+     /**
+     * Assign Podcast Host To Podcast.
+     *
+     * @return nothing
+     * @throws SQLException the sql exception
+     */
+    public static void assignPodcastHostToPodcast() throws SQLException {
+        Connection conn = Connections.open();
+        System.out.println("Enter PodcastHost ID\n");
+        String podcastHostID = input.nextLine();
+        int isCreated = 0;
+        if (!podcastHostID.isEmpty()) {
+            isCreated = createHostedPodcasts(podcastHostID, conn);
+        }
+        if (isCreated == 0) {
+            System.out.println("PodcastHost not assigned to Podcast mentioned");
+        } else {
+            System.out.println("podcastHost with ID: " + podcastHostID + "has been assigned to respective Podcast");
+        }
+        Connections.close(conn);
     }
 
     /**

@@ -44,11 +44,36 @@ public class PodcastEpisodeInformationProcessing {
             case 4:
                 readPodcastEpisode();
                 break;
+            case 5:
+                assignPodcastEpisodeToPodcast();
+                break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
                 break;
         }
 
+    }
+
+     /**
+     * Assign Podcast Episode To Podcast.
+     *
+     * @return nothing
+     * @throws SQLException the sql exception
+     */
+    public static void assignPodcastEpisodeToPodcast() throws SQLException {
+        Connection conn = Connections.open();
+        System.out.println("Enter PodcastEpisode ID\n");
+        String podcastEpisodeID = input.nextLine();
+        int isCreated = 0;
+        if (!podcastEpisodeID.isEmpty()) {
+            isCreated = createPartOf(podcastEpisodeID, conn);
+        }
+        if (isCreated == 0) {
+            System.out.println("Podcast Episode not assigned to Podcast mentioned");
+        } else {
+            System.out.println("Podcast Episode with ID: " + podcastEpisodeID + "has been assigned to respective Podcast");
+        }
+        Connections.close(conn);
     }
 
     /**
