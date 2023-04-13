@@ -62,7 +62,6 @@ private static void createPodcast() throws SQLException {
     int isCreated = PodCast.createPodcast(p, conn);
 
 
-
     if (isCreated == 0) {
         System.out.println("Podcast not created");
     }
@@ -75,17 +74,28 @@ private static void createPodcast() throws SQLException {
 
         createOwnedBy(podcastID,conn);
 
-        createSubscribePodcast(podcastID,conn);
+        // createSubscribePodcast(podcastID,conn);
 
-
+        createOriginCountry(podcastID,conn);
 
     }
     Connections.close(conn);
    
 }
+public static int createOriginCountry(String podcastID, Connection conn) throws SQLException {
+    System.out.println(
+            "Podcast is Based In: \n 1: United States\n 2: United Kingdom\n 3: Canada\n 4: Australia\n 5: Japan\n 6: Germany\n 7: France\n 8: Brazil");
+    String countryID = input.nextLine();
+    int isCreated = 0;
+    if (!countryID.isEmpty()) {
+        OriginCountry oC = new OriginCountry(podcastID, countryID);
+        isCreated = OriginCountry.createOriginCountry(oC, conn);
+    }
+    return isCreated;
+}
 
     public static int createPartOf(String podcastID, Connection conn) throws SQLException {
-    	System.out.println("Podcast Episode ID: ");
+    	System.out.println("Enter any Podcast Episode ID to be linked: ");
         String podcastEpisodeID = input.nextLine();
         int isCreated = 0;
         if (!podcastEpisodeID.isEmpty()) {
@@ -102,12 +112,12 @@ private static void createPodcast() throws SQLException {
     }
     
     public static int createGeneredIn(String podcastID, Connection conn) throws SQLException {
-        System.out.println("Song Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
+        System.out.println("Podcast Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
         String genreID = input.nextLine();
         int isCreated = 0;
         if (!genreID.isEmpty()) {
-            GeneredIn gI = new GeneredIn(podcastID, genreID);
-            isCreated = GeneredIn.createGeneredIn(gI, conn);
+            PodcastGeneredIn gI = new PodcastGeneredIn(podcastID, genreID);
+            isCreated = PodcastGeneredIn.createPodcastGeneredIn(gI, conn);
         }
         return isCreated;
     }
@@ -184,17 +194,15 @@ private static void createPodcast() throws SQLException {
         if (pToUpdate == null) {
             System.out.println("Podcast with ID " + updateID + " does not exist");
         } else {
-            System.out.println("Enter new song information:");
-            System.out.print("Podcast ID: ");
-            pToUpdate.setPodcastID(input.nextLine());
+            System.out.println("Enter new podcast information:");
+            // System.out.print("Podcast ID: ");
+            // pToUpdate.setPodcastID(input.nextLine());
             System.out.print("Podcast Name: ");
             pToUpdate.setPodcastName(input.nextLine());
             System.out.print("Language: ");
             pToUpdate.setLanguage(input.nextLine());
             System.out.print("Episode count: ");
             pToUpdate.setEpisodeCount(input.nextInt());
-            System.out.print("Total subscribers: ");
-            pToUpdate.setTotalSubscribers(input.nextInt());
             System.out.print("Total subscribers: ");
             pToUpdate.setTotalSubscribers(input.nextInt());
             System.out.print("Rating: ");
@@ -205,6 +213,7 @@ private static void createPodcast() throws SQLException {
                 System.out.println("Failed to update song");
             }
             // TODO update podcast relationship tables
+            System.out.println("Updated Podcast Successfully");
         }
         Connections.close(conn);
     }
