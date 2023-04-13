@@ -1848,20 +1848,23 @@ VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8);
 
   -- 1. Monthly play count per song/album/artist
   -- songs
-    SELECT s.title, YEAR(sv.date) AS year, MONTH(sv.date) AS month, SUM(sv.count) AS play_count
+    SELECT s.songID, s.title, YEAR(sv.date) AS year, MONTH(sv.date) AS month, SUM(sv.count) AS play_count
     FROM songs s
     INNER JOIN songsViewed sv ON s.songID = sv.songID
+    where s.songID=1
     GROUP BY s.songID, YEAR(sv.date), MONTH(sv.date);
   -- albums
     SELECT a.albumID, YEAR(sv.date) AS year, MONTH(sv.date) AS month, SUM(sv.count) AS play_count
     FROM albums a
     INNER JOIN belongsTo bt ON a.albumID = bt.albumID
     INNER JOIN songsViewed sv ON bt.songID = sv.songID
+    where a.albumID = ?
     GROUP BY a.albumID, YEAR(sv.date), MONTH(sv.date);
   -- artist
     SELECT ar.name, YEAR(ml.date) AS year, MONTH(ml.date) AS month, SUM(ml.count) AS play_count
     FROM artists ar
     INNER JOIN monthlyListeners ml ON ar.artistID = ml.artistID
+    where ar.artistID= ? 
     GROUP BY ar.artistID, YEAR(ml.date), MONTH(ml.date);
 
   -- 2. Calculate total payments made out to host/artist/record labels per a given time period
@@ -1872,7 +1875,7 @@ VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8);
       JOIN payments ON podcastHostPayments.paymentID = payments.paymentID
       JOIN podcastHosts ON podcastHosts.podcastHostID = podcastPayments.podcastHostID
       WHERE 
-      -- podcastHosts.podcastHostID=1 AND 
+      podcastHosts.podcastHostID= ? AND 
       payments.date BETWEEN '2022-01-01' AND '2022-12-31'
       GROUP BY podcastHosts.podcastHostID;
 
@@ -1892,7 +1895,8 @@ VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8);
       JOIN paymentsReceived ON paymentsReceived.paymentID = recordLabelPayments.paymentID
       JOIN payments ON recordLabelPayments.paymentID = payments.paymentID
       JOIN recordLabel ON recordLabel.recordLabelID = paymentsReceived.recordLabelID
-      WHERE payments.date BETWEEN '2022-01-01' AND '2022-12-31'
+      WHERE recordLabel.id= ?
+      payments.date BETWEEN ? AND ? 
       GROUP BY recordLabel.name;
 
   -- 3. Total revenue of the streaming service per month, per year
