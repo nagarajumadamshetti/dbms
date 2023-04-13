@@ -25,7 +25,7 @@ public class PodcastEpisodeInformationProcessing {
         System.out.println("2. Update Podcast Episode");
         System.out.println("3. Delete Podcast Episode");
         System.out.println("4. Read Podcast Episode information");
-        System.out.println("4. Assign Podcast Episode To Podcast");
+        System.out.println("5. Assign Podcast Episode To Podcast");
         System.out.print("Choice: ");
 
         int subChoice3 = input.nextInt();

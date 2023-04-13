@@ -25,7 +25,7 @@ public class SongInformationProcessing {
         System.out.println("2. Update song");
         System.out.println("3. Delete song");
         System.out.println("4. Read song information");
-        System.out.println("4. Assign Song To Album");
+        System.out.println("5. Assign Song To Album");
         System.out.print("Choice: ");
 
         int subChoice2 = input.nextInt();

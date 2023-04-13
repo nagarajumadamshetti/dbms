@@ -23,7 +23,7 @@ public class PodcastHostInformationProcessing {
         System.out.println("2. Update PodcastHost");
         System.out.println("3. Delete PodcastHost");
         System.out.println("4. Read PodcastHost information");
-        System.out.println("4. Assign Podcast Host To Podcast");
+        System.out.println("5. Assign Podcast Host To Podcast");
         System.out.print("Choice: ");
 
         int subChoice3 = input.nextInt();
