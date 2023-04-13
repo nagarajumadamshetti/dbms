@@ -61,7 +61,7 @@ public class PodcastGeneredIn {
      *
      * @param podcastGeneredIn the podcast genered in
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPodcastGeneredIn(PodcastGeneredIn podcastGeneredIn, Connection connection) throws SQLException {
@@ -127,7 +127,7 @@ public class PodcastGeneredIn {
      *
      * @param podcastGeneredIn the podcast genered in
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePodcastGeneredIn(PodcastGeneredIn podcastGeneredIn, Connection connection) throws SQLException {
@@ -156,7 +156,7 @@ public class PodcastGeneredIn {
      * @param podcastID  the podcast id
      * @param genreID    the genre id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePodcastGeneredIn(String podcastID, String genreID, Connection connection) throws SQLException {

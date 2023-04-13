@@ -115,7 +115,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int addArtistRecordLabelcontracts(String artistID, Connection conn) throws SQLException {
@@ -134,7 +134,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
@@ -154,7 +154,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
@@ -168,7 +168,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createHasAlbums(String artistID, Connection conn) throws SQLException {
@@ -187,7 +187,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createCollaborations(String artistID, Connection conn) throws SQLException {
@@ -207,7 +207,7 @@ public class ArtistInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteCollaboration(String artistID, String songID, Connection conn) throws SQLException {
@@ -222,7 +222,7 @@ public class ArtistInformationProcessing {
      * @param artistID  the artist id
      * @param paymentID the payment id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int addPaymentReceived(String artistID, String paymentID, Connection conn) throws SQLException {
@@ -236,7 +236,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBasedIn(String artistID, Connection conn) throws SQLException {
@@ -256,7 +256,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteBasedIn(String artistID, Connection conn) throws SQLException {
@@ -270,7 +270,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int increaseArtistMonthlyListeners(String artistID, Connection conn) throws SQLException {
@@ -296,7 +296,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createArtistMonthlyListeners(String artistID, Connection conn) throws SQLException {
@@ -314,7 +314,7 @@ public class ArtistInformationProcessing {
      *
      * @param artistID the artist id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSungBy(String artistID, Connection conn) throws SQLException {
@@ -341,7 +341,7 @@ public class ArtistInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSungBy(String artistID, String songID, Connection conn) throws SQLException {
@@ -424,6 +424,9 @@ public class ArtistInformationProcessing {
      */
     public static String artistBasedIn(String artistID, Connection conn) throws SQLException {
         BasedIn rI = BasedIn.readBasedIn(artistID, conn);
+        if(rI==null){
+            return "(none)";
+        }
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }
@@ -434,7 +437,7 @@ public class ArtistInformationProcessing {
      * @param artistID the artist id
      * @param date     the date
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int artistMonthlyViewed(String artistID, String date, Connection conn) throws SQLException {

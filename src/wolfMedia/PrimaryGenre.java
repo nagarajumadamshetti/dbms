@@ -60,7 +60,7 @@ public class PrimaryGenre {
      *
      * @param primaryGenre the primary genre
      * @param connection   the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPrimaryGenre(PrimaryGenre primaryGenre, Connection connection) throws SQLException {
@@ -119,7 +119,7 @@ public class PrimaryGenre {
      *
      * @param primaryGenre the primary genre
      * @param connection   the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePrimaryGenre(PrimaryGenre primaryGenre, Connection connection) throws SQLException {
@@ -147,7 +147,7 @@ public class PrimaryGenre {
      *
      * @param artistID   the artist id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePrimaryGenre(String artistID, Connection connection) throws SQLException {

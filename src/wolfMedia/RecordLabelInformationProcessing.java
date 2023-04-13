@@ -80,7 +80,7 @@ public class RecordLabelInformationProcessing {
      *
      * @param recordLabelID the record label id
      * @param conn          the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int addRecordLabelArtistcontracts(String recordLabelID, Connection conn) throws SQLException {

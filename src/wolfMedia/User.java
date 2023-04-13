@@ -188,7 +188,7 @@ public class User {
      *
      * @param user       the user
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createUser(User user, Connection connection) throws SQLException {
@@ -264,7 +264,7 @@ public class User {
      *
      * @param user       the user
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateUser(User user, Connection connection) throws SQLException {
@@ -298,7 +298,7 @@ public class User {
      *
      * @param userID     the user id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteUser(String userID, Connection connection) throws SQLException {

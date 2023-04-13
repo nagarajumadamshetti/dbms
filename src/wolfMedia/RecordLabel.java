@@ -66,7 +66,7 @@ public class RecordLabel {
      *
      * @param recordLabel the record label
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createRecordLabel(RecordLabel recordLabel, Connection connection) throws SQLException {
@@ -137,7 +137,7 @@ public class RecordLabel {
      *
      * @param recordLabel the record label
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateRecordLabel(RecordLabel recordLabel, Connection connection) throws SQLException {
@@ -168,7 +168,7 @@ public class RecordLabel {
      *
      * @param recordLabelID the record label id
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteRecordLabel(String recordLabelID, Connection connection) throws SQLException {

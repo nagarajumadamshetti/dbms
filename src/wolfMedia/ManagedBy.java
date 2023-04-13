@@ -60,7 +60,7 @@ public class ManagedBy {
      *
      * @param managedBy  the managed by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createManagedBy(ManagedBy managedBy, Connection connection) throws SQLException {
@@ -121,7 +121,7 @@ public class ManagedBy {
      *
      * @param managedBy  the managed by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateManagedBy(ManagedBy managedBy, Connection connection) throws SQLException {
@@ -149,7 +149,7 @@ public class ManagedBy {
      *
      * @param paymentID  the payment id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteManagedBy(String paymentID, Connection connection) throws SQLException {

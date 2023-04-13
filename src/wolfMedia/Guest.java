@@ -60,7 +60,7 @@ public class Guest {
      *
      * @param guest      the guest
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGuest(Guest guest, Connection connection) throws SQLException {
@@ -120,7 +120,7 @@ public class Guest {
      *
      * @param guest      the guest
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateGuest(Guest guest, Connection connection) throws SQLException {
@@ -148,7 +148,7 @@ public class Guest {
      *
      * @param guestID    the guest id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGuest(String guestID, Connection connection) throws SQLException {

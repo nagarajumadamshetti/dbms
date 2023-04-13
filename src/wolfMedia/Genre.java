@@ -61,7 +61,7 @@ public class Genre {
      *
      * @param genre      the genre
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGenre(Genre genre, Connection connection) throws SQLException {
@@ -121,7 +121,7 @@ public class Genre {
      *
      * @param genre      the genre
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateGenre(Genre genre, Connection connection) throws SQLException {
@@ -149,7 +149,7 @@ public class Genre {
      *
      * @param genreID    the genre id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGenre(String genreID, Connection connection) throws SQLException {

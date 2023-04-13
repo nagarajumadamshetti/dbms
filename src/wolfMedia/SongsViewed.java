@@ -83,7 +83,7 @@ public class SongsViewed {
      *
      * @param songsViewed the songs viewed
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSongsViewed(SongsViewed songsViewed, Connection connection) throws SQLException {
@@ -157,7 +157,7 @@ public class SongsViewed {
      *
      * @param songsViewed the songs viewed
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSongsViewed(SongsViewed songsViewed, Connection connection) throws SQLException {
@@ -190,7 +190,7 @@ public class SongsViewed {
      * @param songID     the song id
      * @param date       the date
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSongsViewed(String songID, String date, Connection connection) throws SQLException {

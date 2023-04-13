@@ -63,7 +63,7 @@ public class SungBy {
      *
      * @param sungBy     the sung by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSungBy(SungBy sungBy, Connection connection) throws SQLException {
@@ -204,7 +204,7 @@ public class SungBy {
      *
      * @param sungBy     the sung by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSungBy(SungBy sungBy, Connection connection) throws SQLException {
@@ -236,7 +236,7 @@ public class SungBy {
      * @param artistID   the artist id
      * @param songID     the song id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSungBy(String artistID, String songID, Connection connection) throws SQLException {

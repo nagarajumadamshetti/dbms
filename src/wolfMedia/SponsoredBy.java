@@ -62,7 +62,7 @@ public class SponsoredBy {
      *
      * @param sponsoredBy the sponsored by
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSponsoredBy(SponsoredBy sponsoredBy, Connection connection) throws SQLException {
@@ -158,7 +158,7 @@ public class SponsoredBy {
      * @param podcastID  the podcast id
      * @param sponsorID  the sponsor id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSponsoredBy(String podcastID, String sponsorID, Connection connection) throws SQLException {

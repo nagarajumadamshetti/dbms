@@ -163,7 +163,7 @@ public class Song {
      *
      * @param song       the song
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSong(Song song, Connection connection) throws SQLException {
@@ -242,7 +242,7 @@ public class Song {
      *
      * @param song       the song
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSong(Song song, Connection connection) throws SQLException {
@@ -278,7 +278,7 @@ public class Song {
      *
      * @param songID     the song id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSong(String songID, Connection connection) throws SQLException {

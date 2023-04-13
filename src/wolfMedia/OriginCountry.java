@@ -61,7 +61,7 @@ public class OriginCountry {
      *
      * @param originCountry the origin country
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createOriginCountry(OriginCountry originCountry, Connection connection) throws SQLException {
@@ -125,7 +125,7 @@ public class OriginCountry {
      *
      * @param originCountry the origin country
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateOriginCountry(OriginCountry originCountry, Connection connection) throws SQLException {
@@ -153,7 +153,7 @@ public class OriginCountry {
      *
      * @param podcastID  the podcast id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteOriginCountry(String podcastID, Connection connection) throws SQLException {

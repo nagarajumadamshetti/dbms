@@ -147,7 +147,7 @@ public class PodcastEpisode {
      *
      * @param episode    the episode
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPodcastEpisode(PodcastEpisode episode, Connection connection) throws SQLException {
@@ -217,7 +217,7 @@ public class PodcastEpisode {
      *
      * @param episode    the episode
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePodcastEpisode(PodcastEpisode episode, Connection connection) throws SQLException {
@@ -249,7 +249,7 @@ public class PodcastEpisode {
      *
      * @param podcastEpisodeID the podcast episode id
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePodcastEpisode(String podcastEpisodeID, Connection connection) throws SQLException {

@@ -62,7 +62,7 @@ public class PartOf {
      *
      * @param partOf     the part of
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPartOf(PartOf partOf, Connection connection) throws SQLException {
@@ -189,7 +189,7 @@ public class PartOf {
      *
      * @param partOf     the part of
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePartOf(PartOf partOf, Connection connection) throws SQLException {
@@ -218,7 +218,7 @@ public class PartOf {
      * @param podcastID        the podcast id
      * @param podcastEpisodeID the podcast episode id
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {

@@ -61,7 +61,7 @@ public class Country {
      *
      * @param country    the country
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createCountry(Country country, Connection connection) throws SQLException {
@@ -121,7 +121,7 @@ public class Country {
      *
      * @param country    the country
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateCountry(Country country, Connection connection) throws SQLException {
@@ -149,7 +149,7 @@ public class Country {
      *
      * @param countryID  the country id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteCountry(String countryID, Connection connection) throws SQLException {

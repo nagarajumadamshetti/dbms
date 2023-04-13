@@ -95,7 +95,7 @@ public class PodcastEpisodeInformationProcessing {
      *
      * @param podcastEpisodeID the podcast episode id
      * @param conn             the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPartOf(String podcastEpisodeID, Connection conn) throws SQLException{
@@ -127,7 +127,7 @@ public class PodcastEpisodeInformationProcessing {
      *
      * @param podcastEpisodeID the podcast episode id
      * @param conn             the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGuestFeatured(String podcastEpisodeID, Connection conn) throws SQLException{
@@ -147,7 +147,7 @@ public class PodcastEpisodeInformationProcessing {
      * @param guestID          the guest id
      * @param podcastEpisodeID the podcast episode id
      * @param conn             the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection conn) throws SQLException {

@@ -114,7 +114,7 @@ public class Artist {
      *
      * @param artist     the artist
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createArtist(Artist artist, Connection connection) throws SQLException {
@@ -189,7 +189,7 @@ public class Artist {
      *
      * @param artist     the artist
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateArtist(Artist artist, Connection connection) throws SQLException {
@@ -222,7 +222,7 @@ public class Artist {
      *
      * @param artistID   the artist id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteArtist(String artistID, Connection connection) throws SQLException {

@@ -63,7 +63,7 @@ public class ContractedWith {
      *
      * @param contractedWith the contracted with
      * @param connection     the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createContractedWith(ContractedWith contractedWith, Connection connection) throws SQLException {
@@ -182,7 +182,7 @@ public class ContractedWith {
      *
      * @param contractedWith the contracted with
      * @param connection     the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateContractedWith(ContractedWith contractedWith, Connection connection) throws SQLException {
@@ -210,7 +210,7 @@ public class ContractedWith {
      *
      * @param artistID   the artist id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteContractedWith(String artistID, Connection connection) throws SQLException {

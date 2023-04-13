@@ -34,10 +34,10 @@ INSERT INTO monthlyListeners (artistID, date, count) VALUES
 ('ar2001', '2022-02-01', 25),
 ('ar2001', '2022-03-01', 25),
 ('ar2001', '2022-04-01', 25),
-('ar2001', '2022-01-01', 55),
+('ar2002', '2022-01-01', 55),
 ('ar2002', '2022-02-01', 55),
-('ar2003', '2022-03-01', 55),
-('ar2004', '2022-04-01', 55);
+('ar2002', '2022-03-01', 55),
+('ar2002', '2022-04-01', 55);
 
 INSERT INTO albums (albumID, name, edition, releaseYear) VALUES
 ('al4001', 'Electric Oasis', 'Deluxe Edition', 2020),
@@ -51,7 +51,7 @@ INSERT INTO sungBy (artistID, songID) VALUES
 
 
 INSERT INTO collaboratedBy (artistID, songID) VALUES
-('ar2002','s1002'),
+('ar2002','s1002');
 
 INSERT INTO has (artistID, albumID) VALUES
 ('ar2001','al4001'),
@@ -71,10 +71,10 @@ INSERT INTO recordLabel (recordLabelID, name) VALUES
 
 INSERT INTO contractedWith (artistID, recordLabelID) VALUES
 ('ar2001','rl3001'),
-('ar2001','rl3002'),
+('ar2002','rl3002');
 
 INSERT INTO podcasts (podcastID, podcastName, language, episodeCount, totalSubscribers, rating) VALUES
-('p5001', 'Mind Over Matter: Exploring the Power of the Human Mind', 'English', 5, 10, 4.5);
+('p5001', 'Mind Over Matter: Exploring the Power of the Human Mind', 'English', 5, 10, 4);
 
 
 INSERT INTO podcastHosts (podcastHostID, firstName, lastName, phone, email, city) VALUES
@@ -82,7 +82,7 @@ INSERT INTO podcastHosts (podcastHostID, firstName, lastName, phone, email, city
 
 
 INSERT INTO ownedBy (podcastID, podcastHostID)
-VALUES ('p5001','ph6001')
+VALUES ("p5001","ph6001");
 
 INSERT INTO podcastEpisodes (podcastEpisodeID, episodeTitle, duration, releaseDate, listeningCount, advertisementCount) VALUES
 ('pe7001', 'The Science of Mindfulness', '00:03:30', '2020-01-01', 100, 0),
@@ -90,7 +90,7 @@ INSERT INTO podcastEpisodes (podcastEpisodeID, episodeTitle, duration, releaseDa
 
 INSERT INTO users (userID, phone, email, registrationDate, monthlySubscriptionFee, statusOfSubscription, firstName, lastName) VALUES
 ('u8001', '1234567890', 'user1@example.com', '2022-01-01', 10, 'active', 'Alex', 'A'),
-('u8002', '0987654321', 'user2@example.com', '2021-03-15', 10, 'active', 'John', 'J'),
+('u8002', '0987654321', 'user2@example.com', '2021-03-15', 10, 'active', 'John', 'J');
 
 
 INSERT INTO payments (paymentID, date)
@@ -102,21 +102,21 @@ VALUES
 ('5', '2022-02-01'),
 ('6', '2022-03-01'),
 ('7', '2022-01-01'),
-('8', '2022-02-01');
-('9', '2022-03-01');
+('8', '2022-02-01'),
+('9', '2022-03-01'),
 ('10', '2022-01-01'),
-('11', '2022-02-01');
-('12', '2022-03-01');
+('11', '2022-02-01'),
+('12', '2022-03-01'),
 ('13', '2022-01-01'),
-('14', '2022-02-01');
-('15', '2022-03-01');
-('16', '2022-01-01');
-('17', '2022-02-01');
-('18', '2022-03-01');
-('19', '2022-04-01');
-('20', '2022-01-01');
-('21', '2022-02-01');
-('22', '2022-03-01');
+('14', '2022-02-01'),
+('15', '2022-03-01'),
+('16', '2022-01-01'),
+('17', '2022-02-01'),
+('18', '2022-03-01'),
+('19', '2022-04-01'),
+('20', '2022-01-01'),
+('21', '2022-02-01'),
+('22', '2022-03-01'),
 ('23', '2022-04-01');
 
 INSERT INTO received (paymentID, artistID) VALUES
@@ -252,4 +252,14 @@ VALUES
 ('7', 'Peacock', 'info@peacock.com'),
 ('8', 'Paramount+', 'info@paramountplus.com');
 
-
+INSERT INTO users (userID, phone, email, registrationDate, monthlySubscriptionFee, statusOfSubscription, firstName, lastName) VALUES
+(1, '1234567890', 'user1@example.com', '2022-01-01', 9.99, 'active', 'John', 'Doe'),
+(2, '0987654321', 'user2@example.com', '2021-03-15', 4.99, 'inactive', 'Jane', 'Doe'),
+(3, '1111111111', 'user3@example.com', '2020-10-01', 14.99, 'active', 'Bob', 'Smith'),
+(5, '555-555-5555', 'jane@example.com', '2023-03-10', 9.99, 'active', 'Jane', 'Doe'),
+(4, '555-555-5555', 'john@example.com', '2023-03-10', 9.99, 'active', 'John', 'Doe'),
+(6, '555-123-4567', 'jane.doe@example.com', '2022-01-01', 9.99, 'Active', 'Jane', 'Doe'),
+(7, '555-555-5555', 'john.smith@example.com', '2021-12-01', 5.99, 'Active', 'John', 'Smith'),
+(8, '555-987-6543', 'susan.jones@example.com', '2022-02-15', 7.99, 'Active', 'Susan', 'Jones'),
+(9, '555-111-2222', 'jimmy.nguyen@example.com', '2022-03-01', 4.99, 'Active', 'Jimmy', 'Nguyen'),
+(10, '555-555-1212', 'kim.wong@example.com', '2022-01-15', 6.99, 'Active', 'Kim', 'Wong');

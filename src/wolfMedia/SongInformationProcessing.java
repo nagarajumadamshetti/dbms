@@ -116,7 +116,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSongView(String songID, Connection conn) throws SQLException {
@@ -139,7 +139,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createReleasedIn(String songID, Connection conn) throws SQLException {
@@ -159,7 +159,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteReleasedIn(String songID, Connection conn) throws SQLException {
@@ -173,7 +173,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSungIn(String songID, Connection conn) throws SQLException {
@@ -193,7 +193,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSungIn(String songID, Connection conn) throws SQLException {
@@ -207,7 +207,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGeneredIn(String songID, Connection conn) throws SQLException {
@@ -227,7 +227,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGeneredIn(String songID, Connection conn) throws SQLException {
@@ -241,7 +241,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBelongsTo(String songID, Connection conn) throws SQLException {
@@ -263,7 +263,7 @@ public class SongInformationProcessing {
      * @param songID  the song id
      * @param albumID the album id
      * @param conn    the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteBelongsTo(String songID, String albumID, Connection conn) throws SQLException {
@@ -277,7 +277,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSungBy(String songID, Connection conn) throws SQLException {
@@ -297,7 +297,7 @@ public class SongInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSungBy(String artistID, String songID, Connection conn) throws SQLException {
@@ -311,7 +311,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createCollaborators(String songID, Connection conn) throws SQLException {
@@ -334,7 +334,7 @@ public class SongInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteCollaboration(String artistID, String songID, Connection conn) throws SQLException {
@@ -348,7 +348,7 @@ public class SongInformationProcessing {
      *
      * @param songID the song id
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int viewSong(String songID, Connection conn) throws SQLException {
@@ -431,7 +431,7 @@ public class SongInformationProcessing {
      * @param songID the song id
      * @param date   the date
      * @param conn   the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int songViewed(String songID, String date, Connection conn) throws SQLException {
@@ -452,6 +452,9 @@ public class SongInformationProcessing {
      */
     public static String songReleasedIn(String songID, Connection conn) throws SQLException {
         ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn);
+        if(rI==null){
+            return "(none)";
+        }
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }
@@ -466,6 +469,9 @@ public class SongInformationProcessing {
      */
     public static String songSungIn(String songID, Connection conn) throws SQLException {
         SungIn sI = SungIn.readSungIn(songID, conn);
+        if (sI==null){
+            return "(none)";
+        }
         Language l = Language.readLanguage(sI.getLanguageID(), conn);
         return l.getName();
     }
@@ -480,6 +486,9 @@ public class SongInformationProcessing {
      */
     public static String songGeneredIn(String songID, Connection conn) throws SQLException {
         GeneredIn gI = GeneredIn.readGeneredIn(songID, conn);
+        if(gI==null){
+            return "(none)";
+        }
         Genre g = Genre.readGenre(gI.getGenreID(), conn);
         return g.getName();
     }
@@ -494,6 +503,9 @@ public class SongInformationProcessing {
      */
     public static String songArtist(String songID, Connection conn) throws SQLException {
         SungBy sB = SungBy.readSungBySongID(songID, conn);
+        if(sB==null){
+            return "(none)";
+        }
         Artist a = Artist.readArtist(sB.getArtistID(), conn);
         return a.getName();
     }

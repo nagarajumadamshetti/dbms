@@ -145,7 +145,7 @@ public class PodcastHost {
      *
      * @param podcastHost the podcast host
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPodcastHost(PodcastHost podcastHost, Connection connection) throws SQLException {
@@ -217,7 +217,7 @@ public class PodcastHost {
      *
      * @param podcastHost the podcast host
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePodcastHost(PodcastHost podcastHost, Connection connection) throws SQLException {
@@ -249,7 +249,7 @@ public class PodcastHost {
      *
      * @param podcastHostID the podcast host id
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePodcastHost(String podcastHostID, Connection connection) throws SQLException {

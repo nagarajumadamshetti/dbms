@@ -52,7 +52,7 @@ public class AlbumInformationProcessing {
      * Create Album
      */
     private static void createAlbum() throws SQLException {
-        System.out.println("Enter artist information:");
+        System.out.println("Enter album information:");
         System.out.print("Album ID: ");
         String albumID = input.nextLine();
         System.out.print("Name: ");
@@ -61,45 +61,53 @@ public class AlbumInformationProcessing {
         String edition = input.nextLine();
         System.out.print("Release year: ");
         int releaseYear = Integer.parseInt(input.nextLine());
-
+    
         Connection conn = Connections.open();
-
+        conn.setAutoCommit(false); // start transaction
+    
         Album a = new Album(albumID, name, edition, releaseYear);
-        int isCreated = Album.createAlbum(a, conn);
-
-        if (isCreated == 0) {
+        int isAlbumCreated = Album.createAlbum(a, conn);
+        int isHasArtistCreated = 0;
+        int isBelongsToCreated = 0;
+    
+        if (isAlbumCreated == 0) {
             System.out.println("Album not created");
         } else {
-            System.out.println("Add a artists to album? Enter yes/no");
-            String response = input.nextLine();
-            if (response.equals("yes")) {
-                createHasArtists(albumID, conn);
+            try {
+                System.out.println("Add artists to album? Enter yes/no");
+                String response = input.nextLine();
+                if (response.equals("yes")) {
+                    isHasArtistCreated = createHasArtists(albumID, conn);
+                }
+    
+                System.out.println("Add song IDs to album? Enter yes/no");
+                response = input.nextLine();
+                if (response.equals("yes")) {
+                    isBelongsToCreated = createBelongsTo(albumID, conn);
+                }
+    
+                if (isHasArtistCreated == 0 || isBelongsToCreated == 0) {
+                    conn.rollback(); // rollback if any failures
+                    System.out.println("Transaction rolled back.");
+                } else {
+                    conn.commit(); // commit if everything is successful
+                    System.out.println("Transaction committed.");
+                }
+            } catch (Exception e) {
+                conn.rollback(); // rollback on exception
+                System.out.println("Transaction rolled back due to exception: " + e.getMessage());
             }
-
-            createBelongsTo(albumID, conn);
-
-            System.out.println("Add a song ID's  to album? Enter yes/no");
-            response = input.nextLine();
-            if (response.equals("yes")) {
-                createBelongsTo(albumID, conn);
-            }
-
-            // System.out.println("Add a songs? Enter yes/no");
-            // response = input.nextLine();
-            // if (response.equals("yes")) {
-            // createHasArtists(albumID, conn);
-            // }
         }
-
+    
         Connections.close(conn);
     }
-
+    
     /**
      * Create belongs to int.
      *
      * @param albumID the album id
      * @param conn    the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBelongsTo(String albumID, Connection conn) throws SQLException {
@@ -107,7 +115,7 @@ public class AlbumInformationProcessing {
         while (true) {
             System.out.println("Add a song to album? Enter yes/no");
             String response = input.nextLine();
-            if (response == "no") {
+            if (response.equals("no")) {
                 break;
             }
             System.out.println("Song ID: ");
@@ -128,7 +136,7 @@ public class AlbumInformationProcessing {
      *
      * @param albumID the album id
      * @param conn    the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createHasArtists(String albumID, Connection conn) throws SQLException {
@@ -148,7 +156,7 @@ public class AlbumInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteHasArtists(String artistID, String songID, Connection conn) throws SQLException {
@@ -166,11 +174,17 @@ public class AlbumInformationProcessing {
         System.out.println("Enter album ID to update:");
         String updateID = input.nextLine();
         Connection conn = Connections.open();
-
         Album aToUpdate = Album.readAlbum(updateID, conn);
+    
         if (aToUpdate == null) {
             System.out.println("Album with ID " + updateID + " does not exist");
-        } else {
+            Connections.close(conn);
+            return;
+        }
+    
+        conn.setAutoCommit(false); // Begin transaction
+    
+        try {
             System.out.println("Enter new album information:");
             System.out.print("Name: ");
             aToUpdate.setName(input.nextLine());
@@ -178,14 +192,24 @@ public class AlbumInformationProcessing {
             aToUpdate.setEdition(input.nextLine());
             System.out.print("Release year: ");
             aToUpdate.setReleaseYear(Integer.parseInt(input.nextLine()));
-            int isUpdated;
-            isUpdated = Album.updateAlbum(aToUpdate, conn);
+            int isUpdated = Album.updateAlbum(aToUpdate, conn);
+    
             if (isUpdated == 0) {
                 System.out.println("Failed to update album");
+                conn.rollback(); // Rollback transaction
+            } else {
+                System.out.println("Album updated successfully");
+                conn.commit(); // Commit transaction
             }
+    
+        } catch (SQLException ex) {
+            System.out.println("Error updating album: " + ex.getMessage());
+            conn.rollback(); // Rollback transaction
+        } finally {
+            Connections.close(conn);
         }
-        Connections.close(conn);
     }
+    
 
     /**
      * Delete album.
@@ -196,48 +220,69 @@ public class AlbumInformationProcessing {
         System.out.println("Enter album ID to delete:");
         String deleteID = input.nextLine();
         Connection conn = Connections.open();
-        int s = Album.deleteAlbum(deleteID, conn);
-        if (s == 0) {
-            System.out.println("Album with ID " + deleteID + " does not exist");
-        } else {
-            System.out.println("Album with ID " + deleteID + " is deleted");
+    
+        conn.setAutoCommit(false); // Begin transaction
+    
+        try {
+            int s = Album.deleteAlbum(deleteID, conn);
+            if (s == 0) {
+                System.out.println("Album with ID " + deleteID + " does not exist");
+                conn.rollback(); // Rollback transaction
+            } else {
+                System.out.println("Album with ID " + deleteID + " is deleted");
+                conn.commit(); // Commit transaction
+            }
+    
+        } catch (SQLException ex) {
+            System.out.println("Error deleting album: " + ex.getMessage());
+            conn.rollback(); // Rollback transaction
+        } finally {
+            Connections.close(conn);
         }
-        Connections.close(conn);
     }
+    
 
     private static void readAlbum() throws SQLException {
-        // add code to prompt for album ID and display album information from data store
         System.out.println("Enter album ID to read:");
         String readID = input.nextLine();
         Connection conn = Connections.open();
-        Album a = Album.readAlbum(readID, conn);
-        if (a == null) {
-            System.out.println("Album with ID " + readID + " does not exist");
-        } else {
-            System.out.println("Album ID: " + a.albumID);
-            System.out.println("Name: " + a.name);
-            System.out.println("Edition: " + a.edition);
-            System.out.println("Release Year: " + a.releaseYear);
-            System.out.println("Artists:");
-            List<Artist> artists = Album.getArtists(a.albumID, conn);
-            if (artists.isEmpty()) {
-                System.out.println("  (none)");
+        try {
+            conn.setAutoCommit(false);
+            Album a = Album.readAlbum(readID, conn);
+            if (a == null) {
+                System.out.println("Album with ID " + readID + " does not exist");
             } else {
-                for (Artist artist : artists) {
-                    System.out.println("  " + artist.getArtistID() + " - " + artist.getName());
+                System.out.println("Album ID: " + a.albumID);
+                System.out.println("Name: " + a.name);
+                System.out.println("Edition: " + a.edition);
+                System.out.println("Release Year: " + a.releaseYear);
+                System.out.println("Artists:");
+                List<Artist> artists = Album.getArtists(a.albumID, conn);
+                if (artists.isEmpty()) {
+                    System.out.println("  (none)");
+                } else {
+                    for (Artist artist : artists) {
+                        System.out.println("  " + artist.getArtistID() + " - " + artist.getName());
+                    }
+                }
+                System.out.println("Songs:");
+                List<Song> songs = Album.getSongsByAlbumID(a.albumID, conn);
+                if (songs.isEmpty()) {
+                    System.out.println("  (none)");
+                } else {
+                    for (Song song : songs) {
+                        System.out.println("  " + song.getSongID() + " - " + song.getTitle());
+                    }
                 }
             }
-            System.out.println("Songs:");
-            List<Song> songs = Album.getSongsByAlbumID(a.albumID, conn);
-            if (songs.isEmpty()) {
-                System.out.println("  (none)");
-            } else {
-                for (Song song : songs) {
-                    System.out.println("  " + song.getSongID() + " - " + song.getTitle());
-                }
-            }
+            conn.commit();
+        } catch (SQLException ex) {
+            System.out.println("Failed to read album with ID " + readID);
+            conn.rollback();
+        } finally {
+            Connections.close(conn);
         }
-        Connections.close(conn);
     }
+    
 
 }

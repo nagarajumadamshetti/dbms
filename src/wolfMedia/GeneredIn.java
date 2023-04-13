@@ -60,7 +60,7 @@ public class GeneredIn {
      *
      * @param generedIn  the genered in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGeneredIn(GeneredIn generedIn, Connection connection) throws SQLException {
@@ -121,7 +121,7 @@ public class GeneredIn {
      *
      * @param generedIn  the genered in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateGeneredIn(GeneredIn generedIn, Connection connection) throws SQLException {
@@ -149,7 +149,7 @@ public class GeneredIn {
      *
      * @param songID     the song id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGeneredIn(String songID, Connection connection) throws SQLException {

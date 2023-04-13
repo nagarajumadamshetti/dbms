@@ -85,7 +85,7 @@ public class BelongsTo {
      *
      * @param belongsTo  the belongs to
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBelongsTo(BelongsTo belongsTo, Connection connection) throws SQLException {
@@ -247,7 +247,7 @@ public class BelongsTo {
      *
      * @param belongsTo  the belongs to
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateBelongsTo(BelongsTo belongsTo, Connection connection) throws SQLException {
@@ -277,7 +277,7 @@ public class BelongsTo {
      * @param songID     the song id
      * @param albumID    the album id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteBelongsTo(String songID, String albumID, Connection connection) throws SQLException {

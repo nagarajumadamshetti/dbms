@@ -60,7 +60,7 @@ public class ArtistPayments {
      *
      * @param payment    the payment
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPayment(ArtistPayments payment, Connection connection) throws SQLException {
@@ -119,7 +119,7 @@ public class ArtistPayments {
      *
      * @param payment    the payment
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePayment(ArtistPayments payment, Connection connection) throws SQLException {
@@ -147,7 +147,7 @@ public class ArtistPayments {
      *
      * @param paymentID  the payment id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePayment(String paymentID, Connection connection) throws SQLException {

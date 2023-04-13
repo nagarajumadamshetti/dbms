@@ -64,7 +64,7 @@ public class CollaboratedBy {
      *
      * @param collaboration the collaboration
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createCollaboration(CollaboratedBy collaboration, Connection connection) throws SQLException {
@@ -138,7 +138,7 @@ public class CollaboratedBy {
             // String songID, String title, String duration, String releaseDate, float
             // royaltyPaid, float royaltyRate
             Song song = new Song(rs.getString("songID"), rs.getString("title"), rs.getString("duration"),
-                    rs.getString("releaseDate"), rs.getFloat("royaltyPaid"), rs.getFloat("royaltyRate"));
+                    rs.getString("releaseDate"), rs.getBoolean("royaltyPaid"), rs.getFloat("royaltyRate"));
             songs.add(song);
         }
 
@@ -190,7 +190,7 @@ public class CollaboratedBy {
      *
      * @param collaboration the collaboration
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateCollaboration(CollaboratedBy collaboration, Connection connection) throws SQLException {
@@ -219,7 +219,7 @@ public class CollaboratedBy {
      * @param artistID   the artist id
      * @param songID     the song id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteCollaboration(String artistID, String songID, Connection connection) throws SQLException {

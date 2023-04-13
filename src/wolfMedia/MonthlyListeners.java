@@ -81,7 +81,7 @@ public class MonthlyListeners {
      *
      * @param monthlyListeners the monthly listeners
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createMonthlyListeners(MonthlyListeners monthlyListeners, Connection connection) throws SQLException {
@@ -145,7 +145,7 @@ public class MonthlyListeners {
      *
      * @param monthlyListeners the monthly listeners
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateMonthlyListeners(MonthlyListeners monthlyListeners, Connection connection) throws SQLException {
@@ -175,7 +175,7 @@ public class MonthlyListeners {
      * @param artistID   the artist id
      * @param date       the date
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteMonthlyListeners(String artistID, String date, Connection connection) throws SQLException {

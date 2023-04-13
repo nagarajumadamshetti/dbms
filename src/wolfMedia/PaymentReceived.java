@@ -89,7 +89,7 @@ public class PaymentReceived {
      *
      * @param paymentsReceived the payments received
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPaymentsReceived(PaymentReceived paymentsReceived, Connection connection) throws SQLException {
@@ -155,7 +155,7 @@ public class PaymentReceived {
      *
      * @param paymentsReceived the payments received
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePaymentsReceived(PaymentReceived paymentsReceived, Connection connection) throws SQLException {
@@ -184,7 +184,7 @@ public class PaymentReceived {
      * @param recordLabelID the record label id
      * @param paymentID     the payment id
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePaymentsReceived(String recordLabelID, String paymentID, Connection connection) throws SQLException {

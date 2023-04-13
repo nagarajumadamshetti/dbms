@@ -127,7 +127,7 @@ public class PodCast {
      *
      * @return the rating
      */
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
@@ -145,7 +145,7 @@ public class PodCast {
      *
      * @param podcast    the podcast
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPodcast(PodCast podcast, Connection connection) throws SQLException {
@@ -159,7 +159,7 @@ public class PodCast {
             statement.setString(3, podcast.getLanguage());
             statement.setInt(4, podcast.getEpisodeCount());
             statement.setInt(5, podcast.getTotalSubscribers());
-            statement.setInt(6, podcast.getRating());
+            statement.setFloat(6, podcast.getRating());
             isInserted = statement.executeUpdate();
             System.out.println("PodCast created.");
             return isInserted;
@@ -217,7 +217,7 @@ public class PodCast {
      *
      * @param podcast    the podcast
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePodcast(PodCast podcast, Connection connection) throws SQLException {
@@ -230,7 +230,7 @@ public class PodCast {
             statement.setString(2, podcast.getLanguage());
             statement.setInt(3, podcast.getEpisodeCount());
             statement.setInt(4, podcast.getTotalSubscribers());
-            statement.setInt(5, podcast.getRating());
+            statement.setFloat(5, podcast.getRating());
             statement.setString(6, podcast.getPodcastID());
             isUpdated = statement.executeUpdate();
             return isUpdated;
@@ -249,7 +249,7 @@ public class PodCast {
      *
      * @param podcastID  the podcast id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePodcast(String podcastID, Connection connection) throws SQLException {

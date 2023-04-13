@@ -60,7 +60,7 @@ public class PaymentMade {
      *
      * @param paymentMade the payment made
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPaymentMade(PaymentMade paymentMade, Connection connection) throws SQLException {
@@ -126,7 +126,7 @@ public class PaymentMade {
      *
      * @param paymentMade the payment made
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePaymentMade(PaymentMade paymentMade, Connection connection) throws SQLException {
@@ -155,7 +155,7 @@ public class PaymentMade {
      * @param userID     the user id
      * @param paymentID  the payment id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePaymentMade(String userID, String paymentID, Connection connection) throws SQLException {

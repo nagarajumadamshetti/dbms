@@ -60,7 +60,7 @@ public class Sponsor {
      *
      * @param sponsor    the sponsor
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSponsor(Sponsor sponsor, Connection connection) throws SQLException {
@@ -131,7 +131,7 @@ public class Sponsor {
      *
      * @param sponsor    the sponsor
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSponsor(Sponsor sponsor, Connection connection) throws SQLException {
@@ -162,7 +162,7 @@ public class Sponsor {
      *
      * @param sponsorID  the sponsor id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSponsor(String sponsorID, Connection connection) throws SQLException {

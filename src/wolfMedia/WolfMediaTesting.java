@@ -132,8 +132,10 @@ public class WolfMediaTesting {
                     System.out.println("3. Total revenue of the streaming service per month, per year");
                     System.out.println("4. Report all songs/podcast episodes given an artist, album, and/or podcast");
                     System.out.print("Choice: ");
-                    int subChoice4 = input.nextInt();
+                    // int subChoice4 = input.nextInt();
+                    int subChoice4 = Integer.parseInt(input.nextLine());
                     // handle sub choice here
+                    GenerateReports.processChoice(subChoice4);
                     break;
 
                 case 5:
