@@ -12,3 +12,5 @@ javac -cp .:lib/mariadb-java-client-3.1.1.jar -d bin src/wolfMedia/*.java (This 
 cd bin
 
 java -cp .:../lib/mariadb-java-client-3.1.1.jar wolfMedia.Testing (Runs Testing.java)
+
+javadoc -d ../src  wolfMedia

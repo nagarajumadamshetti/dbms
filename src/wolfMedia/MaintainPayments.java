@@ -5,6 +5,9 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class contains methods for maintaining payments.
+ */
 public class MaintainPayments {
     public static Scanner input = new Scanner(System.in);
 
@@ -24,6 +27,11 @@ public class MaintainPayments {
                 break;
         }
     }
+
+    /**
+     * Creates all payment records when a user subscribes.
+     *
+     */
 
     private static void receivePaymentFromSubscribers() throws SQLException {
         // code for updating play count for songs
@@ -49,6 +57,15 @@ public class MaintainPayments {
         Connections.close(conn);
 
     }
+
+    /**
+     * Creates userPayments records when a user subscribes.
+     *
+     * @param usesrID user id of the person making subscription
+     * @param masterPaymentID main payment table ID
+     * @param connection Connection object to communicate with Database
+     * @return nothing (void)
+     */
 
     public static void makeUserPayments(String userID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
