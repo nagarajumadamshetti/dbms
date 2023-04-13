@@ -1,5 +1,7 @@
 package wolfMedia;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PartOf {
     private String podcastID;
@@ -45,6 +47,27 @@ public class PartOf {
                 statement.close();
             }
         }
+    }
+    public static List<PodcastEpisode> getPodcastEpisodesByPodcastID(String podcastID,Connection conn) throws SQLException{
+        List<PodcastEpisode> podcastEpisodes = new ArrayList<>();
+
+        String sql = "SELECT pE.* FROM partOf pO JOIN  podcastEpisodes pE ON pE.podcastEpisodeID = pO.podcastEpisodeID WHERE pO.podcastID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, podcastID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // String podcastEpisodeID, String episodeTitle, Time duration, Date releaseDate,
+            // int listeningCount, int advertisementCount
+            PodcastEpisode podcastEpisode = new PodcastEpisode(rs.getString("podcastEpisodeID"), rs.getString("episodeTitle"), rs.getString("duration"),
+                    rs.getString("releaseDate"), rs.getInt("listeningCount"), rs.getInt("advertisementCount"));
+            podcastEpisodes.add(podcastEpisode);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return podcastEpisodes;
     }
     
     public static PartOf readPartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {

@@ -91,13 +91,37 @@ public class BelongsTo {
         return belongsTo;
     }
 
-    public static List<Song> getSongs(String albumID, Connection conn) throws SQLException {
+    public static List<Song> getSongsByAlbumID(String albumID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
 
         String sql = "SELECT s.* FROM Songs s JOIN BelongsTo bt ON s.songID = bt.songID WHERE bt.albumID = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, albumID);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // songID, String title, String duration, String releaseDate, float royaltyPaid,
+            // float royaltyRate
+            Song song = new Song(rs.getString("songID"), rs.getString("title"), rs.getString("duration"),
+                    rs.getString("releaseDate"), rs.getFloat("royaltyPaid"), rs.getFloat("royaltyRate"));
+            songs.add(song);
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return songs;
+    }
+
+    public static List<Song> getSongsByAlbumIDSongID(String albumID,String songID, Connection conn) throws SQLException {
+
+        List<Song> songs = new ArrayList<>();
+
+        String sql = "SELECT s.* FROM Songs s JOIN BelongsTo bt ON s.songID = bt.songID WHERE bt.albumID = ? AND bt.songID= ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, albumID);
+        pstmt.setString(2, songID);
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {

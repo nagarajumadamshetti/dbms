@@ -2,8 +2,6 @@ package wolfMedia;
 
 import java.sql.*;
 import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class PodcastHostInformationProcessing {
     public static Scanner input = new Scanner(System.in);

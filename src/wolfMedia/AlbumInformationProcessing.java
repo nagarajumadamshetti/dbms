@@ -2,8 +2,6 @@ package wolfMedia;
 
 import java.sql.*;
 import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class AlbumInformationProcessing {
     public static Scanner input = new Scanner(System.in);
@@ -187,7 +185,7 @@ public class AlbumInformationProcessing {
                 }
             }
             System.out.println("Songs:");
-            List<Song> songs = Album.getSongs(a.albumID, conn);
+            List<Song> songs = Album.getSongsByAlbumID(a.albumID, conn);
             if (songs.isEmpty()) {
                 System.out.println("  (none)");
             } else {

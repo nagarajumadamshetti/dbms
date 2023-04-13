@@ -1,4 +1,5 @@
 package wolfMedia;
+
 import java.sql.*;
 import java.util.*;
 import java.time.LocalDate;
@@ -63,22 +64,27 @@ public class SongInformationProcessing {
         if (isCreated == 0) {
             System.out.println("Song not created");
         } else {
-            createReleasedIn(songID,conn);
+            createReleasedIn(songID, conn);
 
-            createSungIn(songID,conn);
+            createSungIn(songID, conn);
 
-            createGeneredIn(songID,conn);
+            createGeneredIn(songID, conn);
 
-            if(true){// from =="song"
-            createBelongsTo(songID,conn);}
+            if (true) {// from =="song"
+                createBelongsTo(songID, conn);
+            }
 
-            if(true){// from =="song"
-            createSungBy(songID,conn);}
+            if (true) {// from =="song"
+                createSungBy(songID, conn);
+            }
 
-            if(true){ // from =="song"
-            createCollaborators(songID, conn);}
+            if (true) { // from =="song"
+                createCollaborators(songID, conn);
+            }
 
-            viewSong(songID, conn);
+            createSongView(songID, conn);
+
+            // viewSong(songID, conn);
         }
         // input.nextLine(); // consume newline character
         // String songID, String title, String duration, String releaseDate, float
@@ -91,8 +97,24 @@ public class SongInformationProcessing {
 
     }
 
+    public static int createSongView(String songID, Connection conn) throws SQLException {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
+        String date = currentDate.format(formatter);
+
+        SungBy sB = SungBy.readSungBySongID(songID, conn);
+        ArtistInformationProcessing.createArtistMonthlyListeners(sB.getArtistID(), conn);
+        int isCreated = 0;
+        
+        SongsViewed sV = new SongsViewed(songID, date, 0);
+        isCreated = SongsViewed.createSongsViewed(sV, conn);
+
+        return isCreated;
+    }
+
     public static int createReleasedIn(String songID, Connection conn) throws SQLException {
-        System.out.println("Released In: \n 1: United States\n 2: United Kingdom\n 3: Canada\n 4: Australia\n 5: Japan\n 6: Germany\n 7: France\n 8: Brazil");
+        System.out.println(
+                "Released In: \n 1: United States\n 2: United Kingdom\n 3: Canada\n 4: Australia\n 5: Japan\n 6: Germany\n 7: France\n 8: Brazil");
         String countryID = input.nextLine();
         int isCreated = 0;
         if (!countryID.isEmpty()) {
@@ -101,7 +123,7 @@ public class SongInformationProcessing {
         }
         return isCreated;
     }
-    
+
     public static int deleteReleasedIn(String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = ReleasedIn.deleteReleasedIn(songID, conn);
@@ -109,7 +131,8 @@ public class SongInformationProcessing {
     }
 
     public static int createSungIn(String songID, Connection conn) throws SQLException {
-        System.out.println("Sung Language: \n 1: English\n 2:  Japanese\n 3: French\n 4: German\n 5: Portuguese\n 6: Spanish\n 7: Italian \n 8: Mandarin\n");
+        System.out.println(
+                "Sung Language: \n 1: English\n 2:  Japanese\n 3: French\n 4: German\n 5: Portuguese\n 6: Spanish\n 7: Italian \n 8: Mandarin\n");
         String languageID = input.nextLine();
         int isCreated = 0;
         if (!languageID.isEmpty()) {
@@ -118,15 +141,16 @@ public class SongInformationProcessing {
         }
         return isCreated;
     }
-    
+
     public static int deleteSungIn(String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SungIn.deleteSungIn(songID, conn);
         return isDeleted;
-        }
+    }
 
     public static int createGeneredIn(String songID, Connection conn) throws SQLException {
-        System.out.println("Song Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
+        System.out.println(
+                "Song Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
         String genreID = input.nextLine();
         int isCreated = 0;
         if (!genreID.isEmpty()) {
@@ -135,12 +159,12 @@ public class SongInformationProcessing {
         }
         return isCreated;
     }
-    
+
     public static int deleteGeneredIn(String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = GeneredIn.deleteGeneredIn(songID, conn);
         return isDeleted;
-        }
+    }
 
     public static int createBelongsTo(String songID, Connection conn) throws SQLException {
         System.out.println("Album ID: ");
@@ -154,12 +178,12 @@ public class SongInformationProcessing {
         }
         return isCreated;
     }
-    
-    public static int deleteBelongsTo(String songID,String albumID, Connection conn) throws SQLException {
+
+    public static int deleteBelongsTo(String songID, String albumID, Connection conn) throws SQLException {
         int isDeleted = 0;
-        isDeleted = BelongsTo.deleteBelongsTo(songID,albumID, conn);
+        isDeleted = BelongsTo.deleteBelongsTo(songID, albumID, conn);
         return isDeleted;
-        }
+    }
 
     public static int createSungBy(String songID, Connection conn) throws SQLException {
         System.out.println("SungBy ArtistID: ");
@@ -172,17 +196,17 @@ public class SongInformationProcessing {
         return isCreated;
     }
 
-    public static int deleteSungBy(String artistID,String songID, Connection conn) throws SQLException {
+    public static int deleteSungBy(String artistID, String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SungBy.deleteSungBy(artistID, songID, conn);
         return isDeleted;
-        }
+    }
 
     public static int createCollaborators(String songID, Connection conn) throws SQLException {
         System.out.println("Collaborated Artist IDs by space: ");
         String[] collaboratedArtistIDs = input.nextLine().split(" ");
         int isCreated = 0;
-        if(collaboratedArtistIDs.length==0){
+        if (collaboratedArtistIDs.length == 0) {
             return isCreated;
         }
         for (int i = 0; i < collaboratedArtistIDs.length; i++) {
@@ -194,9 +218,9 @@ public class SongInformationProcessing {
 
     public static int deleteCollaboration(String artistID, String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
-        isDeleted = CollaboratedBy.deleteCollaboration(artistID,songID, conn);
+        isDeleted = CollaboratedBy.deleteCollaboration(artistID, songID, conn);
         return isDeleted;
-        }
+    }
 
     public static int viewSong(String songID, Connection conn) throws SQLException {
         LocalDate currentDate = LocalDate.now();
@@ -204,8 +228,8 @@ public class SongInformationProcessing {
         String date = currentDate.format(formatter);
 
         SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn);
-        
-        SungBy sB= SungBy.readSungBySongID(songID, conn);
+
+        SungBy sB = SungBy.readSungBySongID(songID, conn);
         ArtistInformationProcessing.increaseArtistMonthlyListeners(sB.getArtistID(), conn);
 
         if (sV == null) {
@@ -227,7 +251,7 @@ public class SongInformationProcessing {
         System.out.println("Enter song ID to update:");
         String updateID = input.nextLine();
         Connection conn = Connections.open();
-        
+
         Song sToUpdate = Song.readSong(updateID, conn);
         if (sToUpdate == null) {
             System.out.println("Song with ID " + updateID + " does not exist");
@@ -266,44 +290,45 @@ public class SongInformationProcessing {
         }
         Connections.close(conn);
     }
-    public static int songViewed(String songID, String date, Connection conn) throws SQLException{
-        SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn );
-        if(sV== null){
+
+    public static int songViewed(String songID, String date, Connection conn) throws SQLException {
+        SongsViewed sV = SongsViewed.readSongsViewed(songID, date, conn);
+        if (sV == null) {
             return 0;
         }
         return sV.getCount();
     }
 
-    public static String songReleasedIn(String songID, Connection conn) throws SQLException{
-        ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn );
+    public static String songReleasedIn(String songID, Connection conn) throws SQLException {
+        ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn);
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }
 
-    public static String songSungIn(String songID, Connection conn) throws SQLException{
-        SungIn sI = SungIn.readSungIn(songID, conn );
+    public static String songSungIn(String songID, Connection conn) throws SQLException {
+        SungIn sI = SungIn.readSungIn(songID, conn);
         Language l = Language.readLanguage(sI.getLanguageID(), conn);
         return l.getName();
     }
 
-    public static String songGeneredIn(String songID, Connection conn) throws SQLException{
-        GeneredIn gI = GeneredIn.readGeneredIn(songID, conn );
+    public static String songGeneredIn(String songID, Connection conn) throws SQLException {
+        GeneredIn gI = GeneredIn.readGeneredIn(songID, conn);
         Genre g = Genre.readGenre(gI.getGenreID(), conn);
         return g.getName();
     }
-    
-    public static String songArtist(String songID, Connection conn) throws SQLException{
-        SungBy sB= SungBy.readSungBySongID(songID, conn);
-        Artist a= Artist.readArtist(sB.getArtistID(), conn);
+
+    public static String songArtist(String songID, Connection conn) throws SQLException {
+        SungBy sB = SungBy.readSungBySongID(songID, conn);
+        Artist a = Artist.readArtist(sB.getArtistID(), conn);
         return a.getName();
     }
 
-    public static List<Album> songBelongsToAlbums(String songID, Connection conn) throws SQLException{
+    public static List<Album> songBelongsToAlbums(String songID, Connection conn) throws SQLException {
         List<Album> albums = BelongsTo.getAlbums(songID, conn);
         return albums;
     }
 
-    public static List<Artist> songCollaborators(String songID, Connection conn) throws SQLException{
+    public static List<Artist> songCollaborators(String songID, Connection conn) throws SQLException {
         List<Artist> artists = CollaboratedBy.getArtists(songID, conn);
         return artists;
     }
@@ -328,19 +353,19 @@ public class SongInformationProcessing {
             System.out.println("Royalty Paid: " + s.royaltyPaid);
             System.out.println("Royalty Rate: " + s.royaltyRate);
 
-            System.out.println("Song sung By: "+ songArtist(readID,conn));
+            System.out.println("Song sung By: " + songArtist(readID, conn));
 
-            System.out.println("Song Viewed: "+ songViewed(readID, date, conn));
+            System.out.println("Song Viewed: " + songViewed(readID, date, conn));
 
-            System.out.println("Song Released In: " + songReleasedIn(readID,conn));
+            System.out.println("Song Released In: " + songReleasedIn(readID, conn));
 
-            System.out.println("Song Sung In: " + songSungIn(readID,conn));
+            System.out.println("Song Sung In: " + songSungIn(readID, conn));
 
-            System.out.println("Song Genered In: " + songGeneredIn(readID,conn));
+            System.out.println("Song Genered In: " + songGeneredIn(readID, conn));
 
             System.out.println("Song Collaborators: ");
 
-            List<Artist> artists= songCollaborators(readID,conn);
+            List<Artist> artists = songCollaborators(readID, conn);
             if (artists.isEmpty()) {
                 System.out.println("  (none)");
             } else {
@@ -350,7 +375,7 @@ public class SongInformationProcessing {
             }
 
             System.out.println("Song Belongs to albums: ");
-            List<Album> albums = songBelongsToAlbums(readID,conn);
+            List<Album> albums = songBelongsToAlbums(readID, conn);
             if (albums.isEmpty()) {
                 System.out.println("  (none)");
             } else {

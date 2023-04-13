@@ -66,7 +66,7 @@ public class WolfMediaTesting {
             System.out.println("4. Generate reports");
             System.out.println("5. Exit");
             System.out.print("Choice: ");
-            choice = input.nextInt();
+            choice = Integer.parseInt(input.nextLine());
 
             switch (choice) {
                 case 1:
@@ -79,7 +79,7 @@ public class WolfMediaTesting {
                     System.out.println("6. Record label");
                     System.out.println("7. Podcast");
                     System.out.print("Choice: ");
-                    int subChoice1 = input.nextInt();
+                    int subChoice1 = Integer.parseInt(input.nextLine());
                     // handle sub choice here
                     InformationProcessing.processInformation(subChoice1);
                     break;
@@ -92,8 +92,9 @@ public class WolfMediaTesting {
                     System.out.println("4. Listening count for podcast episodes");
                     System.out.println("5. Find songs and podcast episodes given artist, album, and/or podcast");
                     System.out.print("Choice: ");
-                    int subChoice2 = input.nextInt();
+                    int subChoice2 = Integer.parseInt(input.nextLine());
                     // handle sub choice here
+                    MetadataProcessing.processMetadata(subChoice2);
                     break;
 
                 case 3:
@@ -102,7 +103,7 @@ public class WolfMediaTesting {
                     System.out.println("2. Make payment to podcast hosts");
                     System.out.println("3. Receive payment from subscribers");
                     System.out.print("Choice: ");
-                    int subChoice3 = input.nextInt();
+                    int subChoice3 = Integer.parseInt(input.nextLine());
                     // handle sub choice here
                     break;
 
