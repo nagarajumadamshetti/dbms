@@ -48,6 +48,30 @@ public class PartOf {
             }
         }
     }
+    
+    public static PodCast getPodcastByPodcastEpisodeID(String podcastEpisodeID,Connection conn) throws SQLException{
+        PodCast podcast = null;
+
+        String sql = "SELECT p.* FROM partOf pO JOIN  podcasts p ON p.podcastID = pO.podcastID WHERE pO.podcastEpisodeID = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, podcastEpisodeID);
+        ResultSet resultSet = pstmt.executeQuery();
+
+        if (resultSet.next()) {
+            podcast = new PodCast(resultSet.getString("podcastID"),
+                        resultSet.getString("podcastName"),
+                        resultSet.getString("language"),
+                        resultSet.getInt("episodeCount"),
+                        resultSet.getInt("totalSubscribers"),
+                        resultSet.getInt("rating"));
+        }
+
+        resultSet.close();
+        pstmt.close();
+
+        return podcast;
+    }
+
     public static List<PodcastEpisode> getPodcastEpisodesByPodcastID(String podcastID,Connection conn) throws SQLException{
         List<PodcastEpisode> podcastEpisodes = new ArrayList<>();
 

@@ -85,11 +85,11 @@ public class WolfMediaTesting {
                     break;
 
                 case 2:
-                    System.out.println("Maintain metadata and records:");
-                    System.out.println("1. Play count for songs");
-                    System.out.println("2. Count of monthly listeners for artists");
-                    System.out.println("3. Total count of subscribers and ratings for podcasts");
-                    System.out.println("4. Listening count for podcast episodes");
+                    System.out.println("Update/Maintain metadata and records of:");
+                    System.out.println("1. Update Play count for songs");
+                    System.out.println("2. Update Count of monthly listeners for artists");
+                    System.out.println("3. Update Total count of subscribers and ratings for podcasts");
+                    System.out.println("4. Update Listening count for podcast episodes");
                     System.out.println("5. Find songs and podcast episodes given artist, album, and/or podcast");
                     System.out.print("Choice: ");
                     int subChoice2 = Integer.parseInt(input.nextLine());
@@ -103,8 +103,10 @@ public class WolfMediaTesting {
                     System.out.println("2. Make payment to podcast hosts");
                     System.out.println("3. Receive payment from subscribers");
                     System.out.print("Choice: ");
+
                     int subChoice3 = Integer.parseInt(input.nextLine());
                     // handle sub choice here
+                    MaintainPayments.processPayments(subChoice3);
                     break;
 
                 case 4:
