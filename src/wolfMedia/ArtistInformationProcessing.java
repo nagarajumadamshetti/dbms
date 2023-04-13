@@ -5,9 +5,20 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Artist information processing.
+ */
 public class ArtistInformationProcessing {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process artist.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void processArtist() throws SQLException {
         System.out.println("Enter/update/delete basic information:");
         System.out.println("1. Create artist");
@@ -99,6 +110,14 @@ public class ArtistInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Add artist record labelcontracts int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int addArtistRecordLabelcontracts(String artistID, Connection conn) throws SQLException {
         System.out.println("Enter  Record Label ID\n");
         String recordLabelID = input.nextLine();
@@ -110,6 +129,14 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Create artist primary genered in int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
         System.out.println(
                 "Enter Artist Primary Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
@@ -122,12 +149,28 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete artist primary genered in int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteArtistPrimaryGeneredIn(String artistID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = PrimaryGenre.deletePrimaryGenre(artistID, conn);
         return isDeleted;
     }
 
+    /**
+     * Create has albums int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createHasAlbums(String artistID, Connection conn) throws SQLException {
         System.out.println("Enter album IDs by space: ");
         String[] artistAlbumIDs = input.nextLine().split(" ");
@@ -139,6 +182,14 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Create collaborations int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createCollaborations(String artistID, Connection conn) throws SQLException {
         System.out.println("Collaborated song IDs by space: ");
         String[] collaboratedSongIDs = input.nextLine().split(" ");
@@ -150,18 +201,44 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete collaboration int.
+     *
+     * @param artistID the artist id
+     * @param songID   the song id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteCollaboration(String artistID, String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = CollaboratedBy.deleteCollaboration(artistID, songID, conn);
         return isDeleted;
     }
 
+    /**
+     * Add payment received int.
+     *
+     * @param artistID  the artist id
+     * @param paymentID the payment id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int addPaymentReceived(String artistID, String paymentID, Connection conn) throws SQLException {
         Received r = new Received(paymentID, artistID);
         int isCreated = Received.createReceived(r, conn);
         return isCreated;
     }
 
+    /**
+     * Create based in int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createBasedIn(String artistID, Connection conn) throws SQLException {
         System.out.println(
                 "Artist is Based In: \n 1: United States\n 2: United Kingdom\n 3: Canada\n 4: Australia\n 5: Japan\n 6: Germany\n 7: France\n 8: Brazil");
@@ -174,12 +251,28 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete based in int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteBasedIn(String artistID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = BasedIn.deleteBasedIn(artistID, conn);
         return isDeleted;
     }
 
+    /**
+     * Increase artist monthly listeners int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int increaseArtistMonthlyListeners(String artistID, Connection conn) throws SQLException {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
@@ -198,6 +291,14 @@ public class ArtistInformationProcessing {
         }
     }
 
+    /**
+     * Create artist monthly listeners int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createArtistMonthlyListeners(String artistID, Connection conn) throws SQLException {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
@@ -208,6 +309,14 @@ public class ArtistInformationProcessing {
         return 1;
     }
 
+    /**
+     * Create sung by int.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSungBy(String artistID, Connection conn) throws SQLException {
         int isCreated = 0;
         while (true) {
@@ -226,6 +335,15 @@ public class ArtistInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete sung by int.
+     *
+     * @param artistID the artist id
+     * @param songID   the song id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSungBy(String artistID, String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SungBy.deleteSungBy(artistID, songID, conn);
@@ -276,6 +394,14 @@ public class ArtistInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Gets artist payments.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist payments
+     * @throws SQLException the sql exception
+     */
     public static List<ArtistPayments> getArtistPayments(String artistID, Connection conn) throws SQLException {
         List<ArtistPayments> artistPayments = Received.getArtistPayments(artistID, conn);
         if (artistPayments.isEmpty()) {
@@ -288,12 +414,29 @@ public class ArtistInformationProcessing {
         return artistPayments;
     }
 
+    /**
+     * Artist based in string.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the string
+     * @throws SQLException the sql exception
+     */
     public static String artistBasedIn(String artistID, Connection conn) throws SQLException {
         BasedIn rI = BasedIn.readBasedIn(artistID, conn);
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }
 
+    /**
+     * Artist monthly viewed int.
+     *
+     * @param artistID the artist id
+     * @param date     the date
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int artistMonthlyViewed(String artistID, String date, Connection conn) throws SQLException {
         MonthlyListeners mL = MonthlyListeners.readMonthlyListeners(artistID, date, conn);
         if (mL == null) {
@@ -302,6 +445,14 @@ public class ArtistInformationProcessing {
         return mL.getCount();
     }
 
+    /**
+     * Gets artist songs.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist songs
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getArtistSongs(String artistID, Connection conn) throws SQLException {
         List<Song> artistSongs = SungBy.getSongsByArtistID(artistID, conn);
         if (artistSongs.isEmpty()) {
@@ -314,6 +465,14 @@ public class ArtistInformationProcessing {
         return artistSongs;
     }
 
+    /**
+     * Gets artist collaborated songs.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist collaborated songs
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getArtistCollaboratedSongs(String artistID, Connection conn) throws SQLException {
         List<Song> collabSongs = CollaboratedBy.getSongsByArtistID(artistID, conn);
         if (collabSongs.isEmpty()) {
@@ -326,6 +485,14 @@ public class ArtistInformationProcessing {
         return collabSongs;
     }
 
+    /**
+     * Gets artist albums.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist albums
+     * @throws SQLException the sql exception
+     */
     public static List<Album> getArtistAlbums(String artistID, Connection conn) throws SQLException {
         List<Album> albums = Has.getAlbumsByArtistID(artistID, conn);
         if (albums.isEmpty()) {
@@ -338,6 +505,14 @@ public class ArtistInformationProcessing {
         return albums;
     }
 
+    /**
+     * Gets artist record label contracts.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist record label contracts
+     * @throws SQLException the sql exception
+     */
     public static List<RecordLabel> getArtistRecordLabelContracts(String artistID, Connection conn)
             throws SQLException {
         List<RecordLabel> recordLabels = ContractedWith.getRecordLabelContractsByArtistID(artistID, conn);

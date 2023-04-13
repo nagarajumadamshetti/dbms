@@ -2,31 +2,68 @@ package wolfMedia;
 
 import java.sql.*;
 
+/**
+ * The type Language.
+ */
 public class Language {
     private String languageID;
     private String name;
 
+    /**
+     * Instantiates a new Language.
+     *
+     * @param languageID the language id
+     * @param name       the name
+     */
     public Language(String languageID, String name) {
         this.languageID = languageID;
         this.name = name;
     }
 
+    /**
+     * Gets language id.
+     *
+     * @return the language id
+     */
     public String getLanguageID() {
         return languageID;
     }
 
+    /**
+     * Sets language id.
+     *
+     * @param languageID the language id
+     */
     public void setLanguageID(String languageID) {
         this.languageID = languageID;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Create language int.
+     *
+     * @param language   the language
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createLanguage(Language language, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -45,6 +82,14 @@ public class Language {
         return isInserted;
     }
 
+    /**
+     * Read language language.
+     *
+     * @param languageID the language id
+     * @param connection the connection
+     * @return the language
+     * @throws SQLException the sql exception
+     */
     public static Language readLanguage(String languageID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -72,6 +117,14 @@ public class Language {
         return language;
     }
 
+    /**
+     * Update language int.
+     *
+     * @param language   the language
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateLanguage(Language language, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -93,6 +146,14 @@ public class Language {
         return isUpdated;
     }
 
+    /**
+     * Delete language int.
+     *
+     * @param languageID the language id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteLanguage(String languageID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

@@ -1,31 +1,69 @@
 package wolfMedia;
 import java.sql.*;
+
+/**
+ * The type Subscribe artist.
+ */
 public class SubscribeArtist {
 
     private String userID;
     private String artistID;
-    
+
+    /**
+     * Instantiates a new Subscribe artist.
+     *
+     * @param userID   the user id
+     * @param artistID the artist id
+     */
     public SubscribeArtist(String userID, String artistID) {
         this.userID = userID;
         this.artistID = artistID;
     }
-    
+
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public String getUserID() {
         return userID;
     }
-    
+
+    /**
+     * Sets user id.
+     *
+     * @param userID the user id
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
-    
+
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
-    
+
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
-    
+
+    /**
+     * Create subscription int.
+     *
+     * @param subscription the subscription
+     * @param connection   the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSubscription(SubscribeArtist subscription, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -46,7 +84,18 @@ public class SubscribeArtist {
             }
         }
     }
-    
+
+    /**
+     * Update subscription int.
+     *
+     * @param userID      the user id
+     * @param artistID    the artist id
+     * @param newUserID   the new user id
+     * @param newArtistID the new artist id
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateSubscription(String userID, String artistID, String newUserID, String newArtistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -69,7 +118,16 @@ public class SubscribeArtist {
             }
         }
     }
-    
+
+    /**
+     * Delete subscription int.
+     *
+     * @param userID     the user id
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSubscription(String userID, String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
@@ -90,7 +148,16 @@ public class SubscribeArtist {
             }
         }
     }
-    
+
+    /**
+     * Has subscription boolean.
+     *
+     * @param userID     the user id
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean hasSubscription(String userID, String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;

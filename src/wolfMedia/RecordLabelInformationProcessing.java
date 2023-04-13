@@ -5,10 +5,21 @@ import java.util.*;
 // import java.time.LocalDate;
 // import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Record label information processing.
+ */
 public class RecordLabelInformationProcessing {
-    
+
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process record label.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void processRecordLabel() throws SQLException {
         System.out.println("Enter/update/delete basic information:");
         System.out.println("1. Create Record Label");
@@ -64,6 +75,14 @@ public class RecordLabelInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Add record label artistcontracts int.
+     *
+     * @param recordLabelID the record label id
+     * @param conn          the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int addRecordLabelArtistcontracts(String recordLabelID, Connection conn) throws SQLException {
         System.out.println("Contracted Artist IDs by space: ");
         String[] contractedArtistIDs = input.nextLine().split(" ");
@@ -118,6 +137,14 @@ public class RecordLabelInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Gets record label payments.
+     *
+     * @param recordLabelID the record label id
+     * @param conn          the conn
+     * @return the record label payments
+     * @throws SQLException the sql exception
+     */
     public static List<RecordLabelPayment> getRecordLabelPayments(String recordLabelID, Connection conn) throws SQLException {
         List<RecordLabelPayment> recordLabelPayments = PaymentReceived.getRecordLabelPayments(recordLabelID, conn);
         if (recordLabelPayments.isEmpty()) {
@@ -130,6 +157,14 @@ public class RecordLabelInformationProcessing {
         return recordLabelPayments;
     }
 
+    /**
+     * Gets record label contracted artists.
+     *
+     * @param recordLabelID the record label id
+     * @param conn          the conn
+     * @return the record label contracted artists
+     * @throws SQLException the sql exception
+     */
     public static List<Artist> getRecordLabelContractedArtists(String recordLabelID, Connection conn)
             throws SQLException {
         List<Artist> artists = ContractedWith.getArtistsByRecordLabelID(recordLabelID, conn);

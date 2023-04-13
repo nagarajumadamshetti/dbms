@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Subscribe podcast.
+ */
 public class SubscribePodcast {
     private String userID;
     private String podcastID;
 
+    /**
+     * Instantiates a new Subscribe podcast.
+     *
+     * @param userID    the user id
+     * @param podcastID the podcast id
+     */
     public SubscribePodcast(String userID, String podcastID) {
         this.userID = userID;
         this.podcastID = podcastID;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userID the user id
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * Gets podcast id.
+     *
+     * @return the podcast id
+     */
     public String getPodcastID() {
         return podcastID;
     }
 
+    /**
+     * Sets podcast id.
+     *
+     * @param podcastID the podcast id
+     */
     public void setPodcastID(String podcastID) {
         this.podcastID = podcastID;
     }
 
+    /**
+     * Create subscribe podcast int.
+     *
+     * @param subscribePodcast the subscribe podcast
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSubscribePodcast(SubscribePodcast subscribePodcast, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -46,7 +83,16 @@ public class SubscribePodcast {
             }
         }
     }
-    
+
+    /**
+     * Read subscribe podcast subscribe podcast.
+     *
+     * @param userID     the user id
+     * @param podcastID  the podcast id
+     * @param connection the connection
+     * @return the subscribe podcast
+     * @throws SQLException the sql exception
+     */
     public static SubscribePodcast readSubscribePodcast(String userID, String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -74,7 +120,15 @@ public class SubscribePodcast {
         }
         return subscribePodcast;
     }
-    
+
+    /**
+     * Update subscribe podcast int.
+     *
+     * @param subscribePodcast the subscribe podcast
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateSubscribePodcast(SubscribePodcast subscribePodcast, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -94,7 +148,16 @@ public class SubscribePodcast {
             }
         }
     }
-    
+
+    /**
+     * Delete subscribe podcast int.
+     *
+     * @param userID     the user id
+     * @param podcastID  the podcast id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSubscribePodcast(String userID, String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

@@ -3,9 +3,20 @@ package wolfMedia;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Album information processing.
+ */
 public class AlbumInformationProcessing {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process album.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void processAlbum() throws SQLException {
         System.out.println("Enter/update/delete basic information:");
         System.out.println("1. Create album");
@@ -83,6 +94,14 @@ public class AlbumInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Create belongs to int.
+     *
+     * @param albumID the album id
+     * @param conn    the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createBelongsTo(String albumID, Connection conn) throws SQLException {
         int isCreated = 0;
         while (true) {
@@ -104,6 +123,14 @@ public class AlbumInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Create has artists int.
+     *
+     * @param albumID the album id
+     * @param conn    the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createHasArtists(String albumID, Connection conn) throws SQLException {
         System.out.println("Enter album artist IDs by space: ");
         String[] albumArtistIDs = input.nextLine().split(" ");
@@ -115,6 +142,15 @@ public class AlbumInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete has artists int.
+     *
+     * @param artistID the artist id
+     * @param songID   the song id
+     * @param conn     the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteHasArtists(String artistID, String songID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = CollaboratedBy.deleteCollaboration(artistID, songID, conn);
@@ -123,6 +159,8 @@ public class AlbumInformationProcessing {
 
     /**
      * Update Album
+     *
+     * @throws SQLException the sql exception
      */
     public static void updateAlbum() throws SQLException {
         System.out.println("Enter album ID to update:");
@@ -149,6 +187,11 @@ public class AlbumInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Delete album.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void deleteAlbum() throws SQLException {
         System.out.println("Enter album ID to delete:");
         String deleteID = input.nextLine();

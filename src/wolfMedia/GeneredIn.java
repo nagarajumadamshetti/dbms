@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Genered in.
+ */
 public class GeneredIn {
     private String songID;
     private String genreID;
 
+    /**
+     * Instantiates a new Genered in.
+     *
+     * @param songID  the song id
+     * @param genreID the genre id
+     */
     public GeneredIn(String songID, String genreID) {
         this.songID = songID;
         this.genreID = genreID;
     }
 
+    /**
+     * Gets song id.
+     *
+     * @return the song id
+     */
     public String getSongID() {
         return songID;
     }
 
+    /**
+     * Sets song id.
+     *
+     * @param songID the song id
+     */
     public void setSongID(String songID) {
         this.songID = songID;
     }
 
+    /**
+     * Gets genre id.
+     *
+     * @return the genre id
+     */
     public String getGenreID() {
         return genreID;
     }
 
+    /**
+     * Sets genre id.
+     *
+     * @param genreID the genre id
+     */
     public void setGenreID(String genreID) {
         this.genreID = genreID;
     }
 
+    /**
+     * Create genered in int.
+     *
+     * @param generedIn  the genered in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createGeneredIn(GeneredIn generedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -44,6 +81,14 @@ public class GeneredIn {
         return isInserted;
     }
 
+    /**
+     * Read genered in genered in.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the genered in
+     * @throws SQLException the sql exception
+     */
     public static GeneredIn readGeneredIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -71,6 +116,14 @@ public class GeneredIn {
         return generedIn;
     }
 
+    /**
+     * Update genered in int.
+     *
+     * @param generedIn  the genered in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateGeneredIn(GeneredIn generedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -91,6 +144,14 @@ public class GeneredIn {
         return isUpdated;
     }
 
+    /**
+     * Delete genered in int.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteGeneredIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

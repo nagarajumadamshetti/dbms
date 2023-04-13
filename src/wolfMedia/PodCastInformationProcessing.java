@@ -2,12 +2,23 @@ package wolfMedia;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Pod cast information processing.
+ */
 public class PodCastInformationProcessing {
 
 
-public static Scanner input = new Scanner(System.in);
+    /**
+     * The constant input.
+     */
+    public static Scanner input = new Scanner(System.in);
 
-public static void processPodcast() throws SQLException {
+    /**
+     * Process podcast.
+     *
+     * @throws SQLException the sql exception
+     */
+    public static void processPodcast() throws SQLException {
     System.out.println("Enter/update/delete basic information:");
     System.out.println("1. Create podcast");
     System.out.println("2. Update podcast");
@@ -42,7 +53,7 @@ public static void processPodcast() throws SQLException {
  * Create Podcast Episode
  */
 private static void createPodcast() throws SQLException {
-	System.out.println("Enter podcast information:");
+    System.out.println("Enter podcast information:");
     System.out.print("Podcast ID: ");
     String podcastID = input.nextLine();
     System.out.print("Podcast Name: ");
@@ -82,7 +93,16 @@ private static void createPodcast() throws SQLException {
     Connections.close(conn);
    
 }
-public static int createOriginCountry(String podcastID, Connection conn) throws SQLException {
+
+    /**
+     * Create origin country int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
+    public static int createOriginCountry(String podcastID, Connection conn) throws SQLException {
     System.out.println(
             "Podcast is Based In: \n 1: United States\n 2: United Kingdom\n 3: Canada\n 4: Australia\n 5: Japan\n 6: Germany\n 7: France\n 8: Brazil");
     String countryID = input.nextLine();
@@ -94,8 +114,16 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
     return isCreated;
 }
 
+    /**
+     * Create part of int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPartOf(String podcastID, Connection conn) throws SQLException {
-    	System.out.println("Enter any Podcast Episode ID to be linked: ");
+        System.out.println("Enter any Podcast Episode ID to be linked: ");
         String podcastEpisodeID = input.nextLine();
         int isCreated = 0;
         if (!podcastEpisodeID.isEmpty()) {
@@ -104,13 +132,30 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
         }
         return isCreated;
     }
-    
+
+    /**
+     * Delete part of int.
+     *
+     * @param podcastID        the podcast id
+     * @param podcastEpisodeID the podcast episode id
+     * @param conn             the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePartOf(String podcastID, String podcastEpisodeID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = PartOf.deletePartOf(podcastID, podcastEpisodeID, conn);
         return isDeleted;
     }
-    
+
+    /**
+     * Create genered in int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createGeneredIn(String podcastID, Connection conn) throws SQLException {
         System.out.println("Podcast Genre: \n 1: Pop\n 2: Rock\n 3: Hip hop\n 4: Electronic\n 5: Classical\n 6: Country\n 7: Jazz\n 8: Blues\n");
         String genreID = input.nextLine();
@@ -121,15 +166,31 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
         }
         return isCreated;
     }
-    
+
+    /**
+     * Delete genered in int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteGeneredIn(String podcastID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = GeneredIn.deleteGeneredIn(podcastID, conn);
         return isDeleted;
         }
-    
+
+    /**
+     * Create sponsored by int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSponsoredBy(String podcastID, Connection conn) throws SQLException {
-    	System.out.println("Sponser ID: ");
+        System.out.println("Sponser ID: ");
         String sponsorID = input.nextLine();
         int isCreated = 0;
         if (!sponsorID.isEmpty()) {
@@ -138,7 +199,16 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
         }
         return isCreated;
     }
-    
+
+    /**
+     * Delete sponsored by int.
+     *
+     * @param podcastID the podcast id
+     * @param sponsorID the sponsor id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSponsoredBy(String podcastID, String sponsorID ,Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SponsoredBy.deleteSponsoredBy(podcastID, sponsorID, conn);
@@ -146,7 +216,14 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
     }
 
 
-    
+    /**
+     * Create owned by int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createOwnedBy(String podcastID, Connection conn) throws SQLException {
         System.out.println("Owned By Podcast Host ID: ");
         String podcastHostID = input.nextLine();
@@ -158,12 +235,29 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
         return isCreated;
     }
 
+    /**
+     * Delete owned by int.
+     *
+     * @param podcastHostID the podcast host id
+     * @param podcastID     the podcast id
+     * @param conn          the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteOwnedBy(String podcastHostID,String podcastID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = OwnedBy.deleteOwnedBy(podcastHostID, podcastID, conn);
         return isDeleted;
         }
 
+    /**
+     * Create subscribe podcast int.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSubscribePodcast(String podcastID, Connection conn) throws SQLException {
         System.out.println("User ID ");
         String userID = input.nextLine();
@@ -175,6 +269,15 @@ public static int createOriginCountry(String podcastID, Connection conn) throws 
         return isCreated;
     }
 
+    /**
+     * Delete subscribe podcast int.
+     *
+     * @param podcastID the podcast id
+     * @param userID    the user id
+     * @param conn      the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSubscribePodcast(String podcastID, String userID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SubscribePodcast.deleteSubscribePodcast(podcastID, userID, conn);

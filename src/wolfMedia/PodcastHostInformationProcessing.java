@@ -3,9 +3,20 @@ package wolfMedia;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Podcast host information processing.
+ */
 public class PodcastHostInformationProcessing {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process podcast host.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void processPodcastHost() throws SQLException {
         System.out.println("Enter/update/delete basic information:");
         System.out.println("1. Create PodcastHost");
@@ -147,6 +158,14 @@ public class PodcastHostInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Create hosted podcasts int.
+     *
+     * @param podcastHostID the podcast host id
+     * @param conn          the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createHostedPodcasts(String podcastHostID, Connection conn) throws SQLException {
         System.out.println("Enter Podcast IDs by space: ");
         String[] podcastIDs = input.nextLine().split(" ");
@@ -158,6 +177,15 @@ public class PodcastHostInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete hosted podcasts int.
+     *
+     * @param podcastHostID the podcast host id
+     * @param podcastID     the podcast id
+     * @param conn          the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteHostedPodcasts(String podcastHostID, String podcastID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = SungBy.deleteSungBy(podcastHostID, podcastID, conn);
@@ -165,6 +193,15 @@ public class PodcastHostInformationProcessing {
     }
 
 
+    /**
+     * Add payment received int.
+     *
+     * @param podcastHostID the podcast host id
+     * @param paymentID     the payment id
+     * @param conn          the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int addPaymentReceived(String podcastHostID, String paymentID, Connection conn) throws SQLException {
         PodcastPayments p = new PodcastPayments(paymentID, podcastHostID);
         int isCreated = PodcastPayments.createPodcastPayment(p, conn);

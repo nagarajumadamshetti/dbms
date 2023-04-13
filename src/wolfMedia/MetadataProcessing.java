@@ -5,9 +5,21 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Metadata processing.
+ */
 public class MetadataProcessing {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process metadata.
+     *
+     * @param subChoice the sub choice
+     * @throws SQLException the sql exception
+     */
     public static void processMetadata(int subChoice) throws SQLException {
         switch (subChoice) {
             case 1:

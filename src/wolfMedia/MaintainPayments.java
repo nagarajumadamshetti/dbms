@@ -9,8 +9,17 @@ import java.time.format.DateTimeFormatter;
  * This class contains methods for maintaining payments.
  */
 public class MaintainPayments {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process payments.
+     *
+     * @param subChoice the sub choice
+     * @throws SQLException the sql exception
+     */
     public static void processPayments(int subChoice) throws SQLException {
         switch (subChoice) {
             case 1:
@@ -61,12 +70,12 @@ public class MaintainPayments {
     /**
      * Creates userPayments records when a user subscribes.
      *
-     * @param usesrID user id of the person making subscription
+     * @param userID          the user id
      * @param masterPaymentID main payment table ID
-     * @param connection Connection object to communicate with Database
+     * @param conn            the conn
      * @return nothing (void)
+     * @throws SQLException the sql exception
      */
-
     public static void makeUserPayments(String userID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
         String sql = "INSERT INTO userPayments (paymentID, paymentAmount) " +
@@ -100,6 +109,14 @@ public class MaintainPayments {
         // //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Make payments made.
+     *
+     * @param userID          the user id
+     * @param masterPaymentID the master payment id
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void makePaymentsMade(String userID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
         String sql = "INSERT INTO paymentsMade (paymentID, userID) " +
@@ -157,6 +174,14 @@ public class MaintainPayments {
 
     }
 
+    /**
+     * Make podcast host payments.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param masterPaymentID  the master payment id
+     * @param conn             the conn
+     * @throws SQLException the sql exception
+     */
     public static void makePodcastHostPayments(String podcastEpisodeID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
@@ -192,6 +217,14 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Create podcast payments.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param masterPaymentID  the master payment id
+     * @param conn             the conn
+     * @throws SQLException the sql exception
+     */
     public static void createPodcastPayments(String podcastEpisodeID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
@@ -256,6 +289,14 @@ public class MaintainPayments {
         Connections.close(conn);
     }
 
+    /**
+     * Make main artist payment.
+     *
+     * @param songID          the song id
+     * @param masterPaymentID the master payment id
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void makeMainArtistPayment(String songID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
@@ -290,6 +331,14 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Make collaborator payments.
+     *
+     * @param songID          the song id
+     * @param masterPaymentID the master payment id
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void makeCollaboratorPayments(String songID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
@@ -319,6 +368,14 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Make artist payment.
+     *
+     * @param songID          the song id
+     * @param masterPaymentID the master payment id
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void makeArtistPayment(String songID, String masterPaymentID, Connection conn) throws SQLException {
         // Prepare SQL statement
         String sql = "INSERT INTO artistPayments (paymentID, paymentAmount) select ? as paymentID, (songsViewed.count * s.royaltyRate) * 0.7/ count(*) FROM songs s JOIN belongsTo b ON s.songID = b.songID JOIN albums a ON b.albumID = a.albumID JOIN has h ON a.albumID = h.albumID JOIN contractedWith c ON h.artistID = c.artistID JOIN recordLabel r ON c.recordLabelID = r.recordLabelID join songsViewed ON s.songID= songsViewed.songID WHERE s.songID = ?";
@@ -347,6 +404,14 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Create payments received record.
+     *
+     * @param songID          the song id
+     * @param masterPaymentID the master payment id
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void createPaymentsReceivedRecord(String songID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
@@ -383,6 +448,15 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Make record label payment.
+     *
+     * @param songID          the song id
+     * @param masterPaymentID the master payment id
+     * @param formattedDate   the formatted date
+     * @param conn            the conn
+     * @throws SQLException the sql exception
+     */
     public static void makeRecordLabelPayment(String songID, String masterPaymentID, String formattedDate,
             Connection conn) throws SQLException {
         // Prepare SQL statement
@@ -417,6 +491,14 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     * Make master payment string.
+     *
+     * @param formattedDate the formatted date
+     * @param conn          the conn
+     * @return the string
+     * @throws SQLException the sql exception
+     */
     public static String makeMasterPayment(String formattedDate, Connection conn) throws SQLException {
         System.out.println("Enter Master Payment ID: ");
         String paymentID = input.nextLine();

@@ -5,10 +5,22 @@ import java.util.*;
 // import java.time.LocalDate;
 // import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Search metadata processing.
+ */
 public class SearchMetadataProcessing {
-    
+
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
-    // code for finding songs and podcast episodes given artist, album, and/or podcast
+
+    /**
+     * Process search.
+     *
+     * @throws SQLException the sql exception
+     */
+// code for finding songs and podcast episodes given artist, album, and/or podcast
     public static void processSearch()throws SQLException {
         System.out.println("Enter search criteria:");
         System.out.println("1. Search Songs by artist");

@@ -3,32 +3,69 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Has.
+ */
 public class Has {
 
     private String artistID;
     private String albumID;
-    
+
+    /**
+     * Instantiates a new Has.
+     *
+     * @param artistID the artist id
+     * @param albumID  the album id
+     */
     public Has(String artistID, String albumID) {
         this.artistID = artistID;
         this.albumID = albumID;
     }
-    
+
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
-    
+
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
-    
+
+    /**
+     * Gets album id.
+     *
+     * @return the album id
+     */
     public String getAlbumID() {
         return albumID;
     }
-    
+
+    /**
+     * Sets album id.
+     *
+     * @param albumID the album id
+     */
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
-    
+
+    /**
+     * Create has int.
+     *
+     * @param has        the has
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createHas(Has has, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -50,6 +87,14 @@ public class Has {
         }
     }
 
+    /**
+     * Gets albums by artist id.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the albums by artist id
+     * @throws SQLException the sql exception
+     */
     public static List<Album> getAlbumsByArtistID(String artistID, Connection conn) throws SQLException {
 
         List<Album> albums = new ArrayList<>();
@@ -71,7 +116,16 @@ public class Has {
 
         return albums;
     }
-    
+
+    /**
+     * Read has has.
+     *
+     * @param artistID   the artist id
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the has
+     * @throws SQLException the sql exception
+     */
     public static Has readHas(String artistID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -98,7 +152,15 @@ public class Has {
         }
         return has;
     }
-    
+
+    /**
+     * Update has int.
+     *
+     * @param has        the has
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateHas(Has has, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -118,7 +180,16 @@ public class Has {
             }
         }
     }
-    
+
+    /**
+     * Delete has int.
+     *
+     * @param artistID   the artist id
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteHas(String artistID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

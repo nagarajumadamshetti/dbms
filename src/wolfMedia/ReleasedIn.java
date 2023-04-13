@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Released in.
+ */
 public class ReleasedIn {
     private String songID;
     private String countryID;
 
+    /**
+     * Instantiates a new Released in.
+     *
+     * @param songID    the song id
+     * @param countryID the country id
+     */
     public ReleasedIn(String songID, String countryID) {
         this.songID = songID;
         this.countryID = countryID;
     }
 
+    /**
+     * Gets song id.
+     *
+     * @return the song id
+     */
     public String getSongID() {
         return songID;
     }
 
+    /**
+     * Sets song id.
+     *
+     * @param songID the song id
+     */
     public void setSongID(String songID) {
         this.songID = songID;
     }
 
+    /**
+     * Gets country id.
+     *
+     * @return the country id
+     */
     public String getCountryID() {
         return countryID;
     }
 
+    /**
+     * Sets country id.
+     *
+     * @param countryID the country id
+     */
     public void setCountryID(String countryID) {
         this.countryID = countryID;
     }
 
+    /**
+     * Create released in int.
+     *
+     * @param releasedIn the released in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createReleasedIn(ReleasedIn releasedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -50,6 +87,14 @@ public class ReleasedIn {
         return isInserted;
     }
 
+    /**
+     * Read released in released in.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the released in
+     * @throws SQLException the sql exception
+     */
     public static ReleasedIn readReleasedIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -80,6 +125,14 @@ public class ReleasedIn {
         return releasedIn;
     }
 
+    /**
+     * Update released in int.
+     *
+     * @param releasedIn the released in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateReleasedIn(ReleasedIn releasedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -103,6 +156,14 @@ public class ReleasedIn {
         return isUpdated;
     }
 
+    /**
+     * Delete released in int.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteReleasedIn(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

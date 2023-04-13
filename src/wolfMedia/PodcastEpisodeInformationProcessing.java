@@ -4,10 +4,21 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Podcast episode information processing.
+ */
 public class PodcastEpisodeInformationProcessing {
 
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process podcast episode.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void processPodcastEpisode() throws SQLException {
         System.out.println("Enter/update/delete basic information:");
         System.out.println("1. Create Podcast Episode");
@@ -79,6 +90,14 @@ public class PodcastEpisodeInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Create part of int.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param conn             the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPartOf(String podcastEpisodeID, Connection conn) throws SQLException{
         System.out.println(
                 "Podcast ID: \n");
@@ -103,6 +122,14 @@ public class PodcastEpisodeInformationProcessing {
     //     return l.getName();
     // }
 
+    /**
+     * Create guest featured int.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param conn             the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createGuestFeatured(String podcastEpisodeID, Connection conn) throws SQLException{
         System.out.println("guest featured GuestID: ");
         String guestID = input.nextLine();
@@ -114,12 +141,26 @@ public class PodcastEpisodeInformationProcessing {
         return isCreated;
     }
 
+    /**
+     * Delete guest featured int.
+     *
+     * @param guestID          the guest id
+     * @param podcastEpisodeID the podcast episode id
+     * @param conn             the conn
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection conn) throws SQLException {
         int isDeleted = 0;
         isDeleted = GuestFeatured.deleteGuestFeatured(guestID, podcastEpisodeID, conn);
         return isDeleted;
     }
 
+    /**
+     * Update podcast episode.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void updatePodcastEpisode() throws SQLException {
         System.out.println("Enter podcastEpisodeID to update:");
         String updateID = input.nextLine();
@@ -151,6 +192,11 @@ public class PodcastEpisodeInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Delete podcast episode.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void deletePodcastEpisode() throws SQLException {
         System.out.println("Enter podcast episode ID to delete:");
         String deleteID = input.nextLine();
@@ -164,6 +210,11 @@ public class PodcastEpisodeInformationProcessing {
         Connections.close(conn);
     }
 
+    /**
+     * Read podcast episode.
+     *
+     * @throws SQLException the sql exception
+     */
     public static void readPodcastEpisode() throws SQLException {
         // add code to prompt for song ID and display song information from data store
         System.out.println("Enter podcast episode ID to read:");

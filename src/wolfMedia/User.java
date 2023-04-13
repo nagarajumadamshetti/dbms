@@ -1,6 +1,9 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type User.
+ */
 public class User {
 
     private String userID;
@@ -12,6 +15,18 @@ public class User {
     private String firstName;
     private String lastName;
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param userID                 the user id
+     * @param phone                  the phone
+     * @param email                  the email
+     * @param registrationDate       the registration date
+     * @param monthlySubscriptionFee the monthly subscription fee
+     * @param statusOfSubscription   the status of subscription
+     * @param firstName              the first name
+     * @param lastName               the last name
+     */
     public User(String userID, String phone, String email, Date registrationDate, float monthlySubscriptionFee,
             String statusOfSubscription, String firstName, String lastName) {
         this.userID = userID;
@@ -24,70 +39,158 @@ public class User {
         this.lastName = lastName;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userID the user id
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * Gets phone.
+     *
+     * @return the phone
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Sets phone.
+     *
+     * @param phone the phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets registration date.
+     *
+     * @return the registration date
+     */
     public Date getRegistrationDate() {
         return registrationDate;
     }
 
+    /**
+     * Sets registration date.
+     *
+     * @param registrationDate the registration date
+     */
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 
+    /**
+     * Gets monthly subscription fee.
+     *
+     * @return the monthly subscription fee
+     */
     public float getMonthlySubscriptionFee() {
         return monthlySubscriptionFee;
     }
 
+    /**
+     * Sets monthly subscription fee.
+     *
+     * @param monthlySubscriptionFee the monthly subscription fee
+     */
     public void setMonthlySubscriptionFee(float monthlySubscriptionFee) {
         this.monthlySubscriptionFee = monthlySubscriptionFee;
     }
 
+    /**
+     * Gets status of subscription.
+     *
+     * @return the status of subscription
+     */
     public String getStatusOfSubscription() {
         return statusOfSubscription;
     }
 
+    /**
+     * Sets status of subscription.
+     *
+     * @param statusOfSubscription the status of subscription
+     */
     public void setStatusOfSubscription(String statusOfSubscription) {
         this.statusOfSubscription = statusOfSubscription;
     }
 
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Create user int.
+     *
+     * @param user       the user
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createUser(User user, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -114,7 +217,15 @@ public class User {
             }
         }
     }
-    
+
+    /**
+     * Read user user.
+     *
+     * @param userID     the user id
+     * @param connection the connection
+     * @return the user
+     * @throws SQLException the sql exception
+     */
     public static User readUser(String userID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -147,7 +258,15 @@ public class User {
         }
         return user;
     }
-    
+
+    /**
+     * Update user int.
+     *
+     * @param user       the user
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateUser(User user, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -173,7 +292,15 @@ public class User {
             }
         }
     }
-    
+
+    /**
+     * Delete user int.
+     *
+     * @param userID     the user id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteUser(String userID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

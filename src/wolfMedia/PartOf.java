@@ -3,31 +3,68 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Part of.
+ */
 public class PartOf {
     private String podcastID;
     private String podcastEpisodeID;
 
+    /**
+     * Instantiates a new Part of.
+     *
+     * @param podcastID        the podcast id
+     * @param podcastEpisodeID the podcast episode id
+     */
     public PartOf(String podcastID, String podcastEpisodeID) {
         this.podcastID = podcastID;
         this.podcastEpisodeID = podcastEpisodeID;
     }
 
+    /**
+     * Gets podcast id.
+     *
+     * @return the podcast id
+     */
     public String getPodcastID() {
         return podcastID;
     }
 
+    /**
+     * Sets podcast id.
+     *
+     * @param podcastID the podcast id
+     */
     public void setPodcastID(String podcastID) {
         this.podcastID = podcastID;
     }
 
+    /**
+     * Gets podcast episode id.
+     *
+     * @return the podcast episode id
+     */
     public String getPodcastEpisodeID() {
         return podcastEpisodeID;
     }
 
+    /**
+     * Sets podcast episode id.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     */
     public void setPodcastEpisodeID(String podcastEpisodeID) {
         this.podcastEpisodeID = podcastEpisodeID;
     }
 
+    /**
+     * Create part of int.
+     *
+     * @param partOf     the part of
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPartOf(PartOf partOf, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -48,7 +85,15 @@ public class PartOf {
             }
         }
     }
-    
+
+    /**
+     * Gets podcast by podcast episode id.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param conn             the conn
+     * @return the podcast by podcast episode id
+     * @throws SQLException the sql exception
+     */
     public static PodCast getPodcastByPodcastEpisodeID(String podcastEpisodeID,Connection conn) throws SQLException{
         PodCast podcast = null;
 
@@ -72,6 +117,14 @@ public class PartOf {
         return podcast;
     }
 
+    /**
+     * Gets podcast episodes by podcast id.
+     *
+     * @param podcastID the podcast id
+     * @param conn      the conn
+     * @return the podcast episodes by podcast id
+     * @throws SQLException the sql exception
+     */
     public static List<PodcastEpisode> getPodcastEpisodesByPodcastID(String podcastID,Connection conn) throws SQLException{
         List<PodcastEpisode> podcastEpisodes = new ArrayList<>();
 
@@ -93,7 +146,16 @@ public class PartOf {
 
         return podcastEpisodes;
     }
-    
+
+    /**
+     * Read part of part of.
+     *
+     * @param podcastID        the podcast id
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the part of
+     * @throws SQLException the sql exception
+     */
     public static PartOf readPartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -121,7 +183,15 @@ public class PartOf {
         }
         return partOf;
     }
-    
+
+    /**
+     * Update part of int.
+     *
+     * @param partOf     the part of
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePartOf(PartOf partOf, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -141,7 +211,16 @@ public class PartOf {
             }
         }
     }
-    
+
+    /**
+     * Delete part of int.
+     *
+     * @param podcastID        the podcast id
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePartOf(String podcastID, String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

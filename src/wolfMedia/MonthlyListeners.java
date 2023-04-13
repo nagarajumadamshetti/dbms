@@ -1,41 +1,89 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Monthly listeners.
+ */
 public class MonthlyListeners {
     private String artistID;
     private String date;
     private int count;
-    
+
+    /**
+     * Instantiates a new Monthly listeners.
+     *
+     * @param artistID the artist id
+     * @param date     the date
+     * @param count    the count
+     */
     public MonthlyListeners(String artistID, String date, int count) {
         this.artistID = artistID;
         this.date = date;
         this.count = count;
     }
-    
+
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
-    
+
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
-    
+
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public String getDate() {
         return date;
     }
-    
+
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(String date) {
         this.date = date;
     }
-    
+
+    /**
+     * Gets count.
+     *
+     * @return the count
+     */
     public int getCount() {
         return count;
     }
-    
+
+    /**
+     * Sets count.
+     *
+     * @param count the count
+     */
     public void setCount(int count) {
         this.count = count;
     }
-    
+
+    /**
+     * Create monthly listeners int.
+     *
+     * @param monthlyListeners the monthly listeners
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createMonthlyListeners(MonthlyListeners monthlyListeners, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -53,7 +101,16 @@ public class MonthlyListeners {
         }
         return isInserted;
     }
-    
+
+    /**
+     * Read monthly listeners monthly listeners.
+     *
+     * @param artistID   the artist id
+     * @param date       the date
+     * @param connection the connection
+     * @return the monthly listeners
+     * @throws SQLException the sql exception
+     */
     public static MonthlyListeners readMonthlyListeners(String artistID, String date, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -82,7 +139,15 @@ public class MonthlyListeners {
         }
         return monthlyListeners;
     }
-    
+
+    /**
+     * Update monthly listeners int.
+     *
+     * @param monthlyListeners the monthly listeners
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateMonthlyListeners(MonthlyListeners monthlyListeners, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated =0;
@@ -103,7 +168,16 @@ public class MonthlyListeners {
         }
         return isUpdated;
     }
-    
+
+    /**
+     * Delete monthly listeners int.
+     *
+     * @param artistID   the artist id
+     * @param date       the date
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteMonthlyListeners(String artistID, String date, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
@@ -114,8 +188,8 @@ public class MonthlyListeners {
             statement.setString(2, date);
             statement.executeUpdate();
         } catch (SQLException e) {
-        	  e.printStackTrace();
-        	  return 0;
+            e.printStackTrace();
+            return 0;
         } finally {
             if (statement != null) {
                 statement.close();

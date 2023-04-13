@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Guest.
+ */
 public class Guest {
     private String guestID;
     private String name;
 
+    /**
+     * Instantiates a new Guest.
+     *
+     * @param guestID the guest id
+     * @param name    the name
+     */
     public Guest(String guestID, String name) {
         this.guestID = guestID;
         this.name = name;
     }
 
+    /**
+     * Gets guest id.
+     *
+     * @return the guest id
+     */
     public String getGuestID() {
         return guestID;
     }
 
+    /**
+     * Sets guest id.
+     *
+     * @param guestID the guest id
+     */
     public void setGuestID(String guestID) {
         this.guestID = guestID;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Create guest int.
+     *
+     * @param guest      the guest
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createGuest(Guest guest, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -43,6 +80,14 @@ public class Guest {
         return isInserted;
     }
 
+    /**
+     * Read guest guest.
+     *
+     * @param guestID    the guest id
+     * @param connection the connection
+     * @return the guest
+     * @throws SQLException the sql exception
+     */
     public static Guest readGuest(String guestID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -70,6 +115,14 @@ public class Guest {
         return guest;
     }
 
+    /**
+     * Update guest int.
+     *
+     * @param guest      the guest
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateGuest(Guest guest, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -90,6 +143,14 @@ public class Guest {
         return isUpdated;
     }
 
+    /**
+     * Delete guest int.
+     *
+     * @param guestID    the guest id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteGuest(String guestID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

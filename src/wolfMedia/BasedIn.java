@@ -2,31 +2,68 @@ package wolfMedia;
 
 import java.sql.*;
 
+/**
+ * The type Based in.
+ */
 public class BasedIn {
     private String artistID;
     private String countryID;
 
+    /**
+     * Instantiates a new Based in.
+     *
+     * @param artistID  the artist id
+     * @param countryID the country id
+     */
     public BasedIn(String artistID, String countryID) {
         this.artistID = artistID;
         this.countryID = countryID;
     }
 
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
 
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
 
+    /**
+     * Gets country id.
+     *
+     * @return the country id
+     */
     public String getCountryID() {
         return countryID;
     }
 
+    /**
+     * Sets country id.
+     *
+     * @param countryID the country id
+     */
     public void setCountryID(String countryID) {
         this.countryID = countryID;
     }
 
+    /**
+     * Create based in int.
+     *
+     * @param basedIn    the based in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createBasedIn(BasedIn basedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -44,6 +81,14 @@ public class BasedIn {
         return isInserted;
     }
 
+    /**
+     * Read based in based in.
+     *
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the based in
+     * @throws SQLException the sql exception
+     */
     public static BasedIn readBasedIn(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -71,6 +116,14 @@ public class BasedIn {
         return basedIn;
     }
 
+    /**
+     * Update based in int.
+     *
+     * @param basedIn    the based in
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateBasedIn(BasedIn basedIn, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -91,6 +144,14 @@ public class BasedIn {
         return isUpdated;
     }
 
+    /**
+     * Delete based in int.
+     *
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteBasedIn(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

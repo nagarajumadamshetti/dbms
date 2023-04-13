@@ -1,6 +1,9 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Podcast host.
+ */
 public class PodcastHost {
 
     private String podcastHostID;
@@ -10,6 +13,16 @@ public class PodcastHost {
     private String email;
     private String city;
 
+    /**
+     * Instantiates a new Podcast host.
+     *
+     * @param podcastHostID the podcast host id
+     * @param firstName     the first name
+     * @param lastName      the last name
+     * @param phone         the phone
+     * @param email         the email
+     * @param city          the city
+     */
     public PodcastHost(String podcastHostID, String firstName, String lastName, String phone, String email, String city) {
         this.podcastHostID = podcastHostID;
         this.firstName = firstName;
@@ -19,54 +32,122 @@ public class PodcastHost {
         this.city = city;
     }
 
+    /**
+     * Gets podcast host id.
+     *
+     * @return the podcast host id
+     */
     public String getPodcastHostID() {
         return podcastHostID;
     }
 
+    /**
+     * Sets podcast host id.
+     *
+     * @param podcastHostID the podcast host id
+     */
     public void setPodcastHostID(String podcastHostID) {
         this.podcastHostID = podcastHostID;
     }
 
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Gets phone.
+     *
+     * @return the phone
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Sets phone.
+     *
+     * @param phone the phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets city.
+     *
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets city.
+     *
+     * @param city the city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Create podcast host int.
+     *
+     * @param podcastHost the podcast host
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPodcastHost(PodcastHost podcastHost, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -91,7 +172,15 @@ public class PodcastHost {
             }
         }
     }
-    
+
+    /**
+     * Read podcast host podcast host.
+     *
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the podcast host
+     * @throws SQLException the sql exception
+     */
     public static PodcastHost readPodcastHost(String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -122,7 +211,15 @@ public class PodcastHost {
         }
         return podcastHost;
     }
-    
+
+    /**
+     * Update podcast host int.
+     *
+     * @param podcastHost the podcast host
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePodcastHost(PodcastHost podcastHost, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -146,7 +243,15 @@ public class PodcastHost {
             }
         }
     }
-    
+
+    /**
+     * Delete podcast host int.
+     *
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePodcastHost(String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

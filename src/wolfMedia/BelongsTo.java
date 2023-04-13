@@ -4,42 +4,90 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Belongs to.
+ */
 public class BelongsTo {
 
     private String albumID;
     private String songID;
     private int trackNumber;
 
+    /**
+     * Instantiates a new Belongs to.
+     *
+     * @param albumID     the album id
+     * @param songID      the song id
+     * @param trackNumber the track number
+     */
     public BelongsTo(String albumID, String songID, int trackNumber) {
         this.albumID = albumID;
         this.songID = songID;
         this.trackNumber = trackNumber;
     }
 
+    /**
+     * Gets album id.
+     *
+     * @return the album id
+     */
     public String getAlbumID() {
         return albumID;
     }
 
+    /**
+     * Sets album id.
+     *
+     * @param albumID the album id
+     */
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
 
+    /**
+     * Gets song id.
+     *
+     * @return the song id
+     */
     public String getSongID() {
         return songID;
     }
 
+    /**
+     * Sets song id.
+     *
+     * @param songID the song id
+     */
     public void setSongID(String songID) {
         this.songID = songID;
     }
 
+    /**
+     * Gets track number.
+     *
+     * @return the track number
+     */
     public int getTrackNumber() {
         return trackNumber;
     }
 
+    /**
+     * Sets track number.
+     *
+     * @param trackNumber the track number
+     */
     public void setTrackNumber(int trackNumber) {
         this.trackNumber = trackNumber;
     }
 
+    /**
+     * Create belongs to int.
+     *
+     * @param belongsTo  the belongs to
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createBelongsTo(BelongsTo belongsTo, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -62,6 +110,15 @@ public class BelongsTo {
         }
     }
 
+    /**
+     * Read belongs to belongs to.
+     *
+     * @param songID     the song id
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the belongs to
+     * @throws SQLException the sql exception
+     */
     public static BelongsTo readBelongsTo(String songID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -91,6 +148,14 @@ public class BelongsTo {
         return belongsTo;
     }
 
+    /**
+     * Gets songs by album id.
+     *
+     * @param albumID the album id
+     * @param conn    the conn
+     * @return the songs by album id
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getSongsByAlbumID(String albumID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
@@ -114,6 +179,15 @@ public class BelongsTo {
         return songs;
     }
 
+    /**
+     * Gets songs by album id song id.
+     *
+     * @param albumID the album id
+     * @param songID  the song id
+     * @param conn    the conn
+     * @return the songs by album id song id
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getSongsByAlbumIDSongID(String albumID,String songID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
@@ -138,6 +212,14 @@ public class BelongsTo {
         return songs;
     }
 
+    /**
+     * Gets albums.
+     *
+     * @param songID the song id
+     * @param conn   the conn
+     * @return the albums
+     * @throws SQLException the sql exception
+     */
     public static List<Album> getAlbums(String songID, Connection conn) throws SQLException {
 
         List<Album> albums = new ArrayList<>();
@@ -160,6 +242,14 @@ public class BelongsTo {
         return albums;
     }
 
+    /**
+     * Update belongs to int.
+     *
+     * @param belongsTo  the belongs to
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateBelongsTo(BelongsTo belongsTo, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -181,6 +271,15 @@ public class BelongsTo {
         }
     }
 
+    /**
+     * Delete belongs to int.
+     *
+     * @param songID     the song id
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteBelongsTo(String songID, String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

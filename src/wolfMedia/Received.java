@@ -4,31 +4,68 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Received.
+ */
 public class Received {
     private String paymentID;
     private String artistID;
 
+    /**
+     * Instantiates a new Received.
+     *
+     * @param paymentID the payment id
+     * @param artistID  the artist id
+     */
     public Received(String paymentID, String artistID) {
         this.paymentID = paymentID;
         this.artistID = artistID;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
 
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
 
+    /**
+     * Create received int.
+     *
+     * @param received   the received
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createReceived(Received received, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -50,6 +87,14 @@ public class Received {
         return isInserted;
     }
 
+    /**
+     * Gets artist payments.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the artist payments
+     * @throws SQLException the sql exception
+     */
     public static List<ArtistPayments> getArtistPayments(String artistID, Connection conn) throws SQLException {
 
         List<ArtistPayments> artistPayments = new ArrayList<>();
@@ -70,6 +115,14 @@ public class Received {
         return artistPayments;
     }
 
+    /**
+     * Read received received.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the received
+     * @throws SQLException the sql exception
+     */
     public static Received readReceived(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -97,6 +150,14 @@ public class Received {
         return received;
     }
 
+    /**
+     * Update received int.
+     *
+     * @param received   the received
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateReceived(Received received, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -117,6 +178,14 @@ public class Received {
         return isUpdated;
     }
 
+    /**
+     * Delete received int.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteReceived(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

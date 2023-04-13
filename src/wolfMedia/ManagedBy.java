@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Managed by.
+ */
 public class ManagedBy {
     private String paymentID;
     private String ID;
 
+    /**
+     * Instantiates a new Managed by.
+     *
+     * @param paymentID the payment id
+     * @param ID        the id
+     */
     public ManagedBy(String paymentID, String ID) {
         this.paymentID = paymentID;
         this.ID = ID;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getID() {
         return ID;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param ID the id
+     */
     public void setID(String ID) {
         this.ID = ID;
     }
 
+    /**
+     * Create managed by int.
+     *
+     * @param managedBy  the managed by
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createManagedBy(ManagedBy managedBy, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -44,6 +81,14 @@ public class ManagedBy {
         return isInserted;
     }
 
+    /**
+     * Read managed by managed by.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the managed by
+     * @throws SQLException the sql exception
+     */
     public static ManagedBy readManagedBy(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -71,6 +116,14 @@ public class ManagedBy {
         return managedBy;
     }
 
+    /**
+     * Update managed by int.
+     *
+     * @param managedBy  the managed by
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateManagedBy(ManagedBy managedBy, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -91,6 +144,14 @@ public class ManagedBy {
         return isUpdated;
     }
 
+    /**
+     * Delete managed by int.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteManagedBy(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

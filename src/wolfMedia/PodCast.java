@@ -1,6 +1,9 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Pod cast.
+ */
 public class PodCast {
 
     private String podcastID;
@@ -10,6 +13,16 @@ public class PodCast {
     private int totalSubscribers;
     private int rating;
 
+    /**
+     * Instantiates a new Pod cast.
+     *
+     * @param podcastID        the podcast id
+     * @param podcastName      the podcast name
+     * @param language         the language
+     * @param episodeCount     the episode count
+     * @param totalSubscribers the total subscribers
+     * @param rating           the rating
+     */
     public PodCast(String podcastID, String podcastName, String language, int episodeCount, int totalSubscribers, int rating) {
         this.podcastID = podcastID;
         this.podcastName = podcastName;
@@ -19,54 +32,122 @@ public class PodCast {
         this.rating = rating;
     }
 
+    /**
+     * Gets podcast id.
+     *
+     * @return the podcast id
+     */
     public String getPodcastID() {
         return podcastID;
     }
 
+    /**
+     * Sets podcast id.
+     *
+     * @param podcastID the podcast id
+     */
     public void setPodcastID(String podcastID) {
         this.podcastID = podcastID;
     }
 
+    /**
+     * Gets podcast name.
+     *
+     * @return the podcast name
+     */
     public String getPodcastName() {
         return podcastName;
     }
 
+    /**
+     * Sets podcast name.
+     *
+     * @param podcastName the podcast name
+     */
     public void setPodcastName(String podcastName) {
         this.podcastName = podcastName;
     }
 
+    /**
+     * Gets language.
+     *
+     * @return the language
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * Sets language.
+     *
+     * @param language the language
+     */
     public void setLanguage(String language) {
         this.language = language;
     }
 
+    /**
+     * Gets episode count.
+     *
+     * @return the episode count
+     */
     public int getEpisodeCount() {
         return episodeCount;
     }
 
+    /**
+     * Sets episode count.
+     *
+     * @param episodeCount the episode count
+     */
     public void setEpisodeCount(int episodeCount) {
         this.episodeCount = episodeCount;
     }
 
+    /**
+     * Gets total subscribers.
+     *
+     * @return the total subscribers
+     */
     public int getTotalSubscribers() {
         return totalSubscribers;
     }
 
+    /**
+     * Sets total subscribers.
+     *
+     * @param totalSubscribers the total subscribers
+     */
     public void setTotalSubscribers(int totalSubscribers) {
         this.totalSubscribers = totalSubscribers;
     }
 
+    /**
+     * Gets rating.
+     *
+     * @return the rating
+     */
     public int getRating() {
         return rating;
     }
 
+    /**
+     * Sets rating.
+     *
+     * @param rating the rating
+     */
     public void setRating(int rating) {
         this.rating = rating;
     }
 
+    /**
+     * Create podcast int.
+     *
+     * @param podcast    the podcast
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPodcast(PodCast podcast, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -91,7 +172,15 @@ public class PodCast {
             }
         }
     }
-    
+
+    /**
+     * Read podcast pod cast.
+     *
+     * @param podcastID  the podcast id
+     * @param connection the connection
+     * @return the pod cast
+     * @throws SQLException the sql exception
+     */
     public static PodCast readPodcast(String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -122,7 +211,15 @@ public class PodCast {
         }
         return podcast;
     }
-    
+
+    /**
+     * Update podcast int.
+     *
+     * @param podcast    the podcast
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePodcast(PodCast podcast, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -146,7 +243,15 @@ public class PodCast {
             }
         }
     }
-    
+
+    /**
+     * Delete podcast int.
+     *
+     * @param podcastID  the podcast id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePodcast(String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

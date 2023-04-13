@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Payment made.
+ */
 public class PaymentMade {
     private String userID;
     private String paymentID;
 
+    /**
+     * Instantiates a new Payment made.
+     *
+     * @param userID    the user id
+     * @param paymentID the payment id
+     */
     public PaymentMade(String userID, String paymentID) {
         this.userID = userID;
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userID the user id
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Create payment made int.
+     *
+     * @param paymentMade the payment made
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPaymentMade(PaymentMade paymentMade, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -46,7 +83,16 @@ public class PaymentMade {
             }
         }
     }
-    
+
+    /**
+     * Read payment made payment made.
+     *
+     * @param userID     the user id
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the payment made
+     * @throws SQLException the sql exception
+     */
     public static PaymentMade readPaymentMade(String userID, String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -74,7 +120,15 @@ public class PaymentMade {
         }
         return paymentMade;
     }
-    
+
+    /**
+     * Update payment made int.
+     *
+     * @param paymentMade the payment made
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePaymentMade(PaymentMade paymentMade, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -94,7 +148,16 @@ public class PaymentMade {
             }
         }
     }
-    
+
+    /**
+     * Delete payment made int.
+     *
+     * @param userID     the user id
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePaymentMade(String userID, String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
