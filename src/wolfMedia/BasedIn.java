@@ -61,7 +61,7 @@ public class BasedIn {
      *
      * @param basedIn    the based in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBasedIn(BasedIn basedIn, Connection connection) throws SQLException {
@@ -121,7 +121,7 @@ public class BasedIn {
      *
      * @param basedIn    the based in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateBasedIn(BasedIn basedIn, Connection connection) throws SQLException {
@@ -149,7 +149,7 @@ public class BasedIn {
      *
      * @param artistID   the artist id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteBasedIn(String artistID, Connection connection) throws SQLException {

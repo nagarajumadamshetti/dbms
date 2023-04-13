@@ -60,7 +60,7 @@ public class PodcastPayments {
      *
      * @param podcastPayment the podcast payment
      * @param connection     the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPodcastPayment(PodcastPayments podcastPayment, Connection connection) throws SQLException {
@@ -126,7 +126,7 @@ public class PodcastPayments {
      *
      * @param podcastPayment the podcast payment
      * @param connection     the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updatePodcastPayment(PodcastPayments podcastPayment, Connection connection) throws SQLException {
@@ -155,7 +155,7 @@ public class PodcastPayments {
      * @param paymentID     the payment id
      * @param podcastHostID the podcast host id
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePodcastPayment(String paymentID, String podcastHostID, Connection connection) throws SQLException {

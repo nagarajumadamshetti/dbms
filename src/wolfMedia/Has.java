@@ -63,7 +63,7 @@ public class Has {
      *
      * @param has        the has
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createHas(Has has, Connection connection) throws SQLException {
@@ -158,7 +158,7 @@ public class Has {
      *
      * @param has        the has
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateHas(Has has, Connection connection) throws SQLException {
@@ -187,7 +187,7 @@ public class Has {
      * @param artistID   the artist id
      * @param albumID    the album id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteHas(String artistID, String albumID, Connection connection) throws SQLException {

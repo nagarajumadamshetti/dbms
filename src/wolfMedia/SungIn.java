@@ -60,7 +60,7 @@ public class SungIn {
      *
      * @param sungIn     the sung in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSungIn(SungIn sungIn, Connection connection) throws SQLException {
@@ -130,7 +130,7 @@ public class SungIn {
      *
      * @param sungIn     the sung in
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSungIn(SungIn sungIn, Connection connection) throws SQLException {
@@ -161,7 +161,7 @@ public class SungIn {
      *
      * @param songID     the song id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSungIn(String songID, Connection connection) throws SQLException {

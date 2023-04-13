@@ -81,7 +81,7 @@ public class MediaStreamingService {
      *
      * @param mediaStreamingService the media streaming service
      * @param connection            the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createMediaStreamingService(MediaStreamingService mediaStreamingService, Connection connection) throws SQLException {
@@ -143,7 +143,7 @@ public class MediaStreamingService {
      *
      * @param mediaStreamingService the media streaming service
      * @param connection            the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateMediaStreamingService(MediaStreamingService mediaStreamingService, Connection connection) throws SQLException {
@@ -172,7 +172,7 @@ public class MediaStreamingService {
      *
      * @param ID         the id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteMediaStreamingService(String ID, Connection connection) throws SQLException {

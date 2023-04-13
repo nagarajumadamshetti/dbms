@@ -163,7 +163,7 @@ public class PodcastHostInformationProcessing {
      *
      * @param podcastHostID the podcast host id
      * @param conn          the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createHostedPodcasts(String podcastHostID, Connection conn) throws SQLException {
@@ -183,7 +183,7 @@ public class PodcastHostInformationProcessing {
      * @param podcastHostID the podcast host id
      * @param podcastID     the podcast id
      * @param conn          the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteHostedPodcasts(String podcastHostID, String podcastID, Connection conn) throws SQLException {
@@ -199,7 +199,7 @@ public class PodcastHostInformationProcessing {
      * @param podcastHostID the podcast host id
      * @param paymentID     the payment id
      * @param conn          the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int addPaymentReceived(String podcastHostID, String paymentID, Connection conn) throws SQLException {

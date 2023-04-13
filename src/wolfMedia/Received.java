@@ -63,7 +63,7 @@ public class Received {
      *
      * @param received   the received
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createReceived(Received received, Connection connection) throws SQLException {
@@ -155,7 +155,7 @@ public class Received {
      *
      * @param received   the received
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateReceived(Received received, Connection connection) throws SQLException {
@@ -183,7 +183,7 @@ public class Received {
      *
      * @param paymentID  the payment id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteReceived(String paymentID, Connection connection) throws SQLException {

@@ -61,7 +61,7 @@ public class OwnedBy {
      *
      * @param ownedBy    the owned by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createOwnedBy(OwnedBy ownedBy, Connection connection) throws SQLException {
@@ -126,7 +126,7 @@ public class OwnedBy {
      *
      * @param ownedBy    the owned by
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateOwnedBy(OwnedBy ownedBy, Connection connection) throws SQLException {
@@ -158,7 +158,7 @@ public class OwnedBy {
      * @param podcastID     the podcast id
      * @param podcastHostID the podcast host id
      * @param connection    the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteOwnedBy(String podcastID, String podcastHostID, Connection connection) throws SQLException {

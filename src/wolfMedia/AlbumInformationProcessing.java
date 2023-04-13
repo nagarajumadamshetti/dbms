@@ -99,7 +99,7 @@ public class AlbumInformationProcessing {
      *
      * @param albumID the album id
      * @param conn    the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createBelongsTo(String albumID, Connection conn) throws SQLException {
@@ -128,7 +128,7 @@ public class AlbumInformationProcessing {
      *
      * @param albumID the album id
      * @param conn    the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createHasArtists(String albumID, Connection conn) throws SQLException {
@@ -148,7 +148,7 @@ public class AlbumInformationProcessing {
      * @param artistID the artist id
      * @param songID   the song id
      * @param conn     the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteHasArtists(String artistID, String songID, Connection conn) throws SQLException {

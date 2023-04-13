@@ -60,7 +60,7 @@ public class UserPayment {
      *
      * @param userPayment the user payment
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createUserPayment(UserPayment userPayment, Connection connection) throws SQLException {
@@ -124,7 +124,7 @@ public class UserPayment {
      *
      * @param userPayment the user payment
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateUserPayment(UserPayment userPayment, Connection connection) throws SQLException {
@@ -152,7 +152,7 @@ public class UserPayment {
      *
      * @param paymentID  the payment id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteUserPayment(String paymentID, Connection connection) throws SQLException {

@@ -99,7 +99,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createOriginCountry(String podcastID, Connection conn) throws SQLException {
@@ -119,7 +119,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createPartOf(String podcastID, Connection conn) throws SQLException {
@@ -139,7 +139,7 @@ private static void createPodcast() throws SQLException {
      * @param podcastID        the podcast id
      * @param podcastEpisodeID the podcast episode id
      * @param conn             the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deletePartOf(String podcastID, String podcastEpisodeID, Connection conn) throws SQLException {
@@ -153,7 +153,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createGeneredIn(String podcastID, Connection conn) throws SQLException {
@@ -172,7 +172,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteGeneredIn(String podcastID, Connection conn) throws SQLException {
@@ -186,7 +186,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSponsoredBy(String podcastID, Connection conn) throws SQLException {
@@ -206,7 +206,7 @@ private static void createPodcast() throws SQLException {
      * @param podcastID the podcast id
      * @param sponsorID the sponsor id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSponsoredBy(String podcastID, String sponsorID ,Connection conn) throws SQLException {
@@ -221,7 +221,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createOwnedBy(String podcastID, Connection conn) throws SQLException {
@@ -241,7 +241,7 @@ private static void createPodcast() throws SQLException {
      * @param podcastHostID the podcast host id
      * @param podcastID     the podcast id
      * @param conn          the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteOwnedBy(String podcastHostID,String podcastID, Connection conn) throws SQLException {
@@ -255,7 +255,7 @@ private static void createPodcast() throws SQLException {
      *
      * @param podcastID the podcast id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSubscribePodcast(String podcastID, Connection conn) throws SQLException {
@@ -275,7 +275,7 @@ private static void createPodcast() throws SQLException {
      * @param podcastID the podcast id
      * @param userID    the user id
      * @param conn      the conn
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSubscribePodcast(String podcastID, String userID, Connection conn) throws SQLException {

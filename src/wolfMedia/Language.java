@@ -61,7 +61,7 @@ public class Language {
      *
      * @param language   the language
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createLanguage(Language language, Connection connection) throws SQLException {
@@ -122,7 +122,7 @@ public class Language {
      *
      * @param language   the language
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateLanguage(Language language, Connection connection) throws SQLException {
@@ -151,7 +151,7 @@ public class Language {
      *
      * @param languageID the language id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteLanguage(String languageID, Connection connection) throws SQLException {

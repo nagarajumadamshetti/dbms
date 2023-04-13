@@ -60,7 +60,7 @@ public class SubscribePodcast {
      *
      * @param subscribePodcast the subscribe podcast
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSubscribePodcast(SubscribePodcast subscribePodcast, Connection connection) throws SQLException {
@@ -126,7 +126,7 @@ public class SubscribePodcast {
      *
      * @param subscribePodcast the subscribe podcast
      * @param connection       the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSubscribePodcast(SubscribePodcast subscribePodcast, Connection connection) throws SQLException {
@@ -155,7 +155,7 @@ public class SubscribePodcast {
      * @param userID     the user id
      * @param podcastID  the podcast id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSubscribePodcast(String userID, String podcastID, Connection connection) throws SQLException {

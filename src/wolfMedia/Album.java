@@ -118,7 +118,7 @@ public class Album {
      *
      * @param album      the album
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createAlbum(Album album, Connection connection) throws SQLException {
@@ -242,7 +242,7 @@ public class Album {
      *
      * @param album      the album
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateAlbum(Album album, Connection connection) throws SQLException {
@@ -272,7 +272,7 @@ public class Album {
      *
      * @param albumID    the album id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteAlbum(String albumID, Connection connection) throws SQLException {

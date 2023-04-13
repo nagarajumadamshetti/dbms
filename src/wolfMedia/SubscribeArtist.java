@@ -61,7 +61,7 @@ public class SubscribeArtist {
      *
      * @param subscription the subscription
      * @param connection   the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int createSubscription(SubscribeArtist subscription, Connection connection) throws SQLException {
@@ -93,7 +93,7 @@ public class SubscribeArtist {
      * @param newUserID   the new user id
      * @param newArtistID the new artist id
      * @param connection  the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int updateSubscription(String userID, String artistID, String newUserID, String newArtistID, Connection connection) throws SQLException {
@@ -125,7 +125,7 @@ public class SubscribeArtist {
      * @param userID     the user id
      * @param artistID   the artist id
      * @param connection the connection
-     * @return the int
+     * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
     public static int deleteSubscription(String userID, String artistID, Connection connection) throws SQLException {
