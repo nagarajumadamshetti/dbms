@@ -25,6 +25,8 @@ public class ArtistInformationProcessing {
         System.out.println("2. Update artist");
         System.out.println("3. Delete artist");
         System.out.println("4. Read artist information");
+        System.out.println("5. Assign Artist To Album");
+        System.out.println("6. Assign Artist To RecordLabel");
         System.out.print("Choice: ");
 
         int subChoice3 = input.nextInt();
@@ -43,6 +45,12 @@ public class ArtistInformationProcessing {
                 break;
             case 4:
                 readArtist();
+                break;
+            case 5:
+                assignArtistToAlbum();
+                break;
+            case 6:
+                assignArtistToRecordLabel(); 
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -107,6 +115,50 @@ public class ArtistInformationProcessing {
             addArtistRecordLabelcontracts(artistID, conn);
         }
 
+        Connections.close(conn);
+    }
+
+     /**
+     * Assign Artist To Album.
+     *
+     * @return nothing
+     * @throws SQLException the sql exception
+     */
+    public static void assignArtistToAlbum() throws SQLException {
+        Connection conn = Connections.open();
+        System.out.println("EnterArtist ID\n");
+        String artistID = input.nextLine();
+        int isCreated = 0;
+        if (!artistID.isEmpty()) {
+            isCreated = createHasAlbums(artistID, conn);
+        }
+        if (isCreated == 0) {
+            System.out.println("Artist not assigned to Albums mentioned");
+        } else {
+            System.out.println("Artist with ID: " + artistID + "has been assigned to respective Albums");
+        }
+        Connections.close(conn);
+    }
+
+    /**
+     * Assign Artist To RecordLabel.
+     *
+     * @return nothing
+     * @throws SQLException the sql exception
+     */
+    public static void assignArtistToRecordLabel() throws SQLException {
+        Connection conn = Connections.open();
+        System.out.println("EnterArtist ID\n");
+        String artistID = input.nextLine();
+        int isCreated = 0;
+        if (!artistID.isEmpty()) {
+            isCreated = addArtistRecordLabelcontracts(artistID, conn);
+        }
+        if (isCreated == 0) {
+            System.out.println("Artist not assigned to Record Label");
+        } else {
+            System.out.println("Artist with ID: " + artistID + "has been assigned to respective Record Label");
+        }
         Connections.close(conn);
     }
 
@@ -424,7 +476,7 @@ public class ArtistInformationProcessing {
      */
     public static String artistBasedIn(String artistID, Connection conn) throws SQLException {
         BasedIn rI = BasedIn.readBasedIn(artistID, conn);
-        if(rI==null){
+        if (rI == null) {
             return "(none)";
         }
         Country c = Country.readCountry(rI.getCountryID(), conn);

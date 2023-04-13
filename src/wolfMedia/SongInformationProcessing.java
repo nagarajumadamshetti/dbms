@@ -44,10 +44,35 @@ public class SongInformationProcessing {
             case 4:
                 readSong();
                 break;
+            case 5:
+                assignSongToAlbum(); //TODO songID, albumID
+                break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
                 break;
         }
+    }
+
+    /**
+     * Assign Song Host To Album.
+     *
+     * @return nothing
+     * @throws SQLException the sql exception
+     */
+    public static void assignSongToAlbum() throws SQLException {
+        Connection conn = Connections.open();
+        System.out.println("Enter Song ID\n");
+        String songID = input.nextLine();
+        int isCreated = 0;
+        if (!songID.isEmpty()) {
+            isCreated = createBelongsTo(songID, conn);
+        }
+        if (isCreated == 0) {
+            System.out.println("Song not assigned to Album mentioned");
+        } else {
+            System.out.println("Song with ID: " + songID + "has been assigned to respective Album");
+        }
+        Connections.close(conn);
     }
 
     /**
