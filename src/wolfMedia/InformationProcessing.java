@@ -30,6 +30,7 @@ public class InformationProcessing {
                 break;
             default:
                 System.out.println("Invalid choice.");
+                break;
         }
     }
 

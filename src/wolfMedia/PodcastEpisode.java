@@ -1,16 +1,17 @@
 package wolfMedia;
+
 import java.sql.*;
 
 public class PodcastEpisode {
 
     private String podcastEpisodeID;
     private String episodeTitle;
-    private Time duration;
-    private Date releaseDate;
+    private String duration;
+    private String releaseDate;
     private int listeningCount;
     private int advertisementCount;
 
-    public PodcastEpisode(String podcastEpisodeID, String episodeTitle, Time duration, Date releaseDate,
+    public PodcastEpisode(String podcastEpisodeID, String episodeTitle, String duration, String releaseDate,
             int listeningCount, int advertisementCount) {
         this.podcastEpisodeID = podcastEpisodeID;
         this.episodeTitle = episodeTitle;
@@ -36,19 +37,19 @@ public class PodcastEpisode {
         this.episodeTitle = episodeTitle;
     }
 
-    public Time getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -76,8 +77,8 @@ public class PodcastEpisode {
             statement = connection.prepareStatement(query);
             statement.setString(1, episode.getPodcastEpisodeID());
             statement.setString(2, episode.getEpisodeTitle());
-            statement.setTime(3, episode.getDuration());
-            statement.setDate(4, episode.getReleaseDate());
+            statement.setString(3, episode.getDuration());
+            statement.setString(4, episode.getReleaseDate());
             statement.setInt(5, episode.getListeningCount());
             statement.setInt(6, episode.getAdvertisementCount());
             isInserted = statement.executeUpdate();
@@ -92,8 +93,9 @@ public class PodcastEpisode {
             }
         }
     }
-    
-    public static PodcastEpisode readPodcastEpisode(String podcastEpisodeID, Connection connection) throws SQLException {
+
+    public static PodcastEpisode readPodcastEpisode(String podcastEpisodeID, Connection connection)
+            throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         PodcastEpisode episode = null;
@@ -103,8 +105,9 @@ public class PodcastEpisode {
             statement.setString(1, podcastEpisodeID);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                episode = new PodcastEpisode(resultSet.getString("podcastEpisodeID"), resultSet.getString("episodeTitle"),
-                        resultSet.getTime("duration"), resultSet.getDate("releaseDate"),
+                episode = new PodcastEpisode(resultSet.getString("podcastEpisodeID"),
+                        resultSet.getString("episodeTitle"),
+                        resultSet.getString("duration"), resultSet.getString("releaseDate"),
                         resultSet.getInt("listeningCount"), resultSet.getInt("advertisementCount"));
             }
         } catch (SQLException ex) {
@@ -119,7 +122,7 @@ public class PodcastEpisode {
         }
         return episode;
     }
-    
+
     public static int updatePodcastEpisode(PodcastEpisode episode, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -127,8 +130,8 @@ public class PodcastEpisode {
             String query = "UPDATE podcastEpisodes SET episodeTitle = ?, duration = ?, releaseDate = ?, listeningCount = ?, advertisementCount = ? WHERE podcastEpisodeID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, episode.getEpisodeTitle());
-            statement.setTime(2, episode.getDuration());
-            statement.setDate(3, episode.getReleaseDate());
+            statement.setString(2, episode.getDuration());
+            statement.setString(3, episode.getReleaseDate());
             statement.setInt(4, episode.getListeningCount());
             statement.setInt(5, episode.getAdvertisementCount());
             statement.setString(6, episode.getPodcastEpisodeID());
@@ -143,7 +146,7 @@ public class PodcastEpisode {
             }
         }
     }
-    
+
     public static int deletePodcastEpisode(String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
@@ -162,5 +165,5 @@ public class PodcastEpisode {
             }
         }
     }
-    
-}    
+
+}
