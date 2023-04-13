@@ -1,3 +1,323 @@
+CREATE TABLE countries (
+  countryID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE languages (
+  languageID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE genres (
+  genreID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE sponsors (
+  sponsorID VARCHAR(255) PRIMARY KEY NOT NULL,
+  sponsorName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE guests (
+  guestID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE payments (
+  paymentID VARCHAR(255) PRIMARY KEY NOT NULL,
+  date DATE NOT NULL
+);
+
+CREATE TABLE mediaStreamingService (
+  ID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE managedBy (
+  paymentID VARCHAR(255) NOT NULL,
+  ID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (paymentID, ID),
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (ID) REFERENCES mediaStreamingService(ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE recordLabel (
+  recordLabelID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE recordLabelPayments (
+  paymentID VARCHAR(255) PRIMARY KEY NOT NULL,
+  paymentAmount FLOAT NOT NULL,
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE paymentsReceived (
+  paymentID VARCHAR(255) NOT NULL,
+  recordLabelID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (paymentID, recordLabelID),
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (recordLabelID) REFERENCES recordLabel(recordLabelID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE artists (
+  artistID VARCHAR(255) PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  status VARCHAR(255) NOT NULL,
+  type VARCHAR(255) NOT NULL
+); 
+
+CREATE TABLE primaryGenre (
+  artistID VARCHAR(255) PRIMARY KEY NOT NULL,
+  genreID VARCHAR(255) NOT NULL,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (genreID) REFERENCES genres(genreID) ON UPDATE CASCADE ON DELETE CASCADE
+); 
+
+CREATE TABLE artistPayments (
+  paymentID VARCHAR(255) PRIMARY KEY NOT NULL,
+  paymentAmount FLOAT NOT NULL,
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE received (
+  paymentID VARCHAR(255) NOT NULL,
+  artistID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (paymentID, artistID),
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE contractedWith (
+  artistID VARCHAR(255) NOT NULL,
+  recordLabelID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (recordLabelID, artistID),
+  FOREIGN KEY (recordLabelID) REFERENCES recordLabel(recordLabelID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE basedIn (
+  artistID VARCHAR(255) NOT NULL,
+  countryID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (artistID, countryID),
+  FOREIGN KEY (countryID) REFERENCES countries(countryID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE monthlyListeners (
+  artistID VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  count INT NOT NULL,
+  PRIMARY KEY (artistID, date),
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE songs (
+  songID VARCHAR(255) NOT NULL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  duration TIME NOT NULL,
+  releaseDate DATE NOT NULL,
+  royaltyPaid Boolean NOT NULL,
+  royaltyRate FLOAT NOT NULL
+); 
+CREATE TABLE releasedIn (
+  songID VARCHAR(255) NOT NULL,
+  countryID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (songID, countryID),
+  FOREIGN KEY (countryID) REFERENCES countries(countryID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE songsViewed (
+  songID VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  count INT NOT NULL,
+  PRIMARY KEY (songID, date),
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE
+); 
+CREATE TABLE sungIn (
+  songID VARCHAR(255) NOT NULL PRIMARY KEY,
+  languageID VARCHAR(255) NOT NULL,
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (languageID) REFERENCES languages(languageID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE generedIn (
+  songID VARCHAR(255) NOT NULL,
+  genreID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (songID,genreID),
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (genreID) REFERENCES genres(genreID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE sungBy (
+  artistID VARCHAR(255) NOT NULL,
+  songID VARCHAR(255) NOT NULL PRIMARY KEY,
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE collaboratedBy (
+  artistID VARCHAR(255) NOT NULL,
+  songID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (artistID, songID),
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE albums (
+  albumID VARCHAR(255) NOT NULL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  edition VARCHAR(255) NOT NULL,
+  releaseYear INT NOT NULL
+);
+
+CREATE TABLE has (
+  artistID VARCHAR(255) NOT NULL,
+  albumID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (artistID, albumID),
+  FOREIGN KEY (albumID) REFERENCES albums(albumID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE belongsTo (
+  albumID VARCHAR(255) NOT NULL,
+  songID VARCHAR(255) NOT NULL,
+  trackNumber INT NOT NULL,
+  PRIMARY KEY (songID, albumID),
+  FOREIGN KEY (albumID) REFERENCES albums(albumID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (songID) REFERENCES songs(songID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE users (
+  userID VARCHAR(255) NOT NULL PRIMARY KEY,
+  phone VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  registrationDate DATE NOT NULL,
+  monthlySubscriptionFee FLOAT NOT NULL,
+  statusOfSubscription VARCHAR(255) NOT NULL,
+  firstName VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE subscribeArtist (
+  userID VARCHAR(255) NOT NULL,
+  artistID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (userID, artistID),
+  FOREIGN KEY (userID) REFERENCES users(userID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (artistID) REFERENCES artists(artistID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE userPayments (
+  paymentID VARCHAR(255) NOT NULL PRIMARY KEY,
+  paymentAmount INT NOT NULL,
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE paymentsMade (
+  userID VARCHAR(255) NOT NULL,
+  paymentID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (userID, paymentID),
+  FOREIGN KEY (userID) REFERENCES users(userID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE podcasts (
+  podcastID VARCHAR(255) NOT NULL PRIMARY KEY,
+  podcastName VARCHAR(255) NOT NULL,
+  language VARCHAR(255) NOT NULL,
+  episodeCount INT NOT NULL,
+  totalSubscribers INT NOT NULL,
+  rating INT NOT NULL
+); 
+
+CREATE TABLE sponsoredBy (
+  podcastID VARCHAR(255) NOT NULL,
+  sponsorID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (podcastID, sponsorID),
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (sponsorID) REFERENCES sponsors(sponsorID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE subscribePodcast (
+  userID VARCHAR(255) NOT NULL,
+  podcastID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (userID, podcastID),
+  FOREIGN KEY (userID) REFERENCES users(userID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE podcastGeneredIn (
+  podcastID VARCHAR(255) NOT NULL,
+  genreID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (podcastID, genreID),
+  FOREIGN KEY (genreID) REFERENCES genres(genreID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE originCountry (
+  podcastID VARCHAR(255) NOT NULL PRIMARY KEY,
+  countryID VARCHAR(255) NOT NULL,
+  FOREIGN KEY (countryID) REFERENCES countries(countryID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE
+); 
+
+CREATE TABLE podcastEpisodes (
+  podcastEpisodeID VARCHAR(255) NOT NULL PRIMARY KEY,
+  episodeTitle VARCHAR(255) NOT NULL,
+  duration TIME NOT NULL,
+  releaseDate DATE NOT NULL,
+  listeningCount INT NOT NULL,
+  advertisementCount INT NOT NULL
+);
+
+CREATE TABLE partOf (
+  podcastID VARCHAR(255) NOT NULL,
+  podcastEpisodeID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (podcastID, podcastEpisodeID),
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastEpisodeID) REFERENCES podcastEpisodes(podcastEpisodeID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE guestsFeatured (
+  guestID VARCHAR(255) NOT NULL,
+  podcastEpisodeID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (guestID, podcastEpisodeID),
+  FOREIGN KEY (guestID) REFERENCES guests(guestID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastEpisodeID) REFERENCES podcastEpisodes(podcastEpisodeID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE podcastHosts (
+  podcastHostID VARCHAR(255) PRIMARY KEY NOT NULL,
+  firstName VARCHAR(255) NOT NULL,
+  lastName VARCHAR(255) NOT NULL,
+  phone VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL
+); 
+
+CREATE TABLE ownedBy (
+  podcastID VARCHAR(255) NOT NULL,
+  podcastHostID VARCHAR(255) NOT NULL,
+  PRIMARY KEY (podcastID, podcastHostID),
+  FOREIGN KEY (podcastID) REFERENCES podcasts(podcastID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (podcastHostID) REFERENCES podcastHosts(podcastHostID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE podcastHostPayments (
+  paymentID VARCHAR(255) PRIMARY KEY NOT NULL,
+  flatFee FLOAT NOT NULL,
+  bonus FLOAT NOT NULL,
+  FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- episodeID VARCHAR(255) NOT NULL,
+CREATE TABLE podcastPayments (
+paymentID VARCHAR(255) NOT NULL,
+podcastHostID VARCHAR(255) NOT NULL,
+PRIMARY KEY (paymentID, podcastHostID),
+FOREIGN KEY (podcastHostID) REFERENCES podcastHosts(podcastHostID) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (paymentID) REFERENCES payments(paymentID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-------------------------------------------------------------------------------------------------------------
+---------------------------------------------INSERT DATA-----------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+
+
 INSERT INTO songs (songID, title, duration, releaseDate, royaltyPaid, royaltyRate) VALUES 
 ('s1001', 'Electric Dreamscape', '00:03:30', '2023-01-01', FALSE, 0.10),
 ('s1002', 'Midnight Mirage', '00:03:30', '2023-01-01', FALSE, 0.10),
@@ -119,6 +439,31 @@ VALUES
 ('22', '2023-03-01'),
 ('23', '2023-04-01');
 
+INSERT INTO managedBy (paymentID, ID) VALUES
+('1', '1'),
+('2', '1'),
+('3', '1'),
+('4', '1'),
+('5', '1'),
+('6', '1'),
+('7', '1'),
+('8', '1'),
+('9', '1'),
+('10', '1'),
+('11', '1'),
+('12', '1'),
+('13', '1'),
+('14', '1'),
+('15', '1'),
+('16', '1'),
+('17', '1'),
+('18', '1'),
+('19', '1'),
+('20', '1'),
+('21', '1'),
+('22', '1'),
+('23', '1');
+
 INSERT INTO received (paymentID, artistID) VALUES
 ('1', 'ar2001'),
 ('2', 'ar2001'),
@@ -162,28 +507,6 @@ INSERT INTO paymentsReceived (paymentID, recordLabelID) VALUES
 ('13', 'rl3002'),
 ('14', 'rl3002'),
 ('15', 'rl3002');
-
-
-INSERT INTO userPayments (paymentAmount, paymentID) VALUES
-(10,'16'),
-(10,'17'),
-(10,'18'),
-(10,'19'),
-(10,'20'),
-(10,'21'),
-(10,'22'),
-(10,'23');
-
-INSERT INTO paymentsMade (userID, paymentID) VALUES
-('u8001','16'),
-('u8001','17'),
-('u8001','18'),
-('u8001','19'),
-('u8002','20'),
-('u8002','21'),
-('u8002','22'),
-('u8002','23');
-
 
 INSERT INTO countries (countryID, name)
 VALUES
