@@ -30,7 +30,7 @@ public class Guest {
         PreparedStatement statement = null;
         int isInserted = 0;
         try {
-            String query = "INSERT INTO guest (guestID, name) VALUES (?, ?)";
+            String query = "INSERT INTO guests (guestID, name) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, guest.getGuestID());
             statement.setString(2, guest.getName());
@@ -48,7 +48,7 @@ public class Guest {
         ResultSet resultSet = null;
         Guest guest = null;
         try {
-            String query = "SELECT * FROM guest WHERE guestID = ?";
+            String query = "SELECT * FROM guests WHERE guestID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, guestID);
             resultSet = statement.executeQuery();
@@ -74,7 +74,7 @@ public class Guest {
         PreparedStatement statement = null;
         int isUpdated = 0;
         try {
-            String query = "UPDATE guest SET name = ? WHERE guestID = ?";
+            String query = "UPDATE guests SET name = ? WHERE guestID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, guest.getName());
             statement.setString(2, guest.getGuestID());
@@ -94,7 +94,7 @@ public class Guest {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
-            String query = "DELETE FROM guest WHERE guestID = ?";
+            String query = "DELETE FROM guests WHERE guestID = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, guestID);
             statement.executeUpdate();

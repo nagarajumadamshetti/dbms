@@ -59,7 +59,7 @@ public class InformationProcessing {
     
     private static void processPodcastEpisode() throws SQLException{
         // code for processing podcast episode information
-        // PodcastEpisodeInformationProcessing.process
+        PodcastEpisodeInformationProcessing.processPodcastEpisode();
         // additional fields as required
         // add code to update or delete podcast episode information
     }
