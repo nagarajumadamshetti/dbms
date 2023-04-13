@@ -424,6 +424,9 @@ public class ArtistInformationProcessing {
      */
     public static String artistBasedIn(String artistID, Connection conn) throws SQLException {
         BasedIn rI = BasedIn.readBasedIn(artistID, conn);
+        if(rI==null){
+            return "(none)";
+        }
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }

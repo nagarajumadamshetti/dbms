@@ -452,6 +452,9 @@ public class SongInformationProcessing {
      */
     public static String songReleasedIn(String songID, Connection conn) throws SQLException {
         ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn);
+        if(rI==null){
+            return "(none)";
+        }
         Country c = Country.readCountry(rI.getCountryID(), conn);
         return c.getName();
     }
@@ -466,6 +469,9 @@ public class SongInformationProcessing {
      */
     public static String songSungIn(String songID, Connection conn) throws SQLException {
         SungIn sI = SungIn.readSungIn(songID, conn);
+        if (sI==null){
+            return "(none)";
+        }
         Language l = Language.readLanguage(sI.getLanguageID(), conn);
         return l.getName();
     }
@@ -480,6 +486,9 @@ public class SongInformationProcessing {
      */
     public static String songGeneredIn(String songID, Connection conn) throws SQLException {
         GeneredIn gI = GeneredIn.readGeneredIn(songID, conn);
+        if(gI==null){
+            return "(none)";
+        }
         Genre g = Genre.readGenre(gI.getGenreID(), conn);
         return g.getName();
     }
@@ -494,6 +503,9 @@ public class SongInformationProcessing {
      */
     public static String songArtist(String songID, Connection conn) throws SQLException {
         SungBy sB = SungBy.readSungBySongID(songID, conn);
+        if(sB==null){
+            return "(none)";
+        }
         Artist a = Artist.readArtist(sB.getArtistID(), conn);
         return a.getName();
     }
