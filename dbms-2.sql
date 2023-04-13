@@ -115,7 +115,7 @@ CREATE TABLE songs (
   title VARCHAR(255) NOT NULL,
   duration TIME NOT NULL,
   releaseDate DATE NOT NULL,
-  royaltyPaid FLOAT NOT NULL,
+  royaltyPaid Boolean NOT NULL,
   royaltyRate FLOAT NOT NULL
 ); 
 CREATE TABLE releasedIn (
@@ -514,14 +514,14 @@ INSERT INTO monthlyListeners (artistID, date, count) VALUES
 (8, '2022-01-01', 80000);
 
 INSERT INTO songs (songID, title, duration, releaseDate, royaltyPaid, royaltyRate) VALUES 
-(1, 'Song A', '00:03:30', '2022-01-01', 1000.00, 0.10),
-(2, 'Song B', '00:04:15', '2022-01-02', 1500.00, 0.12),
-(3, 'Song C', '00:03:45', '2022-01-03', 2000.00, 0.15),
-(4, 'Song D', '00:03:00', '2022-01-04', 2500.00, 0.18),
-(5, 'Song E', '00:05:00', '2022-01-05', 3000.00, 0.20),
-(6, 'Song F', '00:03:20', '2022-01-06', 3500.00, 0.22),
-(7, 'Song G', '00:04:45', '2022-01-07', 4000.00, 0.25),
-(8, 'Song H', '00:02:45', '2022-01-08', 4500.00, 0.30);
+(1, 'Song A', '00:03:30', '2022-01-01', FALSE, 0.10),
+(2, 'Song B', '00:04:15', '2022-01-02', FALSE, 0.12),
+(3, 'Song C', '00:03:45', '2022-01-03', FALSE, 0.15),
+(4, 'Song D', '00:03:00', '2022-01-04', FALSE, 0.18),
+(5, 'Song E', '00:05:00', '2022-01-05', FALSE, 0.20),
+(6, 'Song F', '00:03:20', '2022-01-06', FALSE, 0.22),
+(7, 'Song G', '00:04:45', '2022-01-07', FALSE, 0.25),
+(8, 'Song H', '00:02:45', '2022-01-08', FALSE, 0.30);
 
 -- INSERT INTO songs (songID, title, duration, releaseDate, royaltyPaid, royaltyRate, playCount) VALUES 
 -- (1, 'Song A', '00:03:30', '2022-01-01', 1000.00, 0.10, 11),

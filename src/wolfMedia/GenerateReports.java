@@ -468,7 +468,7 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
     private static void playCountForArtistID(String artistID, Connection conn) throws SQLException {
         // code for displaying play count for songID
         // Prepare SQL statement
-        String sql = " SELECT ar.name, YEAR(ml.date) AS year, DATE_FORMAT(CONCAT(YEAR(sv.date),'-',MONTH(sv.date),'-01'), '%M') AS month, SUM(ml.count) AS play_count " +
+        String sql = " SELECT ar.name, YEAR(ml.date) AS year, DATE_FORMAT(CONCAT(YEAR(ml.date),'-',MONTH(ml.date),'-01'), '%M') AS month, SUM(ml.count) AS play_count " +
                 "FROM artists ar " +
                 "INNER JOIN monthlyListeners ml ON ar.artistID = ml.artistID " +
                 "where ar.artistID= ? " +
@@ -502,14 +502,6 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
     }
 
     private static void playCountForAlbumID(String albumID, Connection conn) throws SQLException {
-        // code for displaying play count for songID
-        // Prepare SQL statement
-        // String sql = "SELECT a.albumID, YEAR(sv.date) AS year, DATE_FORMAT(CONCAT(YEAR(sv.date),'-',MONTH(sv.date),'-01'), '%M') AS month, SUM(sv.count) AS play_count "+
-        // "FROM albums a "+
-        // "INNER JOIN belongsTo bt ON a.albumID = bt.albumID "+
-        // "INNER JOIN songsViewed sv ON bt.songID = sv.songID "+
-        // "where a.albumID = ? "+
-        // "GROUP BY a.albumID, YEAR(sv.date), MONTH(sv.date)";
         String sql ="SELECT a.albumID, a.name, YEAR(temp.date) AS year, DATE_FORMAT(CONCAT(YEAR(temp.date),'-',MONTH(temp.date),'-01'), '%M') AS month, SUM(temp.play_count) AS album_views "+
         "FROM albums a "+
         "INNER JOIN belongsTo bt ON a.albumID = bt.albumID "+
@@ -552,8 +544,7 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
     private static void playCountForSongID(String songID, Connection conn) throws SQLException {
         // code for displaying play count for songID
         // Prepare SQL statement
-        String sql = "SELECT s.songID, s.title, YEAR(sv.date) AS year,DATE_FORMAT(CONCAT(YEAR(sv.date),'-',MONTH(sv.date),'-01'), '%M') AS month AS month, SUM(sv.count) AS play_count "
-                +
+        String sql = "SELECT s.songID, s.title, YEAR(sv.date) AS year,DATE_FORMAT(CONCAT(YEAR(sv.date),'-',MONTH(sv.date),'-01'), '%M') AS month, SUM(sv.count) AS play_count "+
                 "FROM songs s " +
                 "INNER JOIN songsViewed sv ON s.songID = sv.songID " +
                 "where s.songID= ? " +
