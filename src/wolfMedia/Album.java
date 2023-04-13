@@ -190,7 +190,7 @@ public class Album {
             // songID, String title, String duration, String releaseDate, float royaltyPaid,
             // float royaltyRate
             Song song = new Song(rs.getString("songID"), rs.getString("title"), rs.getString("duration"),
-                    rs.getString("releaseDate"), rs.getFloat("royaltyPaid"), rs.getFloat("royaltyRate"));
+                    rs.getString("releaseDate"), rs.getBoolean("royaltyPaid"), rs.getFloat("royaltyRate"));
             songs.add(song);
         }
 

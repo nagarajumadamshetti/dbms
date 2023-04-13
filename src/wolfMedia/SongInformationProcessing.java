@@ -67,7 +67,7 @@ public class SongInformationProcessing {
         System.out.print("Release date in yyyy-MM-dd: ");
         String releaseDate = input.nextLine();
         System.out.print("Royalty paid: ");
-        float royaltyPaid = Float.parseFloat(input.nextLine());
+        Boolean royaltyPaid = Boolean.parseBoolean(input.nextLine());
         System.out.print("Royalty rate: ");
         float royaltyRate = Float.parseFloat(input.nextLine());
         Connection conn = Connections.open();
@@ -398,7 +398,7 @@ public class SongInformationProcessing {
             System.out.print("Release date in yyyy-MM-dd: ");
             sToUpdate.setReleaseDate(input.nextLine());
             System.out.print("Royalty paid: ");
-            sToUpdate.setRoyaltyPaid(Float.parseFloat(input.nextLine()));
+            sToUpdate.setRoyaltyPaid(Boolean.parseBoolean(input.nextLine()));
             System.out.print("Royalty rate: ");
             sToUpdate.setRoyaltyRate(Float.parseFloat(input.nextLine()));
             int isUpdated;
