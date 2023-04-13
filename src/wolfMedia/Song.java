@@ -25,7 +25,7 @@ public class Song {
     /**
      * The Royalty paid.
      */
-    public float royaltyPaid;
+    public boolean royaltyPaid;
     /**
      * The Royalty rate.
      */
@@ -41,7 +41,7 @@ public class Song {
      * @param royaltyPaid the royalty paid
      * @param royaltyRate the royalty rate
      */
-    public Song(String songID, String title, String duration, String releaseDate, float royaltyPaid, float royaltyRate) {
+    public Song(String songID, String title, String duration, String releaseDate, boolean royaltyPaid, float royaltyRate) {
         this.songID = songID;
         this.title = title;
         this.duration = duration;
@@ -127,7 +127,7 @@ public class Song {
      *
      * @return the royalty paid
      */
-    public float getRoyaltyPaid() {
+    public boolean getRoyaltyPaid() {
         return royaltyPaid;
     }
 
@@ -136,7 +136,7 @@ public class Song {
      *
      * @param royaltyPaid the royalty paid
      */
-    public void setRoyaltyPaid(float royaltyPaid) {
+    public void setRoyaltyPaid(boolean royaltyPaid) {
         this.royaltyPaid = royaltyPaid;
     }
 
@@ -176,7 +176,7 @@ public class Song {
             statement.setString(2, song.getTitle());
             statement.setString(3, song.getDuration());
             statement.setString(4, song.getReleaseDate());
-            statement.setFloat(5, song.getRoyaltyPaid());
+            statement.setBoolean(5, song.getRoyaltyPaid());
             statement.setFloat(6, song.getRoyaltyRate());
             isInserted = statement.executeUpdate();
             System.out.println("Song created.");
@@ -217,7 +217,7 @@ public class Song {
                                  resultSet.getString("title"),
                                  resultSet.getString("duration"),
                                  resultSet.getString("releaseDate"),
-                                 resultSet.getFloat("royaltyPaid"),
+                                 resultSet.getBoolean("royaltyPaid"),
                                  resultSet.getFloat("royaltyRate"));
             }
         } catch (SQLException e) {
@@ -254,7 +254,7 @@ public class Song {
             statement.setString(1, song.getTitle());
             statement.setString(2, song.getDuration());
             statement.setString(3, song.getReleaseDate());
-            statement.setFloat(4, song.getRoyaltyPaid());
+            statement.setBoolean(4, song.getRoyaltyPaid());
             statement.setFloat(5, song.getRoyaltyRate());
             statement.setString(6, song.getSongID());
             isUpdated = statement.executeUpdate();
