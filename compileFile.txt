@@ -7,7 +7,7 @@ wolfMedia/src/wolfMedia/*.java
 
 cd CSC_540_DBMS_D/wolfMedia
 
-javac -cp .:lib/mariadb-java-client-3.1.1.jar -d bin src/wolfMedia/*.java (This compiles all the .java files in wolfMedia/src/wolfMedia and stores the created .class files in wolfMedia/bin.
+javac -cp .:lib/mariadb-java-client-2.3.0.jar -d bin src/wolfMedia/*.java (This compiles all the .java files in wolfMedia/src/wolfMedia and stores the created .class files in wolfMedia/bin.
 
 cd bin
 
