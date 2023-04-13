@@ -1,32 +1,69 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Owned by.
+ */
 public class OwnedBy {
 
     private String podcastID;
     private String podcastHostID;
 
+    /**
+     * Instantiates a new Owned by.
+     *
+     * @param podcastID     the podcast id
+     * @param podcastHostID the podcast host id
+     */
     public OwnedBy(String podcastID, String podcastHostID) {
         this.podcastID = podcastID;
         this.podcastHostID = podcastHostID;
     }
 
+    /**
+     * Gets podcast id.
+     *
+     * @return the podcast id
+     */
     public String getPodcastID() {
         return podcastID;
     }
 
+    /**
+     * Sets podcast id.
+     *
+     * @param podcastID the podcast id
+     */
     public void setPodcastID(String podcastID) {
         this.podcastID = podcastID;
     }
 
+    /**
+     * Gets podcast host id.
+     *
+     * @return the podcast host id
+     */
     public String getPodcastHostID() {
         return podcastHostID;
     }
 
+    /**
+     * Sets podcast host id.
+     *
+     * @param podcastHostID the podcast host id
+     */
     public void setPodcastHostID(String podcastHostID) {
         this.podcastHostID = podcastHostID;
     }
 
+    /**
+     * Create owned by int.
+     *
+     * @param ownedBy    the owned by
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createOwnedBy(OwnedBy ownedBy, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -47,7 +84,16 @@ public class OwnedBy {
             }
         }
     }
-    
+
+    /**
+     * Read owned by owned by.
+     *
+     * @param podcastID     the podcast id
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the owned by
+     * @throws SQLException the sql exception
+     */
     public static OwnedBy readOwnedBy(String podcastID, String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -74,7 +120,15 @@ public class OwnedBy {
         }
         return ownedBy;
     }
-    
+
+    /**
+     * Update owned by int.
+     *
+     * @param ownedBy    the owned by
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateOwnedBy(OwnedBy ownedBy, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -97,7 +151,16 @@ public class OwnedBy {
             }
         }
     }
-    
+
+    /**
+     * Delete owned by int.
+     *
+     * @param podcastID     the podcast id
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteOwnedBy(String podcastID, String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

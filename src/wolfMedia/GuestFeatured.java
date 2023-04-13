@@ -4,32 +4,69 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Guest featured.
+ */
 public class GuestFeatured {
 
     private String guestID;
     private String podcastEpisodeID;
 
+    /**
+     * Instantiates a new Guest featured.
+     *
+     * @param guestID          the guest id
+     * @param podcastEpisodeID the podcast episode id
+     */
     public GuestFeatured(String guestID, String podcastEpisodeID) {
         this.guestID = guestID;
         this.podcastEpisodeID = podcastEpisodeID;
     }
 
+    /**
+     * Gets guest id.
+     *
+     * @return the guest id
+     */
     public String getGuestID() {
         return guestID;
     }
 
+    /**
+     * Sets guest id.
+     *
+     * @param guestID the guest id
+     */
     public void setGuestID(String guestID) {
         this.guestID = guestID;
     }
 
+    /**
+     * Gets podcast episode id.
+     *
+     * @return the podcast episode id
+     */
     public String getPodcastEpisodeID() {
         return podcastEpisodeID;
     }
 
+    /**
+     * Sets podcast episode id.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     */
     public void setPodcastEpisodeID(String podcastEpisodeID) {
         this.podcastEpisodeID = podcastEpisodeID;
     }
 
+    /**
+     * Create guest featured int.
+     *
+     * @param guestFeatured the guest featured
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createGuestFeatured(GuestFeatured guestFeatured, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -51,6 +88,14 @@ public class GuestFeatured {
         }
     }
 
+    /**
+     * Gets guests by podcast episode id.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the guests by podcast episode id
+     * @throws SQLException the sql exception
+     */
     public static List<Guest> getGuestsByPodcastEpisodeID( String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -73,6 +118,15 @@ public class GuestFeatured {
             return guests;
     }
 
+    /**
+     * Read guest featured guest featured.
+     *
+     * @param guestID          the guest id
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the guest featured
+     * @throws SQLException the sql exception
+     */
     public static GuestFeatured readGuestFeatured(String guestID, String podcastEpisodeID, Connection connection)
             throws SQLException {
         PreparedStatement statement = null;
@@ -102,6 +156,14 @@ public class GuestFeatured {
         return guestFeatured;
     }
 
+    /**
+     * Update guest featured int.
+     *
+     * @param guestFeatured the guest featured
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateGuestFeatured(GuestFeatured guestFeatured, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -124,6 +186,15 @@ public class GuestFeatured {
         }
     }
 
+    /**
+     * Delete guest featured int.
+     *
+     * @param guestID          the guest id
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection connection)
             throws SQLException {
         PreparedStatement statement = null;

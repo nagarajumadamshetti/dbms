@@ -4,13 +4,36 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Album.
+ */
 public class Album {
 
+    /**
+     * The Album id.
+     */
     public String albumID;
+    /**
+     * The Name.
+     */
     public String name;
+    /**
+     * The Edition.
+     */
     public String edition;
+    /**
+     * The Release year.
+     */
     public int releaseYear;
 
+    /**
+     * Instantiates a new Album.
+     *
+     * @param albumID     the album id
+     * @param name        the name
+     * @param edition     the edition
+     * @param releaseYear the release year
+     */
     public Album(String albumID, String name, String edition, int releaseYear) {
         this.albumID = albumID;
         this.name = name;
@@ -18,38 +41,86 @@ public class Album {
         this.releaseYear = releaseYear;
     }
 
+    /**
+     * Gets album id.
+     *
+     * @return the album id
+     */
     public String getAlbumID() {
         return albumID;
     }
 
+    /**
+     * Sets album id.
+     *
+     * @param albumID the album id
+     */
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets edition.
+     *
+     * @return the edition
+     */
     public String getEdition() {
         return edition;
     }
 
+    /**
+     * Sets edition.
+     *
+     * @param edition the edition
+     */
     public void setEdition(String edition) {
         this.edition = edition;
     }
 
+    /**
+     * Gets release year.
+     *
+     * @return the release year
+     */
     public int getReleaseYear() {
         return releaseYear;
     }
 
+    /**
+     * Sets release year.
+     *
+     * @param releaseYear the release year
+     */
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
+    /**
+     * Create album int.
+     *
+     * @param album      the album
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createAlbum(Album album, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -69,6 +140,14 @@ public class Album {
         }
     }
 
+    /**
+     * Gets artists.
+     *
+     * @param albumID the album id
+     * @param conn    the conn
+     * @return the artists
+     * @throws SQLException the sql exception
+     */
     public static List<Artist> getArtists(String albumID, Connection conn) throws SQLException {
 
         List<Artist> artists = new ArrayList<>();
@@ -90,6 +169,14 @@ public class Album {
         return artists;
     }
 
+    /**
+     * Gets songs by album id.
+     *
+     * @param albumID the album id
+     * @param conn    the conn
+     * @return the songs by album id
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getSongsByAlbumID(String albumID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
@@ -113,6 +200,14 @@ public class Album {
         return songs;
     }
 
+    /**
+     * Read album album.
+     *
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the album
+     * @throws SQLException the sql exception
+     */
     public static Album readAlbum(String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -142,6 +237,14 @@ public class Album {
         return album;
     }
 
+    /**
+     * Update album int.
+     *
+     * @param album      the album
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateAlbum(Album album, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -164,6 +267,14 @@ public class Album {
         }
     }
 
+    /**
+     * Delete album int.
+     *
+     * @param albumID    the album id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteAlbum(String albumID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

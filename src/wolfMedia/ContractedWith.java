@@ -4,31 +4,68 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Contracted with.
+ */
 public class ContractedWith {
     private String artistID;
     private String recordLabelID;
 
+    /**
+     * Instantiates a new Contracted with.
+     *
+     * @param artistID      the artist id
+     * @param recordLabelID the record label id
+     */
     public ContractedWith(String artistID, String recordLabelID) {
         this.artistID = artistID;
         this.recordLabelID = recordLabelID;
     }
 
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
 
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
 
+    /**
+     * Gets record label id.
+     *
+     * @return the record label id
+     */
     public String getRecordLabelID() {
         return recordLabelID;
     }
 
+    /**
+     * Sets record label id.
+     *
+     * @param recordLabelID the record label id
+     */
     public void setRecordLabelID(String recordLabelID) {
         this.recordLabelID = recordLabelID;
     }
 
+    /**
+     * Create contracted with int.
+     *
+     * @param contractedWith the contracted with
+     * @param connection     the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createContractedWith(ContractedWith contractedWith, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -46,6 +83,14 @@ public class ContractedWith {
         return isInserted;
     }
 
+    /**
+     * Gets record label contracts by artist id.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the record label contracts by artist id
+     * @throws SQLException the sql exception
+     */
     public static List<RecordLabel> getRecordLabelContractsByArtistID(String artistID, Connection conn)
             throws SQLException {
 
@@ -68,6 +113,14 @@ public class ContractedWith {
         return recordLabels;
     }
 
+    /**
+     * Gets artists by record label id.
+     *
+     * @param recordLabelID the record label id
+     * @param conn          the conn
+     * @return the artists by record label id
+     * @throws SQLException the sql exception
+     */
     public static List<Artist> getArtistsByRecordLabelID(String recordLabelID, Connection conn) throws SQLException {
 
         List<Artist> artists = new ArrayList<>();
@@ -89,6 +142,14 @@ public class ContractedWith {
         return artists;
     }
 
+    /**
+     * Read contracted with contracted with.
+     *
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the contracted with
+     * @throws SQLException the sql exception
+     */
     public static ContractedWith readContractedWith(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -116,6 +177,14 @@ public class ContractedWith {
         return contractedWith;
     }
 
+    /**
+     * Update contracted with int.
+     *
+     * @param contractedWith the contracted with
+     * @param connection     the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateContractedWith(ContractedWith contractedWith, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -136,6 +205,14 @@ public class ContractedWith {
         return isUpdated;
     }
 
+    /**
+     * Delete contracted with int.
+     *
+     * @param artistID   the artist id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteContractedWith(String artistID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

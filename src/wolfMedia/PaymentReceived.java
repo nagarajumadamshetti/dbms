@@ -2,31 +2,68 @@ package wolfMedia;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Payment received.
+ */
 public class PaymentReceived {
     private String recordLabelID;
     private String paymentID;
 
+    /**
+     * Instantiates a new Payment received.
+     *
+     * @param recordLabelID the record label id
+     * @param paymentID     the payment id
+     */
     public PaymentReceived(String recordLabelID, String paymentID) {
         this.recordLabelID = recordLabelID;
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets record label id.
+     *
+     * @return the record label id
+     */
     public String getRecordLabelID() {
         return recordLabelID;
     }
 
+    /**
+     * Sets record label id.
+     *
+     * @param recordLabelID the record label id
+     */
     public void setRecordLabelID(String recordLabelID) {
         this.recordLabelID = recordLabelID;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets record label payments.
+     *
+     * @param recordLabelID the record label id
+     * @param conn          the conn
+     * @return the record label payments
+     * @throws SQLException the sql exception
+     */
     public static List<RecordLabelPayment> getRecordLabelPayments(String recordLabelID, Connection conn) throws SQLException {
 
         List<RecordLabelPayment> recordLabelPayments = new ArrayList<>();
@@ -47,6 +84,14 @@ public class PaymentReceived {
         return recordLabelPayments;
     }
 
+    /**
+     * Create payments received int.
+     *
+     * @param paymentsReceived the payments received
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPaymentsReceived(PaymentReceived paymentsReceived, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -67,7 +112,16 @@ public class PaymentReceived {
             }
         }
     }
-    
+
+    /**
+     * Read payments received payment received.
+     *
+     * @param recordLabelID the record label id
+     * @param paymentID     the payment id
+     * @param connection    the connection
+     * @return the payment received
+     * @throws SQLException the sql exception
+     */
     public static PaymentReceived readPaymentsReceived(String recordLabelID, String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -95,7 +149,15 @@ public class PaymentReceived {
         }
         return paymentsReceived;
     }
-    
+
+    /**
+     * Update payments received int.
+     *
+     * @param paymentsReceived the payments received
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePaymentsReceived(PaymentReceived paymentsReceived, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -115,7 +177,16 @@ public class PaymentReceived {
             }
         }
     }
-    
+
+    /**
+     * Delete payments received int.
+     *
+     * @param recordLabelID the record label id
+     * @param paymentID     the payment id
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePaymentsReceived(String recordLabelID, String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

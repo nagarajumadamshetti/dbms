@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Artist payments.
+ */
 public class ArtistPayments {
     private String paymentID;
     private float paymentAmount;
 
+    /**
+     * Instantiates a new Artist payments.
+     *
+     * @param paymentID     the payment id
+     * @param paymentAmount the payment amount
+     */
     public ArtistPayments(String paymentID, float paymentAmount) {
         this.paymentID = paymentID;
         this.paymentAmount = paymentAmount;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets payment amount.
+     *
+     * @return the payment amount
+     */
     public float getPaymentAmount() {
         return paymentAmount;
     }
 
+    /**
+     * Sets payment amount.
+     *
+     * @param paymentAmount the payment amount
+     */
     public void setPaymentAmount(float paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
-    
+
+    /**
+     * Create payment int.
+     *
+     * @param payment    the payment
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPayment(ArtistPayments payment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -43,6 +80,14 @@ public class ArtistPayments {
         return isInserted;
     }
 
+    /**
+     * Read payment artist payments.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the artist payments
+     * @throws SQLException the sql exception
+     */
     public static ArtistPayments readPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -69,6 +114,14 @@ public class ArtistPayments {
         return payment;
     }
 
+    /**
+     * Update payment int.
+     *
+     * @param payment    the payment
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePayment(ArtistPayments payment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -89,6 +142,14 @@ public class ArtistPayments {
        return isUpdated;
     }
 
+    /**
+     * Delete payment int.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

@@ -4,32 +4,69 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Collaborated by.
+ */
 public class CollaboratedBy {
 
     private String artistID;
     private String songID;
 
+    /**
+     * Instantiates a new Collaborated by.
+     *
+     * @param artistID the artist id
+     * @param songID   the song id
+     */
     public CollaboratedBy(String artistID, String songID) {
         this.artistID = artistID;
         this.songID = songID;
     }
 
+    /**
+     * Gets artist id.
+     *
+     * @return the artist id
+     */
     public String getArtistID() {
         return artistID;
     }
 
+    /**
+     * Sets artist id.
+     *
+     * @param artistID the artist id
+     */
     public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
 
+    /**
+     * Gets song id.
+     *
+     * @return the song id
+     */
     public String getSongID() {
         return songID;
     }
 
+    /**
+     * Sets song id.
+     *
+     * @param songID the song id
+     */
     public void setSongID(String songID) {
         this.songID = songID;
     }
 
+    /**
+     * Create collaboration int.
+     *
+     * @param collaboration the collaboration
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createCollaboration(CollaboratedBy collaboration, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -51,6 +88,14 @@ public class CollaboratedBy {
         }
     }
 
+    /**
+     * Gets artists.
+     *
+     * @param songID the song id
+     * @param conn   the conn
+     * @return the artists
+     * @throws SQLException the sql exception
+     */
     public static List<Artist> getArtists(String songID, Connection conn) throws SQLException {
 
         List<Artist> artists = new ArrayList<>();
@@ -72,6 +117,14 @@ public class CollaboratedBy {
         return artists;
     }
 
+    /**
+     * Gets songs by artist id.
+     *
+     * @param artistID the artist id
+     * @param conn     the conn
+     * @return the songs by artist id
+     * @throws SQLException the sql exception
+     */
     public static List<Song> getSongsByArtistID(String artistID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
@@ -95,6 +148,15 @@ public class CollaboratedBy {
         return songs;
     }
 
+    /**
+     * Read collaboration collaborated by.
+     *
+     * @param artistID   the artist id
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the collaborated by
+     * @throws SQLException the sql exception
+     */
     public static CollaboratedBy readCollaboration(String artistID, String songID, Connection connection)
             throws SQLException {
         PreparedStatement statement = null;
@@ -123,6 +185,14 @@ public class CollaboratedBy {
         return collaboration;
     }
 
+    /**
+     * Update collaboration int.
+     *
+     * @param collaboration the collaboration
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateCollaboration(CollaboratedBy collaboration, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -143,6 +213,15 @@ public class CollaboratedBy {
         }
     }
 
+    /**
+     * Delete collaboration int.
+     *
+     * @param artistID   the artist id
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteCollaboration(String artistID, String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

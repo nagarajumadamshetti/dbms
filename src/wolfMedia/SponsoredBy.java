@@ -3,31 +3,68 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Sponsored by.
+ */
 public class SponsoredBy {
     private String podcastID;
     private String sponsorID;
 
+    /**
+     * Instantiates a new Sponsored by.
+     *
+     * @param podcastID the podcast id
+     * @param sponsorID the sponsor id
+     */
     public SponsoredBy(String podcastID, String sponsorID) {
         this.podcastID = podcastID;
         this.sponsorID = sponsorID;
     }
 
+    /**
+     * Gets podcast id.
+     *
+     * @return the podcast id
+     */
     public String getPodcastID() {
         return podcastID;
     }
 
+    /**
+     * Sets podcast id.
+     *
+     * @param podcastID the podcast id
+     */
     public void setPodcastID(String podcastID) {
         this.podcastID = podcastID;
     }
 
+    /**
+     * Gets sponsor id.
+     *
+     * @return the sponsor id
+     */
     public String getSponsorID() {
         return sponsorID;
     }
 
+    /**
+     * Sets sponsor id.
+     *
+     * @param sponsorID the sponsor id
+     */
     public void setSponsorID(String sponsorID) {
         this.sponsorID = sponsorID;
     }
 
+    /**
+     * Create sponsored by int.
+     *
+     * @param sponsoredBy the sponsored by
+     * @param connection  the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSponsoredBy(SponsoredBy sponsoredBy, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -48,7 +85,15 @@ public class SponsoredBy {
             }
         }
     }
-    
+
+    /**
+     * Read sponsors by podcast list.
+     *
+     * @param podcastID  the podcast id
+     * @param connection the connection
+     * @return the list
+     * @throws SQLException the sql exception
+     */
     public static List<String> readSponsorsByPodcast(String podcastID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -73,7 +118,15 @@ public class SponsoredBy {
         }
         return sponsorIDs;
     }
-    
+
+    /**
+     * Read podcasts by sponsor list.
+     *
+     * @param sponsorID  the sponsor id
+     * @param connection the connection
+     * @return the list
+     * @throws SQLException the sql exception
+     */
     public static List<String> readPodcastsBySponsor(String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -98,7 +151,16 @@ public class SponsoredBy {
         }
         return podcastIDs;
     }
-    
+
+    /**
+     * Delete sponsored by int.
+     *
+     * @param podcastID  the podcast id
+     * @param sponsorID  the sponsor id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSponsoredBy(String podcastID, String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Payment.
+ */
 public class Payment {
     private String paymentID;
     private String date;
 
+    /**
+     * Instantiates a new Payment.
+     *
+     * @param paymentID the payment id
+     * @param date      the date
+     */
     public Payment(String paymentID, String date) {
         this.paymentID = paymentID;
         this.date = date;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * Create payment int.
+     *
+     * @param payment    the payment
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPayment(Payment payment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -47,6 +84,14 @@ public class Payment {
         return isInserted;
     }
 
+    /**
+     * Read payment payment.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the payment
+     * @throws SQLException the sql exception
+     */
     public static Payment readPayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -74,6 +119,14 @@ public class Payment {
         return payment;
     }
 
+    /**
+     * Update payment int.
+     *
+     * @param payment    the payment
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePayment(Payment payment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -94,6 +147,14 @@ public class Payment {
         return isUpdated;
     }
 
+    /**
+     * Delete payment int.
+     *
+     * @param paymentID  the payment id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePayment(String paymentID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

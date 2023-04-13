@@ -3,8 +3,21 @@ import java.sql.*;
 
 import java.util.Scanner;
 
+/**
+ * The type Information processing.
+ */
 public class InformationProcessing {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
+
+    /**
+     * Process information.
+     *
+     * @param subChoice the sub choice
+     * @throws SQLException the sql exception
+     */
     public static void processInformation(int subChoice) throws SQLException {
         switch (subChoice) {
             case 1:

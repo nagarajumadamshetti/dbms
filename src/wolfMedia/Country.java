@@ -2,31 +2,68 @@ package wolfMedia;
 
 import java.sql.*;
 
+/**
+ * The type Country.
+ */
 public class Country {
     private String countryID;
     private String name;
 
+    /**
+     * Instantiates a new Country.
+     *
+     * @param countryID the country id
+     * @param name      the name
+     */
     public Country(String countryID, String name) {
         this.countryID = countryID;
         this.name = name;
     }
 
+    /**
+     * Gets country id.
+     *
+     * @return the country id
+     */
     public String getCountryID() {
         return countryID;
     }
 
+    /**
+     * Sets country id.
+     *
+     * @param countryID the country id
+     */
     public void setCountryID(String countryID) {
         this.countryID = countryID;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Create country int.
+     *
+     * @param country    the country
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createCountry(Country country, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -44,6 +81,14 @@ public class Country {
         return isInserted;
     }
 
+    /**
+     * Read country country.
+     *
+     * @param countryID  the country id
+     * @param connection the connection
+     * @return the country
+     * @throws SQLException the sql exception
+     */
     public static Country readCountry(String countryID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -71,6 +116,14 @@ public class Country {
         return country;
     }
 
+    /**
+     * Update country int.
+     *
+     * @param country    the country
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateCountry(Country country, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -91,6 +144,14 @@ public class Country {
         return isUpdated;
     }
 
+    /**
+     * Delete country int.
+     *
+     * @param countryID  the country id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteCountry(String countryID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

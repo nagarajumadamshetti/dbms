@@ -2,14 +2,45 @@ package wolfMedia;
 import java.sql.*;
 // import java.util.Date;
 
+/**
+ * The type Song.
+ */
 public class Song {
+    /**
+     * The Song id.
+     */
     public String songID;
+    /**
+     * The Title.
+     */
     public String title;
+    /**
+     * The Duration.
+     */
     public String duration;
+    /**
+     * The Release date.
+     */
     public String releaseDate;
+    /**
+     * The Royalty paid.
+     */
     public float royaltyPaid;
+    /**
+     * The Royalty rate.
+     */
     public float royaltyRate;
-    
+
+    /**
+     * Instantiates a new Song.
+     *
+     * @param songID      the song id
+     * @param title       the title
+     * @param duration    the duration
+     * @param releaseDate the release date
+     * @param royaltyPaid the royalty paid
+     * @param royaltyRate the royalty rate
+     */
     public Song(String songID, String title, String duration, String releaseDate, float royaltyPaid, float royaltyRate) {
         this.songID = songID;
         this.title = title;
@@ -18,55 +49,123 @@ public class Song {
         this.royaltyPaid = royaltyPaid;
         this.royaltyRate = royaltyRate;
     }
-    
+
+    /**
+     * Gets song id.
+     *
+     * @return the song id
+     */
     public String getSongID() {
         return songID;
     }
-    
+
+    /**
+     * Sets song id.
+     *
+     * @param songID the song id
+     */
     public void setSongID(String songID) {
         this.songID = songID;
     }
-    
+
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
-    
+
+    /**
+     * Sets title.
+     *
+     * @param title the title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
+    /**
+     * Gets duration.
+     *
+     * @return the duration
+     */
     public String getDuration() {
         return duration;
     }
-    
+
+    /**
+     * Sets duration.
+     *
+     * @param duration the duration
+     */
     public void setDuration(String duration) {
         this.duration = duration;
     }
-    
+
+    /**
+     * Gets release date.
+     *
+     * @return the release date
+     */
     public String getReleaseDate() {
         return releaseDate;
     }
-    
+
+    /**
+     * Sets release date.
+     *
+     * @param releaseDate the release date
+     */
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
-    
+
+    /**
+     * Gets royalty paid.
+     *
+     * @return the royalty paid
+     */
     public float getRoyaltyPaid() {
         return royaltyPaid;
     }
-    
+
+    /**
+     * Sets royalty paid.
+     *
+     * @param royaltyPaid the royalty paid
+     */
     public void setRoyaltyPaid(float royaltyPaid) {
         this.royaltyPaid = royaltyPaid;
     }
-    
+
+    /**
+     * Gets royalty rate.
+     *
+     * @return the royalty rate
+     */
     public float getRoyaltyRate() {
         return royaltyRate;
     }
-    
+
+    /**
+     * Sets royalty rate.
+     *
+     * @param royaltyRate the royalty rate
+     */
     public void setRoyaltyRate(float royaltyRate) {
         this.royaltyRate = royaltyRate;
     }
-    
+
+    /**
+     * Create song int.
+     *
+     * @param song       the song
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSong(Song song, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -89,13 +188,21 @@ public class Song {
             return 0;
         }
         finally {
-        	if (statement != null) {
+            if (statement != null) {
                 statement.close();
             }
         }
         return isInserted;
     }
-    
+
+    /**
+     * Read song song.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the song
+     * @throws SQLException the sql exception
+     */
     public static Song readSong(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -130,6 +237,14 @@ public class Song {
         return song;
     }
 
+    /**
+     * Update song int.
+     *
+     * @param song       the song
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateSong(Song song, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -157,7 +272,15 @@ public class Song {
         }
         return isUpdated;
     }
-    
+
+    /**
+     * Delete song int.
+     *
+     * @param songID     the song id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSong(String songID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

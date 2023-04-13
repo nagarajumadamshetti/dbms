@@ -1,30 +1,68 @@
 package wolfMedia;
 import java.sql.*;
+
+/**
+ * The type Sponsor.
+ */
 public class Sponsor {
     private String sponsorID;
     private String sponsorName;
 
+    /**
+     * Instantiates a new Sponsor.
+     *
+     * @param sponsorID   the sponsor id
+     * @param sponsorName the sponsor name
+     */
     public Sponsor(String sponsorID, String sponsorName) {
         this.sponsorID = sponsorID;
         this.sponsorName = sponsorName;
     }
 
+    /**
+     * Gets sponsor id.
+     *
+     * @return the sponsor id
+     */
     public String getSponsorID() {
         return sponsorID;
     }
 
+    /**
+     * Sets sponsor id.
+     *
+     * @param sponsorID the sponsor id
+     */
     public void setSponsorID(String sponsorID) {
         this.sponsorID = sponsorID;
     }
 
+    /**
+     * Gets sponsor name.
+     *
+     * @return the sponsor name
+     */
     public String getSponsorName() {
         return sponsorName;
     }
 
+    /**
+     * Sets sponsor name.
+     *
+     * @param sponsorName the sponsor name
+     */
     public void setSponsorName(String sponsorName) {
         this.sponsorName = sponsorName;
     }
 
+    /**
+     * Create sponsor int.
+     *
+     * @param sponsor    the sponsor
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createSponsor(Sponsor sponsor, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -38,18 +76,26 @@ public class Sponsor {
         } catch (SQLException ex) {
             System.out.println("Error creating sponsor: " + ex.getMessage());
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return 0;
         }
         finally {
-        	if (statement != null) {
-				statement.close();
-			}
+            if (statement != null) {
+                statement.close();
+            }
         }
         return isInserted;
     }
 
+    /**
+     * Read sponsor sponsor.
+     *
+     * @param sponsorID  the sponsor id
+     * @param connection the connection
+     * @return the sponsor
+     * @throws SQLException the sql exception
+     */
     public static Sponsor readSponsor(String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -66,8 +112,8 @@ public class Sponsor {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return null;
         } finally {
             if (resultSet != null) {
@@ -80,6 +126,14 @@ public class Sponsor {
         return sponsor;
     }
 
+    /**
+     * Update sponsor int.
+     *
+     * @param sponsor    the sponsor
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateSponsor(Sponsor sponsor, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -92,8 +146,8 @@ public class Sponsor {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return 0;
         } finally {
             if (statement != null) {
@@ -103,6 +157,14 @@ public class Sponsor {
         return isUpdated;
     }
 
+    /**
+     * Delete sponsor int.
+     *
+     * @param sponsorID  the sponsor id
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteSponsor(String sponsorID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
@@ -114,8 +176,8 @@ public class Sponsor {
         } catch (SQLException e) {
             e.printStackTrace();
             if (statement != null) {
-				statement.close();
-			}
+                statement.close();
+            }
             return 0;
         } finally {
             if (statement != null) {

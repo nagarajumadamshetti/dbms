@@ -27,7 +27,16 @@ import java.sql.*;
 
 import java.util.Scanner;
 
+/**
+ * The type Wolf media testing.
+ */
 public class WolfMediaTesting {
+    /**
+     * Process information.
+     *
+     * @param subChoice the sub choice
+     * @throws SQLException the sql exception
+     */
     public static void processInformation(int subChoice) throws SQLException {
         switch (subChoice) {
             case 1:
@@ -52,8 +61,14 @@ public class WolfMediaTesting {
                 System.out.println("Invalid choice.");
         }
     }
-    
-    
+
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws SQLException the sql exception
+     */
     public static void main(String[] args) throws SQLException {
         Scanner input = new Scanner(System.in);
         int choice = 0;

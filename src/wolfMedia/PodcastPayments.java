@@ -1,31 +1,68 @@
 package wolfMedia;
 import java.sql.*;
 
+/**
+ * The type Podcast payments.
+ */
 public class PodcastPayments {
     private String paymentID;
     private String podcastHostID;
 
+    /**
+     * Instantiates a new Podcast payments.
+     *
+     * @param paymentID     the payment id
+     * @param podcastHostID the podcast host id
+     */
     public PodcastPayments(String paymentID, String podcastHostID) {
         this.paymentID = paymentID;
         this.podcastHostID = podcastHostID;
     }
 
+    /**
+     * Gets payment id.
+     *
+     * @return the payment id
+     */
     public String getPaymentID() {
         return paymentID;
     }
 
+    /**
+     * Sets payment id.
+     *
+     * @param paymentID the payment id
+     */
     public void setPaymentID(String paymentID) {
         this.paymentID = paymentID;
     }
 
+    /**
+     * Gets podcast host id.
+     *
+     * @return the podcast host id
+     */
     public String getPodcastHostID() {
         return podcastHostID;
     }
 
+    /**
+     * Sets podcast host id.
+     *
+     * @param podcastHostID the podcast host id
+     */
     public void setPodcastHostID(String podcastHostID) {
         this.podcastHostID = podcastHostID;
     }
 
+    /**
+     * Create podcast payment int.
+     *
+     * @param podcastPayment the podcast payment
+     * @param connection     the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPodcastPayment(PodcastPayments podcastPayment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -46,7 +83,16 @@ public class PodcastPayments {
             }
         }
     }
-    
+
+    /**
+     * Read podcast payment podcast payments.
+     *
+     * @param paymentID     the payment id
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the podcast payments
+     * @throws SQLException the sql exception
+     */
     public static PodcastPayments readPodcastPayment(String paymentID, String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -74,7 +120,15 @@ public class PodcastPayments {
         }
         return podcastPayment;
     }
-    
+
+    /**
+     * Update podcast payment int.
+     *
+     * @param podcastPayment the podcast payment
+     * @param connection     the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePodcastPayment(PodcastPayments podcastPayment, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -94,7 +148,16 @@ public class PodcastPayments {
             }
         }
     }
-    
+
+    /**
+     * Delete podcast payment int.
+     *
+     * @param paymentID     the payment id
+     * @param podcastHostID the podcast host id
+     * @param connection    the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePodcastPayment(String paymentID, String podcastHostID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

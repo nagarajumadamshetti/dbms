@@ -2,6 +2,9 @@ package wolfMedia;
 
 import java.sql.*;
 
+/**
+ * The type Podcast episode.
+ */
 public class PodcastEpisode {
 
     private String podcastEpisodeID;
@@ -11,6 +14,16 @@ public class PodcastEpisode {
     private int listeningCount;
     private int advertisementCount;
 
+    /**
+     * Instantiates a new Podcast episode.
+     *
+     * @param podcastEpisodeID   the podcast episode id
+     * @param episodeTitle       the episode title
+     * @param duration           the duration
+     * @param releaseDate        the release date
+     * @param listeningCount     the listening count
+     * @param advertisementCount the advertisement count
+     */
     public PodcastEpisode(String podcastEpisodeID, String episodeTitle, String duration, String releaseDate,
             int listeningCount, int advertisementCount) {
         this.podcastEpisodeID = podcastEpisodeID;
@@ -21,54 +34,122 @@ public class PodcastEpisode {
         this.advertisementCount = advertisementCount;
     }
 
+    /**
+     * Gets podcast episode id.
+     *
+     * @return the podcast episode id
+     */
     public String getPodcastEpisodeID() {
         return podcastEpisodeID;
     }
 
+    /**
+     * Sets podcast episode id.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     */
     public void setPodcastEpisodeID(String podcastEpisodeID) {
         this.podcastEpisodeID = podcastEpisodeID;
     }
 
+    /**
+     * Gets episode title.
+     *
+     * @return the episode title
+     */
     public String getEpisodeTitle() {
         return episodeTitle;
     }
 
+    /**
+     * Sets episode title.
+     *
+     * @param episodeTitle the episode title
+     */
     public void setEpisodeTitle(String episodeTitle) {
         this.episodeTitle = episodeTitle;
     }
 
+    /**
+     * Gets duration.
+     *
+     * @return the duration
+     */
     public String getDuration() {
         return duration;
     }
 
+    /**
+     * Sets duration.
+     *
+     * @param duration the duration
+     */
     public void setDuration(String duration) {
         this.duration = duration;
     }
 
+    /**
+     * Gets release date.
+     *
+     * @return the release date
+     */
     public String getReleaseDate() {
         return releaseDate;
     }
 
+    /**
+     * Sets release date.
+     *
+     * @param releaseDate the release date
+     */
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
+    /**
+     * Gets listening count.
+     *
+     * @return the listening count
+     */
     public int getListeningCount() {
         return listeningCount;
     }
 
+    /**
+     * Sets listening count.
+     *
+     * @param listeningCount the listening count
+     */
     public void setListeningCount(int listeningCount) {
         this.listeningCount = listeningCount;
     }
 
+    /**
+     * Gets advertisement count.
+     *
+     * @return the advertisement count
+     */
     public int getAdvertisementCount() {
         return advertisementCount;
     }
 
+    /**
+     * Sets advertisement count.
+     *
+     * @param advertisementCount the advertisement count
+     */
     public void setAdvertisementCount(int advertisementCount) {
         this.advertisementCount = advertisementCount;
     }
 
+    /**
+     * Create podcast episode int.
+     *
+     * @param episode    the episode
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int createPodcastEpisode(PodcastEpisode episode, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isInserted = 0;
@@ -94,6 +175,14 @@ public class PodcastEpisode {
         }
     }
 
+    /**
+     * Read podcast episode podcast episode.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the podcast episode
+     * @throws SQLException the sql exception
+     */
     public static PodcastEpisode readPodcastEpisode(String podcastEpisodeID, Connection connection)
             throws SQLException {
         PreparedStatement statement = null;
@@ -123,6 +212,14 @@ public class PodcastEpisode {
         return episode;
     }
 
+    /**
+     * Update podcast episode int.
+     *
+     * @param episode    the episode
+     * @param connection the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updatePodcastEpisode(PodcastEpisode episode, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -147,6 +244,14 @@ public class PodcastEpisode {
         }
     }
 
+    /**
+     * Delete podcast episode int.
+     *
+     * @param podcastEpisodeID the podcast episode id
+     * @param connection       the connection
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deletePodcastEpisode(String podcastEpisodeID, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;

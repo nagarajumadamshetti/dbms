@@ -3,10 +3,18 @@ package  wolfMedia;
 
 import java.sql.*;
 
+/**
+ * The type Connections.
+ */
 public class Connections {
 
     private static Connection connection = null;
 
+    /**
+     * Open connection.
+     *
+     * @return the connection
+     */
     public static Connection open() {
         try {
             String url = "jdbc:mariadb://localhost:3306/nagaraj";
@@ -20,6 +28,11 @@ public class Connections {
         return connection;
     }
 
+    /**
+     * Close.
+     *
+     * @param connection the connection
+     */
     public static void close(Connection connection) {
         try {
             if (connection != null && !connection.isClosed()) {
