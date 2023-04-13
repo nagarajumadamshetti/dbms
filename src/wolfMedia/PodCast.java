@@ -11,7 +11,7 @@ public class PodCast {
     private String language;
     private int episodeCount;
     private int totalSubscribers;
-    private int rating;
+    private float rating;
 
     /**
      * Instantiates a new Pod cast.
