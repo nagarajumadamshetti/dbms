@@ -1,12 +1,11 @@
 package wolfMedia;
 import java.sql.*;
-import java.util.Date;
 
 public class Payment {
     private String paymentID;
-    private Date date;
+    private String date;
 
-    public Payment(String paymentID, Date date) {
+    public Payment(String paymentID, String date) {
         this.paymentID = paymentID;
         this.date = date;
     }
@@ -19,11 +18,11 @@ public class Payment {
         this.paymentID = paymentID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -34,7 +33,7 @@ public class Payment {
             String query = "INSERT INTO payments (paymentID, date) VALUES (?, ?)";
             statement = connection.prepareStatement(query);
             statement.setString(1, payment.getPaymentID());
-            statement.setDate(2, new java.sql.Date(payment.getDate().getTime()));
+            statement.setString(2, payment.getDate());
             isInserted = statement.executeUpdate();
             System.out.println("Payment created.");
         } catch (SQLException ex) {
@@ -59,7 +58,7 @@ public class Payment {
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 payment = new Payment(resultSet.getString("paymentID"),
-                        resultSet.getDate("date"));
+                        resultSet.getString("date"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,7 +80,7 @@ public class Payment {
         try {
             String query = "UPDATE payments SET date = ? WHERE paymentID = ?";
             statement = connection.prepareStatement(query);
-            statement.setDate(1, new java.sql.Date(payment.getDate().getTime()));
+            statement.setString(1, payment.getDate());
             statement.setString(2, payment.getPaymentID());
             isUpdated = statement.executeUpdate();
         } catch (SQLException e) {

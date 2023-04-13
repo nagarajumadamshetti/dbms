@@ -1,5 +1,8 @@
 package wolfMedia;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuestFeatured {
 
@@ -47,8 +50,31 @@ public class GuestFeatured {
             }
         }
     }
+
+    public static List<Guest> getGuestsByPodcastEpisodeID( String podcastEpisodeID, Connection connection) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List<Guest> guests = new ArrayList<>();
+        
+            String query = "SELECT g.* FROM guestsFeatured gf join guests g on g.guestID= gf.guestID  WHERE gf.podcastEpisodeID = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, podcastEpisodeID);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                // String podcastEpisodeID, String episodeTitle, Time duration, Date releaseDate,
+                // int listeningCount, int advertisementCount
+                Guest guest = new Guest(rs.getString("guestID"), rs.getString("name"));
+                        guests.add(guest);
+            }
     
-    public static GuestFeatured readGuestFeatured(String guestID, String podcastEpisodeID, Connection connection) throws SQLException {
+            rs.close();
+            statement.close();
+    
+            return guests;
+    }
+
+    public static GuestFeatured readGuestFeatured(String guestID, String podcastEpisodeID, Connection connection)
+            throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         GuestFeatured guestFeatured = null;
@@ -59,7 +85,8 @@ public class GuestFeatured {
             statement.setString(2, podcastEpisodeID);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                guestFeatured = new GuestFeatured(resultSet.getString("guestID"), resultSet.getString("podcastEpisodeID"));
+                guestFeatured = new GuestFeatured(resultSet.getString("guestID"),
+                        resultSet.getString("podcastEpisodeID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,7 +101,7 @@ public class GuestFeatured {
         }
         return guestFeatured;
     }
-    
+
     public static int updateGuestFeatured(GuestFeatured guestFeatured, Connection connection) throws SQLException {
         PreparedStatement statement = null;
         int isUpdated = 0;
@@ -96,8 +123,9 @@ public class GuestFeatured {
             }
         }
     }
-    
-    public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection connection) throws SQLException {
+
+    public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection connection)
+            throws SQLException {
         PreparedStatement statement = null;
         int isDeleted = 0;
         try {
@@ -116,5 +144,5 @@ public class GuestFeatured {
             }
         }
     }
-    
+
 }
