@@ -6,9 +6,21 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Generate reports.
+ */
 public class GenerateReports {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process choice.
+     *
+     * @param subChoice4 the sub choice 4
+     * @throws SQLException the sql exception
+     */
     public static void processChoice(int subChoice4) throws SQLException {
         switch (subChoice4) {
             case 1:
@@ -566,6 +578,12 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
         pstmt.close();
     }
 
+    /**
+     * Print result set.
+     *
+     * @param resultSet the result set
+     * @throws SQLException the sql exception
+     */
     public static void printResultSet(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numColumns = metaData.getColumnCount();

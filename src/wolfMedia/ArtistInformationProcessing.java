@@ -118,7 +118,7 @@ public class ArtistInformationProcessing {
         Connections.close(conn);
     }
 
-     /**
+    /**
      * Assign Artist To Album.
      *
      * @return nothing
