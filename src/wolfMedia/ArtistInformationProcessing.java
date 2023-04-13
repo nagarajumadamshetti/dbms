@@ -91,7 +91,7 @@ public class ArtistInformationProcessing {
 
             createArtistPrimaryGeneredIn(artistID, conn);
 
-            increaseArtistMonthlyListeners(artistID, conn);
+            createArtistMonthlyListeners(artistID, conn);
 
             addArtistRecordLabelcontracts(artistID, conn);
         }
@@ -196,6 +196,16 @@ public class ArtistInformationProcessing {
             MonthlyListeners.updateMonthlyListeners(mL, conn);
             return count + 1;
         }
+    }
+
+    public static int createArtistMonthlyListeners(String artistID, Connection conn) throws SQLException {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
+        String date = currentDate.format(formatter);
+
+        MonthlyListeners mL = new MonthlyListeners(artistID, date, 0);
+        MonthlyListeners.createMonthlyListeners(mL, conn);
+        return 1;
     }
 
     public static int createSungBy(String artistID, Connection conn) throws SQLException {

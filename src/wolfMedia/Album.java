@@ -90,7 +90,7 @@ public class Album {
         return artists;
     }
 
-    public static List<Song> getSongs(String albumID, Connection conn) throws SQLException {
+    public static List<Song> getSongsByAlbumID(String albumID, Connection conn) throws SQLException {
 
         List<Song> songs = new ArrayList<>();
 

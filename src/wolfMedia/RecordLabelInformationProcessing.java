@@ -2,8 +2,8 @@ package wolfMedia;
 
 import java.sql.*;
 import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+// import java.time.LocalDate;
+// import java.time.format.DateTimeFormatter;
 
 public class RecordLabelInformationProcessing {
     
@@ -146,9 +146,9 @@ public class RecordLabelInformationProcessing {
     private static void readRecordLabel() throws SQLException {
         // add code to prompt for artist ID and display artist information from data
         // store
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
-        String date = currentDate.format(formatter);
+        // LocalDate currentDate = LocalDate.now();
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
+        // String date = currentDate.format(formatter);
 
         System.out.println("Enter artist ID to read:");
         String readID = input.nextLine();
