@@ -1,4 +1,5 @@
 package wolfMedia;
+
 import java.sql.*;
 import java.util.*;
 import java.time.LocalDate;
@@ -63,7 +64,7 @@ public class PodcastEpisodeInformationProcessing {
      */
     public static void assignPodcastEpisodeToPodcast() throws SQLException {
         Connection conn = Connections.open();
-        System.out.println("Enter PodcastEpisode ID\n");
+        System.out.println("Enter PodcastEpisode ID");
         String podcastEpisodeID = input.nextLine();
         int isCreated = 0;
         if (!podcastEpisodeID.isEmpty()) {
@@ -72,7 +73,8 @@ public class PodcastEpisodeInformationProcessing {
         if (isCreated == 0) {
             System.out.println("Podcast Episode not assigned to Podcast mentioned");
         } else {
-            System.out.println("Podcast Episode with ID: " + podcastEpisodeID + "has been assigned to respective Podcast");
+            System.out.println(
+                    "Podcast Episode with ID: " + podcastEpisodeID + "has been assigned to respective Podcast");
         }
         Connections.close(conn);
     }
@@ -96,7 +98,8 @@ public class PodcastEpisodeInformationProcessing {
         int advertisementCount = Integer.parseInt(input.nextLine());
         Connection conn = Connections.open();
 
-        PodcastEpisode p = new PodcastEpisode(podcastEpisodeID,episodeTitle,duration,releaseDate,listeningCount,advertisementCount);
+        PodcastEpisode p = new PodcastEpisode(podcastEpisodeID, episodeTitle, duration, releaseDate, listeningCount,
+                advertisementCount);
         int isCreated = PodcastEpisode.createPodcastEpisode(p, conn);
 
         if (isCreated == 0) {
@@ -126,28 +129,30 @@ public class PodcastEpisodeInformationProcessing {
      * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
-    public static int createPartOf(String podcastEpisodeID, Connection conn) throws SQLException{
+    public static int createPartOf(String podcastEpisodeID, Connection conn) throws SQLException {
         System.out.println(
                 "Podcast ID: \n");
         String podcastID = input.nextLine();
         int isCreated = 0;
         if (!podcastID.isEmpty()) {
-            PartOf pO = new PartOf(podcastID,podcastEpisodeID);
+            PartOf pO = new PartOf(podcastID, podcastEpisodeID);
             isCreated = PartOf.createPartOf(pO, conn);
         }
         return isCreated;
     }
 
-    // public static int deletePartOf(String podcastID, String podcastEpisodeID, Connection conn) throws SQLException {
-    //     int isDeleted = 0;
-    //     isDeleted = PartOf.deletePartOf(podcastID, podcastEpisodeID, conn);
-    //     return isDeleted;
+    // public static int deletePartOf(String podcastID, String podcastEpisodeID,
+    // Connection conn) throws SQLException {
+    // int isDeleted = 0;
+    // isDeleted = PartOf.deletePartOf(podcastID, podcastEpisodeID, conn);
+    // return isDeleted;
     // }
 
-    // public static String episodePartOf(String podcastID, String podcastEpisodeID, Connection conn) throws SQLException {
-    //     PartOf po = PartOf.readPartOf(podcastID, podcastEpisodeID, conn);
-    //     Language l = Language.readLanguage(sI.getLanguageID(), conn);
-    //     return l.getName();
+    // public static String episodePartOf(String podcastID, String podcastEpisodeID,
+    // Connection conn) throws SQLException {
+    // PartOf po = PartOf.readPartOf(podcastID, podcastEpisodeID, conn);
+    // Language l = Language.readLanguage(sI.getLanguageID(), conn);
+    // return l.getName();
     // }
 
     /**
@@ -158,7 +163,7 @@ public class PodcastEpisodeInformationProcessing {
      * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
-    public static int createGuestFeatured(String podcastEpisodeID, Connection conn) throws SQLException{
+    public static int createGuestFeatured(String podcastEpisodeID, Connection conn) throws SQLException {
         System.out.println("guest featured GuestID: ");
         String guestID = input.nextLine();
         int isCreated = 0;
@@ -178,7 +183,8 @@ public class PodcastEpisodeInformationProcessing {
      * @return int value=> operation success(1)/failure(0)
      * @throws SQLException the sql exception
      */
-    public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection conn) throws SQLException {
+    public static int deleteGuestFeatured(String guestID, String podcastEpisodeID, Connection conn)
+            throws SQLException {
         int isDeleted = 0;
         isDeleted = GuestFeatured.deleteGuestFeatured(guestID, podcastEpisodeID, conn);
         return isDeleted;
@@ -263,9 +269,13 @@ public class PodcastEpisodeInformationProcessing {
             System.out.println("Royalty Paid: " + p.getListeningCount());
             System.out.println("Royalty Rate: " + p.getAdvertisementCount());
 
-            PodCast pCast = PartOf.getPodcastByPodcastEpisodeID(readID,conn);
-            System.out.println("Podcast Episode part of: " + pCast.getPodcastName());
-
+            PodCast pCast = PartOf.getPodcastByPodcastEpisodeID(readID, conn);
+            if (pCast != null) {
+                System.out.println("Podcast Episode part of: " + pCast.getPodcastName());
+            }
+            else{
+                System.out.println("Podcast: (none)");
+            }
             System.out.println("Guests Featured: ");
 
             List<Guest> guests = GuestFeatured.getGuestsByPodcastEpisodeID(readID, conn);
@@ -280,4 +290,3 @@ public class PodcastEpisodeInformationProcessing {
         Connections.close(conn);
     }
 }
-
