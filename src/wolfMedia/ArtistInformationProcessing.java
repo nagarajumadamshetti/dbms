@@ -380,6 +380,11 @@ public class ArtistInformationProcessing {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-01");
         String date = currentDate.format(formatter);
 
+        MonthlyListeners mLRead= MonthlyListeners.readMonthlyListeners(artistID, date, conn);
+        if(mLRead!=null){
+            return 1;
+        }
+
         MonthlyListeners mL = new MonthlyListeners(artistID, date, 0);
         int isCreated = MonthlyListeners.createMonthlyListeners(mL, conn);
         return isCreated;

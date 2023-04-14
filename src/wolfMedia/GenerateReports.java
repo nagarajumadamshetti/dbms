@@ -210,7 +210,7 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
         // Prepare SQL statement
         String sql = "SELECT DATE_FORMAT(payments.date, '%Y-%m') AS month, "
         + "COALESCE(SUM(recordLabelPayments.paymentAmount),0) + "
-        + "COALESCE(SUM(artistPayments.paymentAmount),0) + "
+        + "COALESCE(SUM(artistPayments.paymentAmount * (SELECT COUNT(*) FROM received WHERE paymentID=payments.paymentID)),0)  + "
         + "COALESCE(SUM(userPayments.paymentAmount),0) AS total_revenue "
         + "FROM payments "
         + "LEFT JOIN recordLabelPayments ON payments.paymentID = recordLabelPayments.paymentID "
