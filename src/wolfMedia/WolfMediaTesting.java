@@ -42,21 +42,6 @@ public class WolfMediaTesting {
             case 1:
             SongInformationProcessing.processSong();
                 break;
-            // case 2:
-            //     processArtist();
-            //     break;
-            // case 3:
-            //     processPodcastHost();
-            //     break;
-            // case 4:
-            //     processPodcastEpisode();
-            //     break;
-            // case 5:
-            //     processAlbum();
-            //     break;
-            // case 6:
-            //     processRecordLabel();
-            //     break;
             default:
                 System.out.println("Invalid choice.");
         }
