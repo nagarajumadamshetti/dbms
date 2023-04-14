@@ -119,6 +119,17 @@ VALUES
 ('22', '2023-03-01'),
 ('23', '2023-04-01');
 
+INSERT INTO mediaStreamingService (ID, name, email)
+VALUES
+('1', 'Netflix', 'info@netflix.com'),
+('2', 'Amazon Prime Video', 'info@amazon.com'),
+('3', 'Hulu', 'info@hulu.com'),
+('4', 'Disney+', 'info@disneyplus.com'),
+('5', 'HBO Max', 'info@hbomax.com'),
+('6', 'Apple TV+', 'info@appletvplus.com'),
+('7', 'Peacock', 'info@peacock.com'),
+('8', 'Paramount+', 'info@paramountplus.com');
+
 INSERT INTO managedBy (paymentID, ID) VALUES
 ('1', '1'),
 ('2', '1'),
@@ -242,18 +253,6 @@ VALUES
 ('6', 'Maria Garcia'),
 ('7', 'David Rodriguez'),
 ('8', 'Sarah Martinez');
-
-
-INSERT INTO mediaStreamingService (ID, name, email)
-VALUES
-('1', 'Netflix', 'info@netflix.com'),
-('2', 'Amazon Prime Video', 'info@amazon.com'),
-('3', 'Hulu', 'info@hulu.com'),
-('4', 'Disney+', 'info@disneyplus.com'),
-('5', 'HBO Max', 'info@hbomax.com'),
-('6', 'Apple TV+', 'info@appletvplus.com'),
-('7', 'Peacock', 'info@peacock.com'),
-('8', 'Paramount+', 'info@paramountplus.com');
 
 INSERT INTO users (userID, phone, email, registrationDate, monthlySubscriptionFee, statusOfSubscription, firstName, lastName) VALUES
 (1, '1234567890', 'user1@example.com', '2023-01-01', 9.99, 'active', 'John', 'Doe'),
