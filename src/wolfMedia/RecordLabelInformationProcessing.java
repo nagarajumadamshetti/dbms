@@ -68,8 +68,11 @@ public class RecordLabelInformationProcessing {
         if (isCreated == 0) {
             System.out.println("RecordLabel not created");
         } else {
-
+            System.out.println("Want to add artists to recordLabel? Enter yes/no");
+            String response = input.nextLine();
+            if (response.equals("yes")) {
             addRecordLabelArtistcontracts(recordLabelID, conn);
+            }
         }
 
         Connections.close(conn);

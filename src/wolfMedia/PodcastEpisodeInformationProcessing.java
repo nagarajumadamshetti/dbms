@@ -104,12 +104,15 @@ public class PodcastEpisodeInformationProcessing {
 
         if (isCreated == 0) {
             System.out.println("PodcastEpisode not created");
-        } else {
-
-            createPartOf(podcastEpisodeID, conn);
-
-            System.out.println("Add guests to podcast episode? Enter yes/no");
+        }
+        else{
+            System.out.println("Add podcast Episode to podcast? Enter yes/no");
             String response = input.nextLine();
+            if (response.equals("yes")) {
+                createPartOf(podcastEpisodeID,conn);
+            }
+            System.out.println("Add guests to podcast episode? Enter yes/no");
+            response = input.nextLine();
             if (response.equals("yes")) {
                 createGuestFeatured(podcastEpisodeID, conn);
             }

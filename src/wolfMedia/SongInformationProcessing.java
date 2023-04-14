@@ -119,7 +119,9 @@ public class SongInformationProcessing {
                 createSungBy(songID, conn);
             }
 
-            if (true) { // from =="song"
+            System.out.println("Want to add a Collabarators? Enter yes/no");
+            String response = input.nextLine();
+            if (response.equals("yes")) {
                 createCollaborators(songID, conn);
             }
 
