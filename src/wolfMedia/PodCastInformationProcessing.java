@@ -77,13 +77,24 @@ private static void createPodcast() throws SQLException {
         System.out.println("Podcast not created");
     }
     else {
+        System.out.println("Want to add episodes to podcast? Enter yes/no");
+        String response = input.nextLine();
+        if (response.equals("yes")) {
         createPartOf(podcastID,conn);
+        }
 
         createGeneredIn(podcastID,conn);
 
+        System.out.println("Want to add sponsors to podcast? Enter yes/no");
+        response = input.nextLine();
+        if (response.equals("yes")) {
         createSponsoredBy(podcastID,conn);
-
+        }
+        System.out.println("Want to add host to podcast? Enter yes/no");
+        response = input.nextLine();
+        if (response.equals("yes")) {
         createOwnedBy(podcastID,conn);
+        }
 
         // createSubscribePodcast(podcastID,conn);
 
