@@ -119,6 +119,31 @@ VALUES
 ('22', '2023-03-01'),
 ('23', '2023-04-01');
 
+INSERT INTO managedBy (paymentID, ID) VALUES
+('1', '1'),
+('2', '1'),
+('3', '1'),
+('4', '1'),
+('5', '1'),
+('6', '1'),
+('7', '1'),
+('8', '1'),
+('9', '1'),
+('10', '1'),
+('11', '1'),
+('12', '1'),
+('13', '1'),
+('14', '1'),
+('15', '1'),
+('16', '1'),
+('17', '1'),
+('18', '1'),
+('19', '1'),
+('20', '1'),
+('21', '1'),
+('22', '1'),
+('23', '1');
+
 INSERT INTO received (paymentID, artistID) VALUES
 ('1', 'ar2001'),
 ('2', 'ar2001'),
@@ -162,28 +187,6 @@ INSERT INTO paymentsReceived (paymentID, recordLabelID) VALUES
 ('13', 'rl3002'),
 ('14', 'rl3002'),
 ('15', 'rl3002');
-
-
-INSERT INTO userPayments (paymentAmount, paymentID) VALUES
-(10,'16'),
-(10,'17'),
-(10,'18'),
-(10,'19'),
-(10,'20'),
-(10,'21'),
-(10,'22'),
-(10,'23');
-
-INSERT INTO paymentsMade (userID, paymentID) VALUES
-('u8001','16'),
-('u8001','17'),
-('u8001','18'),
-('u8001','19'),
-('u8002','20'),
-('u8002','21'),
-('u8002','22'),
-('u8002','23');
-
 
 INSERT INTO countries (countryID, name)
 VALUES

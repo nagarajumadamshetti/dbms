@@ -6,9 +6,21 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Generate reports.
+ */
 public class GenerateReports {
+    /**
+     * The constant input.
+     */
     public static Scanner input = new Scanner(System.in);
 
+    /**
+     * Process choice.
+     *
+     * @param subChoice4 the sub choice 4
+     * @throws SQLException the sql exception
+     */
     public static void processChoice(int subChoice4) throws SQLException {
         switch (subChoice4) {
             case 1:
@@ -196,13 +208,15 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
     private static void totalRevenuePerMonth(Connection conn) throws SQLException {
         // code for displaying play count for songID
         // Prepare SQL statement
-        String sql = "SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM( recordLabelPayments.paymentAmount)+  sum(artistPayments.paymentAmount) +  sum(userPayments.paymentAmount) AS total_revenue "+
-        "FROM managedBy "+
-        "JOIN payments ON managedBy.paymentID = payments.paymentID "+
-        "JOIN recordLabelPayments ON payments.paymentID = recordLabelPayments.paymentID "+
-        "JOIN artistPayments ON payments.paymentID = artistPayments.paymentID "+
-        "JOIN userPayments ON payments.paymentID = userPayments.paymentID "+
-        "GROUP BY DATE_FORMAT(date, '%Y-%m')";
+        String sql = "SELECT DATE_FORMAT(payments.date, '%Y-%m') AS month, "
+        + "COALESCE(SUM(recordLabelPayments.paymentAmount),0) + "
+        + "COALESCE(SUM(artistPayments.paymentAmount),0) + "
+        + "COALESCE(SUM(userPayments.paymentAmount),0) AS total_revenue "
+        + "FROM payments "
+        + "LEFT JOIN recordLabelPayments ON payments.paymentID = recordLabelPayments.paymentID "
+        + "LEFT JOIN artistPayments ON payments.paymentID = artistPayments.paymentID "
+        + "LEFT JOIN userPayments ON payments.paymentID = userPayments.paymentID "
+        + "GROUP BY DATE_FORMAT(payments.date, '%Y-%m')";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         // Execute SQL statement and get number of rows affected
@@ -238,13 +252,16 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
     private static void totalRevenuePerYear(Connection conn) throws SQLException {
         // code for displaying play count for songID
         // Prepare SQL statement
-        String sql = "SELECT YEAR(date) AS year,  SUM( recordLabelPayments.paymentAmount)+  sum(artistPayments.paymentAmount) +  sum(userPayments.paymentAmount) AS total_revenue "+
-        "FROM managedBy "+
-        "JOIN payments ON managedBy.paymentID = payments.paymentID "+
-        "JOIN recordLabelPayments ON payments.paymentID = recordLabelPayments.paymentID "+
-        "JOIN artistPayments ON payments.paymentID = artistPayments.paymentID "+
-        "JOIN userPayments ON payments.paymentID = userPayments.paymentID "+
-        "GROUP BY YEAR(date)";
+        String sql = "SELECT YEAR(payments.date) AS year, "
+             + "COALESCE(SUM(recordLabelPayments.paymentAmount),0) + "
+             + "COALESCE(SUM(artistPayments.paymentAmount),0) + "
+             + "COALESCE(SUM(userPayments.paymentAmount),0) AS total_revenue "
+             + "FROM payments "
+             + "LEFT JOIN recordLabelPayments ON payments.paymentID = recordLabelPayments.paymentID "
+             + "LEFT JOIN artistPayments ON payments.paymentID = artistPayments.paymentID "
+             + "LEFT JOIN userPayments ON payments.paymentID = userPayments.paymentID "
+             + "GROUP BY YEAR(payments.date)";
+
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         // Execute SQL statement and get number of rows affected
@@ -257,7 +274,7 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
 
     private static void calculateTotalPayments() throws SQLException {
 
-        System.out.println("Choose the type of item to calculate Toatal play count:");
+        System.out.println("Choose the type of item to calculate Total Payments:");
         System.out.println("1. Podcast Host");
         System.out.println("2. Artist");
         System.out.println("3. Record Label");
@@ -561,6 +578,12 @@ private static void songsByArtistID(String artistID, Connection conn) throws SQL
         pstmt.close();
     }
 
+    /**
+     * Print result set.
+     *
+     * @param resultSet the result set
+     * @throws SQLException the sql exception
+     */
     public static void printResultSet(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int numColumns = metaData.getColumnCount();
