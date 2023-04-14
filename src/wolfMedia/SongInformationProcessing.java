@@ -163,7 +163,10 @@ public class SongInformationProcessing {
             ArtistInformationProcessing.createArtistMonthlyListeners(sB.getArtistID(), conn);
             isCreated = 0;
         }
-
+        SongsViewed sVNew= SongsViewed.readSongsViewed(songID, date, conn);
+        if(sVNew!=null){
+            return 1;
+        }
         SongsViewed sV = new SongsViewed(songID, date, 0);
         isCreated = SongsViewed.createSongsViewed(sV, conn);
 

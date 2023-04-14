@@ -262,7 +262,7 @@ public class MaintainPayments {
         } else {
             makeRecordLabelPayment(songID, masterPaymentID, formattedDate, conn);
             createPaymentsReceivedRecord(songID, masterPaymentID, conn);
-            makeArtistPayment(songID, masterPaymentID, conn);
+            makeArtistPayment(songID, masterPaymentID,formattedDate, conn);
             int isUpdated=paySongRoyalty(songID, conn);
             makeCollaboratorPayments(songID, masterPaymentID, conn);
             makeMainArtistPayment(songID, masterPaymentID, conn);
@@ -310,7 +310,11 @@ public class MaintainPayments {
     public static void makeCollaboratorPayments(String songID, String masterPaymentID, Connection conn)
             throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO received (paymentID, artistID) SELECT ? as paymentID, c.artistID FROM songs s JOIN collaboratedBy c ON c.songID = s.songID WHERE s.songID = ?";
+        
+        String sql = "INSERT INTO received (paymentID, artistID) "+
+        "SELECT ? as paymentID, c.artistID FROM songs s "+
+        "JOIN collaboratedBy c ON c.songID = s.songID "+
+        "WHERE s.songID = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, songID);
@@ -334,12 +338,22 @@ public class MaintainPayments {
      * @param conn            the conn
      * @throws SQLException the sql exception
      */
-    public static void makeArtistPayment(String songID, String masterPaymentID, Connection conn) throws SQLException {
+    public static void makeArtistPayment(String songID, String masterPaymentID,String date, Connection conn) throws SQLException {
         // Prepare SQL statement
-        String sql = "INSERT INTO artistPayments (paymentID, paymentAmount) select ? as paymentID, (songsViewed.count * s.royaltyRate) * 0.7/ count(*) FROM songs s JOIN belongsTo b ON s.songID = b.songID JOIN albums a ON b.albumID = a.albumID JOIN has h ON a.albumID = h.albumID JOIN contractedWith c ON h.artistID = c.artistID JOIN recordLabel r ON c.recordLabelID = r.recordLabelID join songsViewed ON s.songID= songsViewed.songID WHERE s.songID = ?";
+        String sql = "INSERT INTO artistPayments (paymentID, paymentAmount) select ? as paymentID, "+
+        " (songsViewed.count * s.royaltyRate) * 0.7/ ((select count(*) "+
+        "from sungBy sb where sb.songID= ?) +(select count(*) "+
+        "from collaboratedBy cB where cb.songID= ?)) "+
+        "FROM songs s  "+
+        "join songsViewed ON s.songID= songsViewed.songID "+
+        "WHERE s.songID = ? and songsViewed.date=?";
+
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, masterPaymentID);
         pstmt.setString(2, songID);
+        pstmt.setString(3, songID);
+        pstmt.setString(4, songID);
+        pstmt.setString(5, date);
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
