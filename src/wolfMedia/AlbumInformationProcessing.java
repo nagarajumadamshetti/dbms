@@ -241,7 +241,6 @@ public class AlbumInformationProcessing {
         }
     }
     
-
     private static void readAlbum() throws SQLException {
         System.out.println("Enter album ID to read:");
         String readID = input.nextLine();
@@ -283,6 +282,4 @@ public class AlbumInformationProcessing {
             Connections.close(conn);
         }
     }
-    
-
 }

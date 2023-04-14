@@ -1,10 +1,9 @@
 package  wolfMedia;
 
-
 import java.sql.*;
 
 /**
- * The type Connections.
+ * Connections class
  */
 public class Connections {
 
@@ -29,7 +28,7 @@ public class Connections {
     }
 
     /**
-     * Close.
+     * Closes the connection.
      *
      * @param connection the connection
      */

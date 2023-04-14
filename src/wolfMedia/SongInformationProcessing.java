@@ -81,8 +81,9 @@ public class SongInformationProcessing {
      *
      * @param from the from
      * @throws SQLException the sql exception
+     * @return isCreated
      */
-    public static void createSong(String from) throws SQLException {
+    public static int createSong(String from) throws SQLException {
         System.out.println("Enter song information:");
         System.out.print("Song ID: ");
         String songID = input.nextLine();
@@ -130,8 +131,8 @@ public class SongInformationProcessing {
         // String songID, String title, String duration, String releaseDate, float
         // royaltyPaid, float royaltyRate
         // Song s= new Song("1", "Hello", "4:01", "2000-01-04", 12.12345, 12.12345);
-
         Connections.close(conn);
+        return 1;
         // Song s= new Song(songID,title,duration,releaseDate,royaltyPaid,royaltyRate);
         // add code to save new song information to a data store
 

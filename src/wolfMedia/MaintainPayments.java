@@ -90,17 +90,7 @@ public class MaintainPayments {
         // Execute SQL statement and get number of rows affected
 
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -130,17 +120,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -198,17 +178,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -243,17 +213,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -262,12 +222,32 @@ public class MaintainPayments {
         //System.out.println(rowsAffected + " row(s) affected");
     }
 
+    /**
+     *  Make Song Royalty to Paid (TRUE)
+     *
+     * @param songID the song id
+     * @param conn  the connection
+     * @throws SQLException the sql exception
+     * @return int isUpdated
+     */
+
+    private static int paySongRoyalty(String songID,Connection conn) throws SQLException{
+        int isUpated=0;
+        Song s= Song.readSong(songID,conn);
+        s.setRoyaltyPaid(true);
+        isUpated= Song.updateSong(s, conn);
+        return isUpated;
+    }
+
+    
+    /**
+     *  Make Royalty Payments for the song
+     *
+     * @throws SQLException the sql exception
+     */
     private static void makeRoyaltyPaymentsForSong() throws SQLException {
         // code for updating play count for songs
         Connection conn = Connections.open();
-        // PlayCountMetadataProcessing.processPlayCount();
-        // System.out.println("Enter/update the play count of the song for that month:
-        // ");
 
         System.out.println("Enter Date:");
         String date = input.nextLine();
@@ -280,9 +260,10 @@ public class MaintainPayments {
         if (masterPaymentID.equals("ERROR")) {
             System.out.println("Retry");
         } else {
-            makeRecordLabelPayment(songID, masterPaymentID, formattedDate, conn); //
-            createPaymentsReceivedRecord(songID, masterPaymentID, conn);//
+            makeRecordLabelPayment(songID, masterPaymentID, formattedDate, conn);
+            createPaymentsReceivedRecord(songID, masterPaymentID, conn);
             makeArtistPayment(songID, masterPaymentID, conn);
+            int isUpdated=paySongRoyalty(songID, conn);
             makeCollaboratorPayments(songID, masterPaymentID, conn);
             makeMainArtistPayment(songID, masterPaymentID, conn);
         }
@@ -312,23 +293,10 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
-
-        // Print number of rows affected
-        //System.out.println(rowsAffected + " row(s) affected");
     }
 
     /**
@@ -349,17 +317,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -385,18 +343,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
-
+        GenerateReports.printResultSet(resultSet);
         // Close resources
         pstmt.close();
 
@@ -429,17 +376,7 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();
@@ -472,17 +409,8 @@ public class MaintainPayments {
 
         // Execute SQL statement and get number of rows affected
         ResultSet resultSet = pstmt.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1)
-                    System.out.print(",  ");
-                String columnValue = resultSet.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
+
+        GenerateReports.printResultSet(resultSet);
 
         // Close resources
         pstmt.close();

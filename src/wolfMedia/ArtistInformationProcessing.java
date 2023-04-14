@@ -50,7 +50,7 @@ public class ArtistInformationProcessing {
                 assignArtistToAlbum();
                 break;
             case 6:
-                assignArtistToRecordLabel(); 
+                assignArtistToRecordLabel();
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -71,54 +71,78 @@ public class ArtistInformationProcessing {
         String status = input.nextLine();
         System.out.print("Type solo/band: ");
         String type = input.nextLine();
-        Connection conn = Connections.open();
+        Connection conn = null;
 
         Artist a = new Artist(artistID, name, status, type);
-        int isCreated = Artist.createArtist(a, conn);
-
-        if (isCreated == 0) {
-            System.out.println("Artist not created");
-        } else {
-
-            createBasedIn(artistID, conn);
-
-            // createSongs(artistID, conn);
-
-            System.out.println("Want to add a song? Enter yes/no");
-            String response = input.nextLine();
-            if (response.equals("yes")) {
-                SongInformationProcessing.createSong("artist");
+        int isCreated = 0;
+        int isBasedInCreated = 0;
+        int isSongCreated = 0;
+        int isSungByCreated = 0;
+        int areCollaboratorsCreated = 0;
+        int areAlbumsLinked = 0;
+        int isPrimaryGenreCreated = 0;
+        int isArtistMonthlyListenersCreated = 0;
+        int isArtistContractsAdded = 0;
+        try {
+            conn = Connections.open();
+            conn.setAutoCommit(false);
+    
+            isCreated = Artist.createArtist(a, conn);
+            if (isCreated == 0) {
+                System.out.println("Artist not created");
+                conn.rollback();
             } else {
-                System.out.println("Want to add just song IDs? Enter yes/no");
+                isBasedInCreated = createBasedIn(artistID, conn);
+    
+                System.out.println("Want to add a song? Enter yes/no");
+                String response = input.nextLine();
+                if (response.equals("yes")) {
+                    isSongCreated = SongInformationProcessing.createSong("artist");
+                } else {
+                    System.out.println("Insted just Want to add song IDs? Enter yes/no");
+                    response = input.nextLine();
+                    if (response.equals("yes")) {
+                        isSungByCreated = createSungBy(artistID, conn);
+                    }
+                }
+    
+                System.out.println("Want to add any collaborations with other artist's songs? Enter yes/no");
                 response = input.nextLine();
                 if (response.equals("yes")) {
-                    createSungBy(artistID, conn);
+                    areCollaboratorsCreated = createCollaborations(artistID, conn);
+                }
+    
+                System.out.println("Want to add artist to any existing albums? Enter yes/no");
+                response = input.nextLine();
+                if (response.equals("yes")) {
+                    areAlbumsLinked = createHasAlbums(artistID, conn);
+                }
+    
+                isPrimaryGenreCreated = createArtistPrimaryGeneredIn(artistID, conn);
+    
+                isArtistMonthlyListenersCreated = createArtistMonthlyListeners(artistID, conn);
+    
+                isArtistContractsAdded = addArtistRecordLabelcontracts(artistID, conn);
+    
+                if (isBasedInCreated == 0 || isSongCreated == 0 || isSungByCreated == 0 ||
+                    areCollaboratorsCreated == 0 || areAlbumsLinked == 0 ||
+                    isPrimaryGenreCreated == 0 || isArtistMonthlyListenersCreated == 0 ||
+                    isArtistContractsAdded == 0) {
+                    conn.rollback();
+                    System.out.println("Changes rolled back.");
+                } else {
+                    conn.commit();
                 }
             }
-
-            System.out.println("Want to add any collaborations with other artist's songs? Enter yes/no");
-            response = input.nextLine();
-            if (response.equals("yes")) {
-                createCollaborations(artistID, conn);
-            }
-
-            System.out.println("Want to add artist to any existing albums? Enter yes/no");
-            response = input.nextLine();
-            if (response.equals("yes")) {
-                createHasAlbums(artistID, conn);
-            }
-
-            createArtistPrimaryGeneredIn(artistID, conn);
-
-            createArtistMonthlyListeners(artistID, conn);
-
-            addArtistRecordLabelcontracts(artistID, conn);
+        } catch (SQLException e) {
+            conn.rollback();
+            e.printStackTrace();
+        } finally {
+            Connections.close(conn);
         }
-
-        Connections.close(conn);
     }
-
-     /**
+    
+    /**
      * Assign Artist To Album.
      *
      * @return nothing
@@ -357,8 +381,8 @@ public class ArtistInformationProcessing {
         String date = currentDate.format(formatter);
 
         MonthlyListeners mL = new MonthlyListeners(artistID, date, 0);
-        MonthlyListeners.createMonthlyListeners(mL, conn);
-        return 1;
+        int isCreated = MonthlyListeners.createMonthlyListeners(mL, conn);
+        return isCreated;
     }
 
     /**
@@ -409,11 +433,17 @@ public class ArtistInformationProcessing {
         System.out.println("Enter artist ID to update:");
         String updateID = input.nextLine();
         Connection conn = Connections.open();
-
         Artist aToUpdate = Artist.readArtist(updateID, conn);
+    
         if (aToUpdate == null) {
             System.out.println("Artist with ID " + updateID + " does not exist");
-        } else {
+            Connections.close(conn);
+            return;
+        }
+    
+        conn.setAutoCommit(false); // Begin transaction
+    
+        try {
             System.out.println("Enter new artist information:");
             System.out.print("Name: ");
             aToUpdate.setName(input.nextLine());
@@ -421,30 +451,55 @@ public class ArtistInformationProcessing {
             aToUpdate.setStatus(input.nextLine());
             System.out.print("Type solo/band: ");
             aToUpdate.setType(input.nextLine());
-            int isUpdated;
-            isUpdated = Artist.updateArtist(aToUpdate, conn);
+            int isUpdated = Artist.updateArtist(aToUpdate, conn);
+    
             if (isUpdated == 0) {
                 System.out.println("Failed to update artist");
+                conn.rollback(); // Rollback transaction
+            } else {
+                System.out.println("Artist updated successfully");
+                conn.commit(); // Commit transaction
             }
-            // TODO update artist relationship tables
+    
+        } catch (SQLException ex) {
+            System.out.println("Error updating artist: " + ex.getMessage());
+            conn.rollback(); // Rollback transaction
+        } finally {
+            Connections.close(conn);
         }
-        Connections.close(conn);
-
     }
+    
+    
 
     private static void deleteArtist() throws SQLException {
-        // add code to prompt for song ID and delete song from data store
         System.out.println("Enter artist ID to delete:");
         String deleteID = input.nextLine();
         Connection conn = Connections.open();
-        int a = Artist.deleteArtist(deleteID, conn);
-        if (a == 0) {
+        Artist artistToDelete = Artist.readArtist(deleteID, conn);
+        if (artistToDelete == null) {
             System.out.println("Artist with ID " + deleteID + " does not exist");
-        } else {
-            System.out.println("Artist with Song ID: " + deleteID + " is deleted");
+            Connections.close(conn);
+            return;
         }
-        Connections.close(conn);
+        conn.setAutoCommit(false); // Begin transaction
+        try {
+            int isDeleted = Artist.deleteArtist(deleteID, conn);
+            if (isDeleted == 0) {
+                System.out.println("Failed to delete artist");
+                conn.rollback(); // Rollback transaction
+            } else {
+                System.out.println("Artist with ID " + deleteID + " is deleted");
+                // TODO: delete artist relationship tables - done with cascase delete
+                conn.commit(); // Commit transaction
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error deleting artist: " + ex.getMessage());
+            conn.rollback(); // Rollback transaction
+        } finally {
+            Connections.close(conn);
+        }
     }
+    
 
     /**
      * Gets artist payments.
