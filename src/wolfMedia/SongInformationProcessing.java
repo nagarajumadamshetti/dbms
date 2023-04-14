@@ -46,7 +46,7 @@ public class SongInformationProcessing {
                 readSong();
                 break;
             case 5:
-                assignSongToAlbum(); 
+                assignSongToAlbum();
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -111,16 +111,20 @@ public class SongInformationProcessing {
 
             createGeneredIn(songID, conn);
 
-            if (true) {// from =="song"
+            System.out.println("Want to add song to an existing album? Enter yes/no");
+            String response = input.nextLine();
+            if (response.equals("yes")) {
                 createBelongsTo(songID, conn);
             }
 
-            if (true) {// from =="song"
+            System.out.println("Want to assign to an existing artist? Enter yes/no");
+            response = input.nextLine();
+            if (response.equals("yes")) {
                 createSungBy(songID, conn);
             }
 
             System.out.println("Want to add a Collabarators? Enter yes/no");
-            String response = input.nextLine();
+            response = input.nextLine();
             if (response.equals("yes")) {
                 createCollaborators(songID, conn);
             }
@@ -154,9 +158,12 @@ public class SongInformationProcessing {
         String date = currentDate.format(formatter);
 
         SungBy sB = SungBy.readSungBySongID(songID, conn);
-        ArtistInformationProcessing.createArtistMonthlyListeners(sB.getArtistID(), conn);
         int isCreated = 0;
-        
+        if (sB != null) {
+            ArtistInformationProcessing.createArtistMonthlyListeners(sB.getArtistID(), conn);
+            isCreated = 0;
+        }
+
         SongsViewed sV = new SongsViewed(songID, date, 0);
         isCreated = SongsViewed.createSongsViewed(sV, conn);
 
@@ -481,7 +488,7 @@ public class SongInformationProcessing {
      */
     public static String songReleasedIn(String songID, Connection conn) throws SQLException {
         ReleasedIn rI = ReleasedIn.readReleasedIn(songID, conn);
-        if(rI==null){
+        if (rI == null) {
             return "(none)";
         }
         Country c = Country.readCountry(rI.getCountryID(), conn);
@@ -498,7 +505,7 @@ public class SongInformationProcessing {
      */
     public static String songSungIn(String songID, Connection conn) throws SQLException {
         SungIn sI = SungIn.readSungIn(songID, conn);
-        if (sI==null){
+        if (sI == null) {
             return "(none)";
         }
         Language l = Language.readLanguage(sI.getLanguageID(), conn);
@@ -515,7 +522,7 @@ public class SongInformationProcessing {
      */
     public static String songGeneredIn(String songID, Connection conn) throws SQLException {
         GeneredIn gI = GeneredIn.readGeneredIn(songID, conn);
-        if(gI==null){
+        if (gI == null) {
             return "(none)";
         }
         Genre g = Genre.readGenre(gI.getGenreID(), conn);
@@ -532,7 +539,7 @@ public class SongInformationProcessing {
      */
     public static String songArtist(String songID, Connection conn) throws SQLException {
         SungBy sB = SungBy.readSungBySongID(songID, conn);
-        if(sB==null){
+        if (sB == null) {
             return "(none)";
         }
         Artist a = Artist.readArtist(sB.getArtistID(), conn);
